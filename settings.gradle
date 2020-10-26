@@ -1,0 +1,4 @@
+/*include ':TMXProfilingConnections-6.0-138'
+include ':TMXProfiling-6.0-138'
+include ':visanet-lib-lite-release'*/
+include ':app'

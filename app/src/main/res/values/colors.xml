@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#70578B</color>
+    <color name="colorPrimaryDark">#8070578B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorLightGreen">#C0FC9A</color>
+    <color name="colorDarkGreen">#35A572</color>
+
+    <color name="colorText">#2F2F2F</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="colorTextBloc">#E4E4E4</color>
+    <color name="colorBloc">#E1DDE7</color>
+
+    <color name="colorShape">#F7F7F7</color>
+
+    <color name="colorHintText">#DBDBDB</color>
+    <color name="colorCuponText">#707070</color>
+    <color name="colorCuponSubTitle">#979797</color>
+
+    <color name="colorPrimaryOpa">#3070578B</color>
+    <color name="colorErrorDialog">#FF7682</color>
+
+    <color name="colorTextInputs">#F0F0F0</color>
+    <color name="colorShapeInput">#F8F8F8</color>
+    //Ripley's color palette
+    <color name="colorBlackRipley">#000000</color>
+    <color name="colorRedRipley">#CE202F</color>
+    <color name="colorCoralRipley">#E63E51</color>
+    <color name="colorPurpleRipley">#672766</color>
+    <color name="colorGreyRipley">#C1C5C9</color>
+    <color name="colorYellowRipley">#FFCF01</color>
+
+
+</resources>
