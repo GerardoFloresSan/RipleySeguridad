@@ -23,9 +23,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="allowBackup"
         android:usesCleartextTraffic="true"
-        tools:ignore="HardcodedDebugMode,UnusedAttribute">
+        tools:ignore="HardcodedDebugMode,UnusedAttribute"
+        tools:replace="allowBackup">
+        <activity android:name=".ui.activity.seguridad.WelcomeSeguridadActivity"></activity>
+        <activity android:name=".ui.activity.seguridad.LoginActivity" />
         <activity
             android:name=".ui.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -96,8 +98,8 @@
         <activity
             android:name=".ui.activity.checkout.CheckOutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:resizeableActivity="false"
             android:launchMode="singleTop"
+            android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
@@ -108,25 +110,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             tools:targetApi="n" />
-
         <activity
             android:name=".ui.activity.datacard.ErrorActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:resizeableActivity="false"
             android:launchMode="singleTop"
+            android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
-        
         <activity
             android:name=".ui.activity.datacard.DataCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:resizeableActivity="false"
             android:launchMode="singleTop"
+            android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
-
 
         <meta-data
             android:name="preloaded_fonts"
