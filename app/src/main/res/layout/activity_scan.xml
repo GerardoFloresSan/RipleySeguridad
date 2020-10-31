@@ -357,38 +357,22 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/add_code_dialog"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="?actionBarSize"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/shape_border_scan"
+        android:backgroundTint="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cameraSurfaceView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-
-        <ImageView
-            android:id="@+id/img_finger_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_sv_finger"
-            android:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/img_finger_cart_ocp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_sv_finger"
-            android:visibility="gone"
-            app:tint="@color/colorPrimaryOpa" />
 
         <TextView
             android:id="@+id/text_cod_cart"
@@ -396,8 +380,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:padding="10dp"
-            android:text="Agregar código manualmente"
-            android:textColor="@color/white" />
+            android:text="Validación por DNI"
+            android:textColor="@color/colorPrimary" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

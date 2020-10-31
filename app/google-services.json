@@ -42,6 +42,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5045299081:android:08adb654172d41fdb0e358",
+        "android_client_info": {
+          "package_name": "com.ripley.pago.seguridad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5045299081-5d5ojgpa5tfrl0ucoksqrb8loqspp35e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX5MqfxswMwB-OMxuxpYY32WAXeSjHYeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5045299081-5d5ojgpa5tfrl0ucoksqrb8loqspp35e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
