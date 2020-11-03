@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.myfirstapp.ui.activity.seguridad.ValidationActivity">
+    tools:context="com.example.myfirstapp.ui.activity.security.ValidationActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

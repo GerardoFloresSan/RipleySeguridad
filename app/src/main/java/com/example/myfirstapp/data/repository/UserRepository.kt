@@ -1,6 +1,7 @@
 package com.example.myfirstapp.data.repository
 
-import com.example.myfirstapp.data.response.User
+import com.example.myfirstapp.data.request.LoginRequest
+import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.data.retrofit.ApiService
 import com.example.myfirstapp.utils.Methods
 import io.reactivex.Observable
@@ -8,19 +9,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class UserRepository(var apiService: ApiService, var methods: Methods) {
-    //private val futureMapper = FutureMapper()
 
-    fun getUserByDni(dni: String): Observable<User> {
-        val url = "https://ux9wpccub6.execute-api.us-east-1.amazonaws.com/qa/api/users/getUserByDNI/$dni"
+    fun login(loginRequest: LoginRequest): Observable<LoginResponse> {
+        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/login"
         val headers = mapOf(
             "Content-Type" to "application/json",
             "x-api-key" to "e3Z23YLIid93Z7K8bXXGY2MLrAPLHo3w8B9N3MXp")
 
-        return apiService.getUserByDni(url, headers)
+        return apiService.login(url, headers, loginRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            /*.observeOn(AndroidSchedulers.mainThread()).map { input ->
-                futureMapper.reverseMap(input)
-            }*/
     }
 }

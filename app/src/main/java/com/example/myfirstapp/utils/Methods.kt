@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
-import com.example.myfirstapp.data.response.Parameter
 import java.text.NumberFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -136,17 +135,6 @@ class Methods(private val context: Context) {
             } catch (e: NumberFormatException) {
                 88
             }
-        }
-
-        fun getParameter(id: Int): Parameter {
-            lateinit var parameter: Parameter
-            for(p in PapersManager.parametersAll) {
-                if(p.id == id) {
-                    parameter = p
-                    break
-                }
-            }
-            return parameter
         }
 
         @Suppress("LocalVariableName")

@@ -1,17 +1,15 @@
-package com.example.myfirstapp.ui.activity.seguridad
+package com.example.myfirstapp.ui.activity.security
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myfirstapp.R
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 
-class DetailShopActivity : RipleyBaseActivity() {
+class ValidationActivity : RipleyBaseActivity() {
 
-    override fun getView(): Int = R.layout.activity_detail_shop
+    override fun getView(): Int = R.layout.activity_validation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
 }

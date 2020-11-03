@@ -20,22 +20,10 @@ class PresenterModule {
 
     @Provides
     @PresenterScope
-    fun subsidiaryPresenter(
-        useCase: GetSubsidiary,
+    fun salesPresenter(
+        useCase: GetSalesQr,
+        useCase2: GetSalesByDoc,
+        useCase3: CloseSales,
         methods: Methods
-    ) = SubsidiaryPresenter(useCase, methods)
-
-    @Provides
-    @PresenterScope
-    fun parameterPresenter(
-        useCase: GetParameters,
-        methods: Methods
-    ) = ParameterPresenter(useCase, methods)
-
-    @Provides
-    @PresenterScope
-    fun checkPricePresenter(
-        useCase: CheckPrice,
-        methods: Methods
-    ) = CheckPricePresenter(useCase, methods)
+    ) = SalesPresenter(useCase, useCase2, useCase3, methods)
 }

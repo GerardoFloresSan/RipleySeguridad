@@ -3,7 +3,7 @@ package com.example.myfirstapp.ui.activity
 import android.os.Bundle
 import android.os.Handler
 import com.example.myfirstapp.R
-import com.example.myfirstapp.ui.activity.seguridad.LoginActivity
+import com.example.myfirstapp.ui.activity.security.LoginActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.startActivityE
 

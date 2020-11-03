@@ -1,6 +1,5 @@
-package com.example.myfirstapp.ui.activity.seguridad
+package com.example.myfirstapp.ui.activity.security
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myfirstapp.R
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
