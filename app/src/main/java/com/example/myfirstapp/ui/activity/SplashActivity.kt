@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.myfirstapp.R
 import com.example.myfirstapp.ui.activity.security.LoginActivity
+import com.example.myfirstapp.ui.activity.security.WelcomeSecurityActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 
 class SplashActivity : RipleyBaseActivity() {
@@ -15,8 +17,7 @@ class SplashActivity : RipleyBaseActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({
-            startActivityE(LoginActivity::class.java)
-            finish()
+            if (PapersManager.login) startActivityE(WelcomeSecurityActivity::class.java) else startActivityE(LoginActivity::class.java)
         }, 3000)
     }
 

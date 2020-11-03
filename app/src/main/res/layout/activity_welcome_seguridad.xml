@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/lbl_text_name_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -84,7 +84,7 @@
         android:textColor="@color/colorText"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_name_user" />
 
     <TextView
         android:id="@+id/txt_subsidiary"
@@ -98,10 +98,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.726"
         app:layout_constraintStart_toEndOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_text_name_user" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnStartShop"
+        android:id="@+id/btn_start_shop"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginStart="48dp"

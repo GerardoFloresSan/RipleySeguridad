@@ -71,12 +71,34 @@ class Methods(private val context: Context) {
     }
 
     companion object {
-
+        private val CHAR_LIST = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        private val RANDOM_STRING_LENGTH = 15
         @SuppressLint("StaticFieldLeak")
         private var methods: Methods? = null
 
         fun init(context: Context) {
             methods = Methods(context)
+        }
+
+        private fun getRandomNumber(): Int {
+            var randomInt = 0
+            val randomGenerator = Random()
+            randomInt = randomGenerator.nextInt(CHAR_LIST.length)
+            return if (randomInt - 1 == -1) {
+                randomInt
+            } else {
+                randomInt - 1
+            }
+        }
+
+        fun generateRandomString(): String {
+            val randStr = StringBuffer()
+            for (i in 0 until RANDOM_STRING_LENGTH) {
+                val number = getRandomNumber()
+                val ch = CHAR_LIST[number]
+                randStr.append(ch)
+            }
+            return randStr.toString()
         }
 
         @SuppressLint("NewApi")
