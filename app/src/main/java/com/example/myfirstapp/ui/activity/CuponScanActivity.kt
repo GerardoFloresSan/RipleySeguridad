@@ -264,7 +264,7 @@ class CuponScanActivity : RipleyBaseActivity(), CheckPricePresenter.View {
         btnOk.setOnClickListener {
             if (validLocation()) {
                 stopScan = true
-                checkPricePresenter.cuponListener(textCode.text.toString().trim().padStart(13, '0'), true, listener = { i, checkPricesResponse, code ->
+                checkPricePresenter.cuponListener(textCode.text.toString().trim().padStart(19, '0'), true, listener = { i, checkPricesResponse, code ->
                     when (i) {
                         200 -> {
                             textError.visibility = View.INVISIBLE

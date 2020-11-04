@@ -26,7 +26,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode,UnusedAttribute"
         tools:replace="allowBackup">
-        <activity android:name=".ui.activity.seguridad.ValidationActivity"></activity>
+        <activity android:name=".ui.activity.seguridad.FirmaActivity"></activity>
+        <activity android:name=".ui.activity.seguridad.ValidationActivity" />
         <activity android:name=".ui.activity.seguridad.DetailShopActivity" />
         <activity
             android:name=".ui.activity.SplashActivity"
