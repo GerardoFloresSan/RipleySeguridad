@@ -18,14 +18,14 @@ interface ApiService {
         @Url url: String,
         @HeaderMap headers: Map<String, String>,
         @Body request: GetStateByQrRequest
-    ): Observable<SalesGetStateResponse>
+    ): Observable<SalesGetByResponse>
 
     @POST
     fun getStateByDoc(
         @Url url: String,
         @HeaderMap headers: Map<String, String>,
         @Body request: GetStateByDocRequest
-    ): Observable<List<SalesGetByDocResponse>>
+    ): Observable<List<SalesGetByResponse>>
 
     @POST
     fun salesCloseCart(

@@ -1,4 +1,5 @@
 package com.example.myfirstapp.data.response
+/*
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -29,4 +30,4 @@ data class SalesGetStateResponse(
         @SerializedName("description") var description: String = "",
         @SerializedName("price") var price: Int = 0
     ) : Serializable
-}
+}*/

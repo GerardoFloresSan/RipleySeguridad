@@ -4,63 +4,63 @@ import com.example.myfirstapp.data.request.CloseCartRequest
 import com.example.myfirstapp.data.request.GetStateByDocRequest
 import com.example.myfirstapp.data.request.GetStateByQrRequest
 import com.example.myfirstapp.data.response.CloseCartResponse
-import com.example.myfirstapp.data.response.SalesGetByDocResponse
-import com.example.myfirstapp.data.response.SalesGetStateResponse
+import com.example.myfirstapp.data.response.SalesGetByResponse
 import com.example.myfirstapp.domain.useCase.*
 import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.utils.Methods
 import io.reactivex.observers.DisposableObserver
 import java.io.Serializable
 
-class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: GetSalesByDoc, private var useCase3: CloseSales, private var methods: Methods) : BasePresenter<UserPresenter.View>() {
+class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: GetSalesByDoc, private var useCase3: CloseSales, private var methods: Methods) : BasePresenter<SalesPresenter.View>() {
 
-    fun getUserByDoc(request: GetStateByQrRequest) {
+    fun getUserByQr(request: GetStateByQrRequest) {
         if (!methods.isInternetConnected()) return
         view?.showLoading()
 
         useCase1.request = request
-        useCase1.execute(object : DisposableObserver<SalesGetStateResponse>() {
+        useCase1.execute(object : DisposableObserver<SalesGetByResponse>() {
             override fun onComplete() {
                 view?.hideLoading()
             }
 
-            override fun onNext(u: SalesGetStateResponse) {
+            override fun onNext(u: SalesGetByResponse) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(200, u)
+                view?.salesSuccessPresenter(200, u)
             }
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(202, "error")
+                view?.salesSuccessPresenter(202, "error")
             }
 
         })
     }
-    fun getUserByDoc(request: GetStateByDocRequest) {
+    fun getUserByDoc(request: GetStateByDocRequest, listener: (Int, ArrayList<SalesGetByResponse>) -> Unit) {
         if (!methods.isInternetConnected()) return
         view?.showLoading()
 
         useCase2.request = request
-        useCase2.execute(object : DisposableObserver<List<SalesGetByDocResponse>>() {
+        useCase2.execute(object : DisposableObserver<List<SalesGetByResponse>>() {
             override fun onComplete() {
                 view?.hideLoading()
             }
 
-            override fun onNext(u: List<SalesGetByDocResponse>) {
-                val list :  ArrayList<SalesGetByDocResponse> = arrayListOf()
+            override fun onNext(u: List<SalesGetByResponse>) {
+                val list :  ArrayList<SalesGetByResponse> = arrayListOf()
                 list.addAll(u)
                 view?.hideLoading()
-                view?.userSuccessPresenter(200, list)
+                listener(200, list)
             }
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(202, "error")
+                listener(202, arrayListOf())
             }
 
         })
     }
-    fun getUserByDoc(request: CloseCartRequest) {
+
+    fun closeSales(request: CloseCartRequest) {
         if (!methods.isInternetConnected()) return
         view?.showLoading()
 
@@ -72,12 +72,12 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
             override fun onNext(u: CloseCartResponse) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(200, u)
+                view?.salesSuccessPresenter(200, u)
             }
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(202, "error")
+                view?.salesSuccessPresenter(202, "error")
             }
 
         })

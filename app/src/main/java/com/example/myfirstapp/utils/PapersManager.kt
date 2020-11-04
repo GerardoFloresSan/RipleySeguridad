@@ -14,6 +14,15 @@ object PapersManager {
             return Paper.book(BuildConfig.FLAVOR).read("loginAccess", LoginResponse())
         }
 
+    var username: String
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("username", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("username", "")
+        }
+
+    //username
     var login: Boolean
         set(value) {
             Paper.book(BuildConfig.FLAVOR).write("login", value)

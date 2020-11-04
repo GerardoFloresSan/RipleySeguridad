@@ -14,7 +14,7 @@ class UserRepository(var apiService: ApiService, var methods: Methods) {
         val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/login"
         val headers = mapOf(
             "Content-Type" to "application/json",
-            "x-api-key" to "e3Z23YLIid93Z7K8bXXGY2MLrAPLHo3w8B9N3MXp")
+            "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
 
         return apiService.login(url, headers, loginRequest)
             .subscribeOn(Schedulers.io())

@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Agregar código \nmanualmente"
+            android:text="Ingreso de DNI"
             android:textAlignment="center"
             android:textColor="@color/colorBlackRipley"
             android:textSize="24sp" />

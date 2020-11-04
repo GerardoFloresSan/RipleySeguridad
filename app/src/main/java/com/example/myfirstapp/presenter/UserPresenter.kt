@@ -5,6 +5,7 @@ import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.domain.useCase.GetUser
 import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.utils.Methods
+import com.example.myfirstapp.utils.PapersManager
 import io.reactivex.observers.DisposableObserver
 import java.io.Serializable
 
@@ -22,6 +23,8 @@ class UserPresenter (private var useCase: GetUser, private var methods: Methods)
 
             override fun onNext(u: LoginResponse) {
                 view?.hideLoading()
+                PapersManager.loginAccess = u
+                PapersManager.login = true
                 view?.userSuccessPresenter(200, u)
             }
 

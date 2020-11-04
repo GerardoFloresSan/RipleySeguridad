@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class CloseCartResponse (
-    @SerializedName("clientVoucher") var clientVoucher : List<ClientVoucher>
+    @SerializedName("clientVoucher") var clientVoucher : ArrayList<ClientVoucher> = arrayListOf()
 ) : Serializable{
     data class ClientVoucher (
         @SerializedName("text") var text : String = "",
