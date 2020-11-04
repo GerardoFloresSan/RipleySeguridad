@@ -21,7 +21,7 @@ class WelcomeSecurityActivity : RipleyBaseActivity() {
         super.onCreate()
 
         lbl_text_name_user.text = "${PapersManager.loginAccess.name} ${PapersManager.loginAccess.lastName}"
-        txt_subsidiary.text = "Ripley" + PapersManager.loginAccess.subsidiaryName
+        txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
 
         close_session.setOnClickListener {
             PapersManager.login = false

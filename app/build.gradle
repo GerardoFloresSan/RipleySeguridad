@@ -12,6 +12,9 @@ def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+//1.0.0A:QA
+//1.0.0A:PRD
+
 android {
     flavorDimensions "default"
     compileSdkVersion 30
@@ -22,7 +25,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode version
-        versionName "0.1.${version}"
+        versionName "1.0.0A:QA.${version}"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

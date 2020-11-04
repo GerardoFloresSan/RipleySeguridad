@@ -269,12 +269,15 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
 
     private fun addText(textCode: AppCompatTextView, number: String, btnOk: AppCompatButton) {
         @SuppressLint("SetTextI18n")
+
+        val validation = textCode.text.length >= 7
+
         textCode.text = "${textCode.text}$number"
 
-        btnOk.isEnabled = textCode.text.isNotEmpty()
-        btnOk.isClickable = textCode.text.isNotEmpty()
-        btnOk.isFocusable = textCode.text.isNotEmpty()
-        val validation = textCode.text.isNotEmpty()
+        btnOk.isEnabled = validation
+        btnOk.isClickable = validation
+        btnOk.isFocusable = validation
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             btnOk.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
