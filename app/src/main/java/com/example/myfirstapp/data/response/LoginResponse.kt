@@ -1,14 +1,14 @@
 package com.example.myfirstapp.data.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class LoginResponse (
-
-    @SerializedName("subsidiary") val subsidiary : Int,
-    @SerializedName("subsidiaryName") val subsidiaryName : String,
-    @SerializedName("document") val document : Int,
-    @SerializedName("name") val name : String,
-    @SerializedName("lastname") val lastname : String,
-    @SerializedName("token") val token : String
-)
+    @SerializedName("subsidiary") var subsidiary : String = "",
+    @SerializedName("subsidiaryName") var subsidiaryName : String = "",
+    @SerializedName("document") var document : String = "",
+    @SerializedName("name") var name : String = "",
+    @Suppress("SpellCheckingInspection") @SerializedName("lastname") val lastName : String = "",
+    @SerializedName("token") var token : String = ""
+) : Serializable

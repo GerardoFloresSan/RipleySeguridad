@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.myfirstapp.ui.activity.seguridad.DetailShopActivity">
+    tools:context="com.example.myfirstapp.ui.activity.security.DetailShopActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar_custom"
@@ -58,6 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
+                android:id="@+id/txt_name_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_person"
@@ -67,6 +68,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/txt_subsidiary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -77,6 +79,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/txt_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -87,6 +90,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/txt_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -123,11 +127,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 style="@style/RecyclerDetail"
-                android:nestedScrollingEnabled="false"
-                android:visibility="invisible"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="1"
-                tools:listitem="@layout/item_detail_shop" />
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_product_detail" />
 
 
         </LinearLayout>
@@ -187,6 +190,23 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <TextView
+            android:id="@+id/btn_check_shopping_cart"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/baseline_check_black_24dp"
+            android:drawablePadding="8dp"
+            android:visibility="gone"
+            android:fontFamily="@font/montserrat"
+            android:text="Pedido Verificado"
+            android:textSize="14sp" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next_shopping_cart"
             android:layout_width="match_parent"
@@ -200,6 +220,7 @@
             android:paddingEnd="24dp"
             android:text="Verificar compra"
             android:textAllCaps="false"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

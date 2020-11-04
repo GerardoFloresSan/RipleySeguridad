@@ -6,61 +6,28 @@ import io.paperdb.Paper
 
 object PapersManager {
 
-    var newUsers: Boolean
+    var loginAccess: LoginResponse
         set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("newUser", value)
+            Paper.book(BuildConfig.FLAVOR).write("loginAccess", value)
         }
         get() {
-            return Paper.book(BuildConfig.FLAVOR).read("newUser", true)
+            return Paper.book(BuildConfig.FLAVOR).read("loginAccess", LoginResponse())
         }
 
-    var subsidiary: Subsidiary
+    var username: String
         set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("subsidiary", value)
+            Paper.book(BuildConfig.FLAVOR).write("username", value)
         }
         get() {
-            return Paper.book(BuildConfig.FLAVOR).read("subsidiary", Subsidiary())
+            return Paper.book(BuildConfig.FLAVOR).read("username", "")
         }
 
-    var parametersAll: ArrayList<Parameter>
+    //username
+    var login: Boolean
         set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("parameters", value)
+            Paper.book(BuildConfig.FLAVOR).write("login", value)
         }
         get() {
-            return Paper.book(BuildConfig.FLAVOR).read("parameters", arrayListOf())
+            return Paper.book(BuildConfig.FLAVOR).read("login", false)
         }
-
-    var shoppingCart: CheckPricesResponse
-        set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("shoppingCart", value)
-        }
-        get() {
-            return Paper.book(BuildConfig.FLAVOR).read("shoppingCart", CheckPricesResponse())
-        }
-
-    var locationUser: LocationUser
-        set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("locationUser", value)
-        }
-        get() {
-            return Paper.book(BuildConfig.FLAVOR).read("locationUser", LocationUser())
-        }
-
-    var gpsStatus: Boolean
-        set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("gpsStatus", value)
-        }
-        get() {
-            return Paper.book(BuildConfig.FLAVOR).read("gpsStatus", false)
-        }
-
-    var userLocal: User
-        set(value) {
-            Paper.book(BuildConfig.FLAVOR).write("user", value)
-        }
-        get() {
-            return Paper.book(BuildConfig.FLAVOR).read("user", User())
-        }
-
-    //
 }

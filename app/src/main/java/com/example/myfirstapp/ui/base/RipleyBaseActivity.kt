@@ -20,7 +20,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
 import com.example.myfirstapp.di.Orchestrator
-import com.example.myfirstapp.ui.activity.LocationStoreActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
@@ -32,31 +31,11 @@ abstract class RipleyBaseActivity : BaseActivity() {
     private var dialog: MaterialDialog? = null
     private var dialogCustom : Dialog? = null
     val PERMISSION_CAMERA = 4567
-    val PERMISSION_LOCATION = 5678
 
     protected val component by lazy { Orchestrator.presenterComponent }
-    protected val locationHelper by lazy {
-        RipleyApplication.locationHelper
-    }
-    protected val locationTrackingService by lazy {
-        RipleyApplication.locationTrackingService
-    }
 
     fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace( R.id.content, fragment).commit()
-    }
-
-    protected val termsConditions by lazy {
-        Methods.getParameter(65).value.toInt()
-    }
-    protected val politicsPersonalData by lazy {
-        Methods.getParameter(107).value.toInt()
-    }
-    protected val maxGlobalProduct by lazy {
-        if(BuildConfig.DEBUG) 1 else Methods.getParameter(122).value.toInt()
-    }
-    protected val maxByProduct by lazy {
-        if(BuildConfig.DEBUG) 3 else Methods.getParameter(123).value.toInt()
     }
 
     fun getContext() = this
@@ -71,21 +50,12 @@ abstract class RipleyBaseActivity : BaseActivity() {
         dialogCustom!!.window?.attributes?.windowAnimations = R.style.AppTheme_Slide
         dialogCustom!!.setCancelable(false)
         dialogCustom!!.show()
-
-
-        /*dialog = MaterialDialog.Builder(this)
-            .customView(R.layout.dialog_loading, false)
-            .cancelable(false)
-            .show()*/
     }
 
     fun hideLoading() {
         if (dialogCustom == null) return
         dialogCustom?.dismiss()
         dialogCustom = null
-        /*if (dialog == null) return
-        dialog?.dismiss()
-        dialog = null*/
     }
 
     //Todo crear dos dialogs
@@ -113,23 +83,8 @@ abstract class RipleyBaseActivity : BaseActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun getLocationPermission() {
-        val permissionArrays = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-        if (checkPermissionsLocation()) {
-            toast("Permiso otorgado --- PERMISSION_LOCATION")
-        } else {
-            requestPermissions(permissionArrays, PERMISSION_LOCATION)
-        }
-    }
-
     fun checkPermissionsCamera(): Boolean {
         val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        return permissionState == PackageManager.PERMISSION_GRANTED
-    }
-
-    fun checkPermissionsLocation(): Boolean {
-        val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
         return permissionState == PackageManager.PERMISSION_GRANTED
     }
 
@@ -175,67 +130,6 @@ abstract class RipleyBaseActivity : BaseActivity() {
 
         btnAccept.setOnClickListener {
             dialog.dismiss()
-        }
-    }
-
-    fun restart() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_close_fail_location)
-        val btnAccept: AppCompatButton = dialog.findViewById<View>(R.id.btnOk) as AppCompatButton
-        val dialogTitle: AppCompatTextView = dialog.findViewById<View>(R.id.lbl_dialog_title) as AppCompatTextView
-        dialogTitle.text = dialogTitle.getString().replace("xxxxxx", PapersManager.subsidiary.description)
-        PapersManager.subsidiary
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.window?.attributes?.windowAnimations = R.style.AppTheme_Slide
-        dialog.setCancelable(false)
-        dialog.show()
-
-        btnAccept.setOnClickListener {
-            dialog.dismiss()
-            RipleyApplication.closeAll()
-            startActivityE(LocationStoreActivity::class.java)
-        }
-    }
-
-    fun distanceShort(startPoint: Location): Float {
-        val endPoint = Location("locationA")//-12.0707968,-77.1002836
-        endPoint.latitude = PapersManager.locationUser.latitude
-        endPoint.longitude = PapersManager.locationUser.longitude
-
-        return startPoint.distanceTo(endPoint)
-    }
-
-    fun validLocation(): Boolean {
-        if(PapersManager.gpsStatus) {
-            if(PapersManager.locationUser.latitude != 0.0) {
-                val subsidiary = PapersManager.subsidiary
-                val subsidiaryPoint = Location("locationA").apply {
-                    this.latitude = subsidiary.latitude
-                    this.longitude = subsidiary.longitude
-                }
-                val shortDistance = distanceShort(subsidiaryPoint)
-                return when {
-                    //(shortDistance < 500) -> {
-                    (shortDistance < Methods.getParameter(120).value.toLong()) -> {
-                        true
-                    }//
-                    else -> {
-                        restart()
-                        false
-                    }
-                }
-            } else {
-                toast(getString(R.string.txt_getting_location))
-                return false
-            }
-        } else {
-            toast(getString(R.string.txt_active_gps))
-            return false
         }
     }
 

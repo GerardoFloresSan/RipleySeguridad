@@ -27,6 +27,5 @@ data class CheckPricesResponse (
         @SerializedName("discountRipley") var  discountRipley: Long = 0,
         @SerializedName("codPromo") var  codPromo: ArrayList<String> = arrayListOf(),
         @SerializedName("codPromoRipley") var  codPromoRipley: ArrayList<String> = arrayListOf()
-    )
-
+    ) : Serializable
 }

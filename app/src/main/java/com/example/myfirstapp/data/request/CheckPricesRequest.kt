@@ -13,5 +13,5 @@ data class CheckPricesRequest (
         @SerializedName("id") var id: Int = 0,
         @SerializedName("sku") var sku: String = "",
         @SerializedName("quantity") var quantity: Int = 0
-    )
+    ) : Serializable
 }
