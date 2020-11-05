@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_margin="8dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="8dp"
     android:elevation="16dp"
     app:cardCornerRadius="16dp">
 
@@ -173,10 +176,9 @@
             android:id="@+id/btn_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat"
+            android:gravity="center"
             android:text="Ver detalle"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"

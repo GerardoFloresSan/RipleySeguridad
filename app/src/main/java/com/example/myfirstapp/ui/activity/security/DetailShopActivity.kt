@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_detail_shop.*
 
 class DetailShopActivity : RipleyBaseActivity() {
 
-    lateinit var sale : SalesGetByResponse
+    lateinit var sale: SalesGetByResponse
     private var adapter: ProductAdapter? = null
 
     override fun getView(): Int = R.layout.activity_detail_shop
@@ -18,8 +18,8 @@ class DetailShopActivity : RipleyBaseActivity() {
     override fun onCreate() {
         sale = intent.getSerializableExtra("extra0") as SalesGetByResponse
 
-        txt_name_person.text = sale.clientName
-        txt_subsidiary.text = sale.subsidiaryName
+        txt_name_person.text = sale.clientName + " " + sale.clientLast
+        txt_subsidiary.text = "Ripley " + sale.subsidiaryName
         txt_date.text = sale.date
         txt_time.text = sale.date//TODO VERIFICAR
 
@@ -34,7 +34,7 @@ class DetailShopActivity : RipleyBaseActivity() {
 
         txt_total_other_payed.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
 
-        when(sale.statusId) {
+        when (sale.statusId) {
             1 -> {
                 btn_next_shopping_cart.visibility = View.VISIBLE
                 btn_check_shopping_cart.visibility = View.GONE
