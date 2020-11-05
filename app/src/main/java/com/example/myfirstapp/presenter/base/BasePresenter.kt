@@ -21,6 +21,9 @@ open class BasePresenter<V : BasePresenter.View> {
     }
 
     interface View {
+
+        fun tokenExpired()
+
         fun getContext(): Context
 
         fun showLoading()

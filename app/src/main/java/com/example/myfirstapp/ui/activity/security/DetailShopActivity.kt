@@ -3,10 +3,16 @@ package com.example.myfirstapp.ui.activity.security
 import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.SalesGetByResponse
+import com.example.myfirstapp.ui.activity.seguridad.FirmActivity
 import com.example.myfirstapp.ui.adapter.ProductAdapter
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.Methods
+import com.example.myfirstapp.utils.startActivityE
+import com.example.myfirstapp.utils.toSimpleString
+import com.example.myfirstapp.utils.toSimpleTime
 import kotlinx.android.synthetic.main.activity_detail_shop.*
+import kotlinx.android.synthetic.main.item_detail_cart.view.*
+import java.text.SimpleDateFormat
 
 class DetailShopActivity : RipleyBaseActivity() {
 
@@ -20,8 +26,10 @@ class DetailShopActivity : RipleyBaseActivity() {
 
         txt_name_person.text = sale.clientName + " " + sale.clientLast
         txt_subsidiary.text = "Ripley " + sale.subsidiaryName
-        txt_date.text = sale.date
-        txt_time.text = sale.date//TODO VERIFICAR
+
+        val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
+        txt_date.text = date.toSimpleString().replaceFirst(" ", " de ")
+        txt_time.text = date.toSimpleTime()
 
         adapter = ProductAdapter()
         recycler.removeAllViews()
@@ -51,6 +59,10 @@ class DetailShopActivity : RipleyBaseActivity() {
                 btn_next_shopping_cart.visibility = View.GONE
                 btn_check_shopping_cart.visibility = View.VISIBLE
             }
+        }
+
+        btn_next_shopping_cart.setOnClickListener {
+            startActivityE(FirmActivity::class.java, sale)
         }
 
         super.onCreate()

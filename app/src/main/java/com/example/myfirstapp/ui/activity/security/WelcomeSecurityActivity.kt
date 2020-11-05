@@ -11,6 +11,7 @@ import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
+import java.text.SimpleDateFormat
 
 class WelcomeSecurityActivity : RipleyBaseActivity() {
 

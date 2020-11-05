@@ -20,6 +20,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
 import com.example.myfirstapp.di.Orchestrator
+import com.example.myfirstapp.ui.activity.SplashActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
@@ -131,6 +132,16 @@ abstract class RipleyBaseActivity : BaseActivity() {
         btnAccept.setOnClickListener {
             dialog.dismiss()
         }
+    }
+
+    fun tokenExpired() {
+        dialog = getErrorDialog("Su sesión ha expirado.")
+            .cancelable(false)
+            .onPositive { _, _ ->
+                PapersManager.login = false
+                RipleyApplication.closeAll()
+                startActivityE(SplashActivity::class.java)
+            }.show()
     }
 
     fun toast(text: String) = Toast.makeText(this@RipleyBaseActivity, text, Toast.LENGTH_LONG).show()

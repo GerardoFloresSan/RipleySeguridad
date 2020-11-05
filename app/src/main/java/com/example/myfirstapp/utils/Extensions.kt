@@ -25,6 +25,8 @@ import androidx.core.content.ContextCompat
 import com.example.myfirstapp.ui.base.BaseFragment
 import com.google.android.material.textfield.TextInputLayout
 import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun Context.postDelayed(unit: () -> Unit, delay: Long) {
@@ -44,6 +46,16 @@ fun AppCompatActivity.startActivityPostDelayed(cls: Class<out AppCompatActivity>
 //fun Toast.makeText(message: String) = Toast.makeText(con)
 
 fun Double.isEmpty() = this == 0.0
+
+fun Date.toSimpleString() : String {
+    val format = SimpleDateFormat("dd MMMM, yyyy")
+    return format.format(this)
+}
+
+fun Date.toSimpleTime() : String {
+    val format = SimpleDateFormat("HH:mm:ss")
+    return format.format(this)
+}
 
 fun Any.toDouble(): Double {
     return (this as? Int)?.toDouble() ?: if (this is String) {
