@@ -83,10 +83,13 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 PapersManager.username = txt_input_user.getString()
                 startActivityE(WelcomeSecurityActivity::class.java)
             }
-            else -> {
+            401 -> {
                 txt_error.visibility = View.VISIBLE
                 txt_input_user.setBackgroundResource(R.drawable.shape_text_error)
                 txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
+            }
+            else -> {
+                toast("Vuelva a intentarlo")
             }
         }
     }

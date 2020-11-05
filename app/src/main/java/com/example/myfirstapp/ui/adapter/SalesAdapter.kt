@@ -8,7 +8,11 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.SalesGetByResponse
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.inflate
+import com.example.myfirstapp.utils.toSimpleString
+import com.example.myfirstapp.utils.toSimpleTime
+import kotlinx.android.synthetic.main.activity_validation.view.*
 import kotlinx.android.synthetic.main.item_detail_cart.view.*
+import java.text.SimpleDateFormat
 
 class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) : RecyclerView.Adapter<SalesAdapter.CommentHolder>() {
     var data: List<SalesGetByResponse> = arrayListOf()
@@ -26,10 +30,11 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) : Re
         @SuppressLint("SetTextI18n")
         fun bind(sale: SalesGetByResponse, listener: (Int, SalesGetByResponse) -> Unit) = with(itemView) {
             txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
+            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
             txt_status_detail.text = sale.status
-            txt_date_detail.text = sale.date
-            txt_hour_detail.text = sale.date
-            btn_detail.setOnClickListener {
+            txt_date_detail.text = date.toSimpleString().replaceFirst(" ", " de ")
+            txt_hour_detail.text = date.toSimpleTime()
+            this.setOnClickListener {
                 listener(0, sale)
             }
         }

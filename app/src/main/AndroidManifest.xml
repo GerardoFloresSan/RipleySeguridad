@@ -24,7 +24,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode,UnusedAttribute"
         tools:replace="allowBackup">
-        <activity android:name=".ui.activity.security.ListDetailActivity"></activity>
+        <activity android:name=".ui.activity.seguridad.EndOrderActivity"></activity>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -65,6 +65,20 @@
             tools:targetApi="n" />
         <activity
             android:name=".ui.activity.security.DetailShopActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n" />
+        <activity
+            android:name=".ui.activity.security.ListDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n" />
+        <activity
+            android:name=".ui.activity.seguridad.FirmActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"

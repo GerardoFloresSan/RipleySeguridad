@@ -7,6 +7,7 @@ import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import io.reactivex.observers.DisposableObserver
+import retrofit2.HttpException
 import java.io.Serializable
 
 class UserPresenter (private var useCase: GetUser, private var methods: Methods) : BasePresenter<UserPresenter.View>() {
@@ -30,7 +31,15 @@ class UserPresenter (private var useCase: GetUser, private var methods: Methods)
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.userSuccessPresenter(202, "error")
+                when (e) {
+                    is HttpException -> {
+                        when {
+                            e.code() == 401 -> view?.userSuccessPresenter(401, "error")
+                            else -> view?.userSuccessPresenter(203, "error")
+                        }
+                    }
+                    else -> view?.userSuccessPresenter(203, "error")
+                }
             }
 
         })

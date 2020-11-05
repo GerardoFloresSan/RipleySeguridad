@@ -11,6 +11,7 @@ import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
+import java.text.SimpleDateFormat
 
 class WelcomeSecurityActivity : RipleyBaseActivity() {
 
@@ -21,7 +22,7 @@ class WelcomeSecurityActivity : RipleyBaseActivity() {
         super.onCreate()
 
         lbl_text_name_user.text = "${PapersManager.loginAccess.name} ${PapersManager.loginAccess.lastName}"
-        txt_subsidiary.text = "Ripley" + PapersManager.loginAccess.subsidiaryName
+        txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
 
         close_session.setOnClickListener {
             PapersManager.login = false

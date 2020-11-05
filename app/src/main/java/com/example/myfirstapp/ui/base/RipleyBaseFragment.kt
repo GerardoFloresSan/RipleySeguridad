@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.myfirstapp.R
 import com.example.myfirstapp.di.Orchestrator
+import com.example.myfirstapp.ui.activity.SplashActivity
+import com.example.myfirstapp.ui.application.RipleyApplication
+import com.example.myfirstapp.utils.startActivityE
 
 abstract class RipleyBaseFragment : BaseFragment() {
 
@@ -44,5 +47,18 @@ abstract class RipleyBaseFragment : BaseFragment() {
 
     fun showError(message: Int) {
         showError(getString(message))
+    }
+
+    fun getErrorDialog(message: String) = MaterialDialog.Builder(this.activity!!)
+        .title(getString(R.string.txt_alert_dialog_error))
+        .content(message)
+        .positiveText(getString(R.string.txt_ok_dialog))
+
+    fun tokenExpired() {
+        dialog = getErrorDialog("Su sesión ha expirado.")
+            .onPositive { _, _ ->
+                RipleyApplication.closeAll()
+                startActivityE(SplashActivity::class.java)
+            }.show()
     }
 }

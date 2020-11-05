@@ -9,6 +9,7 @@ import com.example.myfirstapp.domain.useCase.*
 import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.utils.Methods
 import io.reactivex.observers.DisposableObserver
+import retrofit2.HttpException
 import java.io.Serializable
 
 class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: GetSalesByDoc, private var useCase3: CloseSales, private var methods: Methods) : BasePresenter<SalesPresenter.View>() {
@@ -30,7 +31,16 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.salesSuccessPresenter(202, "error")
+                when (e) {
+                    is HttpException -> {
+                        when {
+                            e.code() == 401 -> view?.tokenExpired()
+                            e.code() == 500 -> view?.salesSuccessPresenter(500, "error")
+                            else -> view?.salesSuccessPresenter(202, "error")
+                        }
+                    }
+                    else -> view?.salesSuccessPresenter(202, "error")
+                }
             }
 
         })
@@ -54,7 +64,17 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                listener(202, arrayListOf())
+                when (e) {
+                    is HttpException -> {
+                        when {
+                            e.code() == 401 -> view?.tokenExpired()
+                            e.code() == 500 -> listener(500, arrayListOf())
+                            else -> listener(202, arrayListOf())
+                        }
+                    }
+                    else -> listener(202, arrayListOf())
+                }
+
             }
 
         })
@@ -77,7 +97,15 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
-                view?.salesSuccessPresenter(202, "error")
+                when (e) {
+                    is HttpException -> {
+                        when {
+                            e.code() == 401 -> view?.tokenExpired()
+                            else -> view?.salesSuccessPresenter(202, "error")
+                        }
+                    }
+                    else -> view?.salesSuccessPresenter(202, "error")
+                }
             }
 
         })

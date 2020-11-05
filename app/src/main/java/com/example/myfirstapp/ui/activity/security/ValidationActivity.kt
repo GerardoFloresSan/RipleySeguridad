@@ -44,7 +44,7 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
 
     private lateinit var detector: BarcodeDetector
 
-    private lateinit var detector2: BarcodeDetector
+    private var hashQrLocal: String = ""
 
     override fun getView(): Int = R.layout.activity_validation
 
@@ -122,6 +122,7 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                         val qrCodes: SparseArray<Barcode> = p0.detectedItems
                         val code = qrCodes.valueAt(0).displayValue
                         stopScan = true
+                        hashQrLocal = code
                         salesPresenter.getUserByQr(GetStateByQrRequest().apply {
                             this.hashQr = code
                             this.username = PapersManager.username
@@ -214,30 +215,17 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
         }
         btnDelete.setOnClickListener {
             textError.visibility = View.INVISIBLE
-            if (textCode.length() > 0) textCode.text =
-                textCode.text.substring(0, textCode.length() - 1)
-            btnOk.isEnabled = textCode.text.isNotEmpty()
-            btnOk.isClickable = textCode.text.isNotEmpty()
-            btnOk.isFocusable = textCode.text.isNotEmpty()
+            if (textCode.length() > 0) textCode.text = textCode.text.substring(0, textCode.length() - 1)
+            val validation = textCode.text.length > 7
+            btnOk.isEnabled = validation
+            btnOk.isClickable = validation
+            btnOk.isFocusable = validation
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                btnOk.backgroundTintList =
-                    if (textCode.text.isNotEmpty()) ColorStateList.valueOf(getColor(R.color.colorPrimary)) else ColorStateList.valueOf(
-                        getColor(R.color.colorPrimaryOpa)
-                    )
+                btnOk.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
             }//
             else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (textCode.text.isNotEmpty())
-                        btnOk.background.setTint(ContextCompat.getColor(this, R.color.colorPrimary))
-                    else
-                        btnOk.background.setTint(
-                            ContextCompat.getColor(
-                                this,
-                                R.color.colorPrimaryOpa
-                            )
-                        )
-                }
+                btnOk.background.setTint(ContextCompat.getColor(this, if(validation) R.color.colorPrimary else R.color.colorPrimaryOpa))
             }
         }
         btnCancel.setOnClickListener {
@@ -258,6 +246,10 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                             startActivityE(ListDetailActivity::class.java, response)
                             dialog.dismiss()
                         }
+                        500 -> {
+                            textError.visibility = View.VISIBLE
+                            textError.text = "No se encuentran compras relacionadas"
+                        }
                         else -> {
                             textError.visibility = View.VISIBLE
                             textError.text = "No se encuentran compras relacionadas"
@@ -269,12 +261,15 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
 
     private fun addText(textCode: AppCompatTextView, number: String, btnOk: AppCompatButton) {
         @SuppressLint("SetTextI18n")
+
+        val validation = textCode.text.length >= 7
+
         textCode.text = "${textCode.text}$number"
 
-        btnOk.isEnabled = textCode.text.isNotEmpty()
-        btnOk.isClickable = textCode.text.isNotEmpty()
-        btnOk.isFocusable = textCode.text.isNotEmpty()
-        val validation = textCode.text.isNotEmpty()
+        btnOk.isEnabled = validation
+        btnOk.isClickable = validation
+        btnOk.isFocusable = validation
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             btnOk.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
@@ -289,8 +284,14 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
         when(status) {
             200 -> {
                 val list : ArrayList<SalesGetByResponse> = arrayListOf()
-                list.add(args[0] as SalesGetByResponse)
+                val t = (args[0] as SalesGetByResponse).apply {
+                    this.hashQr = hashQrLocal
+                }
+                list.add(t)
                 startActivityE(ListDetailActivity::class.java, list)
+            }
+            403 -> {
+                toast("Orden de una sucursal diferente a la que está asignado")
             }
             else -> toast("No se encuentran compras relacionadas")
         }
