@@ -13,18 +13,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
         android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
         android:text="Pedido\nverificado"
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.163" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -33,9 +33,10 @@
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.135"
         app:srcCompat="@drawable/boleta_end" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -55,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.325" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_print"
@@ -64,13 +65,13 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/round_shape_white"
         android:text="Imprimir voucher de verificación"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_valid"
         app:layout_constraintVertical_bias="0.0" />

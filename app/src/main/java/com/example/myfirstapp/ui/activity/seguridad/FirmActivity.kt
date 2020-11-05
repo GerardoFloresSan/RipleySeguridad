@@ -100,7 +100,7 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         salesPresenter.closeSales(CloseCartRequest().apply {
             this.orderId = sale.orderId.toString()
             this.hashQr = if(sale.hashQr != null) sale.hashQr else ""
-            this.clientSignature = sign
+            this.clientSignature = ""// TODO Lo puse vacio porque hace que se caiga -- REVISAR
             this.username = PapersManager.username
             this.token = PapersManager.loginAccess.token
         })
@@ -115,15 +115,6 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
             }
         }
     }
-
-    /*@Throws(IllegalArgumentException::class)
-    fun convert(base64Str: String): Bitmap? {
-        val decodedBytes = Base64.decode(
-            base64Str.substring(base64Str.indexOf(",") + 1),
-            Base64.DEFAULT
-        )
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-    }*/
 
     fun convert(bitmap: Bitmap): String? {
         val outputStream = ByteArrayOutputStream()

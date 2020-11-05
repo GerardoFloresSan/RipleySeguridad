@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.firebase.crashlytics'
 
-def version = 1
+def version = 3
 
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
@@ -25,7 +25,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode version
-        versionName "1.0.0A:QA.${version}"
+        versionName "${version}.0.0A:QA"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

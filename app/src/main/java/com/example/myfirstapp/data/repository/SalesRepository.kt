@@ -36,7 +36,7 @@ class SalesRepository(var apiService: ApiService, var methods: Methods) {
     }
 
     fun salesCloseCart(request: CloseCartRequest): Observable<CloseCartResponse > {
-        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/login"
+        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/closecart"
         val headers = mapOf(
             "Content-Type" to "application/json",
             "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
