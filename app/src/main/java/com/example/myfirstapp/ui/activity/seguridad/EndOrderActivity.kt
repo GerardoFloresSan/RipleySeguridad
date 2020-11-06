@@ -29,4 +29,8 @@ class EndOrderActivity : RipleyBaseActivity() {
         }
         super.onCreate()
     }
+
+    override fun onBackPressed() {
+
+    }
 }

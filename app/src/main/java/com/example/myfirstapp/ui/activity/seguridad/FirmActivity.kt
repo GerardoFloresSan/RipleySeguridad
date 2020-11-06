@@ -111,19 +111,10 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         val encoded = convert(sign)
         if (encoded != null) {
             runOnUiThread {
-                close(encoded)
+                close(encoded.replace("\n", ""))
             }
         }
     }
-
-    /*@Throws(IllegalArgumentException::class)
-    fun convert(base64Str: String): Bitmap? {
-        val decodedBytes = Base64.decode(
-            base64Str.substring(base64Str.indexOf(",") + 1),
-            Base64.DEFAULT
-        )
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-    }*/
 
     fun convert(bitmap: Bitmap): String? {
         val outputStream = ByteArrayOutputStream()
