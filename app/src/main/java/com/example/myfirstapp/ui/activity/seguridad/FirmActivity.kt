@@ -100,7 +100,7 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         salesPresenter.closeSales(CloseCartRequest().apply {
             this.orderId = sale.orderId.toString()
             this.hashQr = if(sale.hashQr != null) sale.hashQr else ""
-            this.clientSignature = ""// TODO Lo puse vacio porque hace que se caiga -- REVISAR
+            this.clientSignature = sign
             this.username = PapersManager.username
             this.token = PapersManager.loginAccess.token
         })
@@ -111,7 +111,7 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         val encoded = convert(sign)
         if (encoded != null) {
             runOnUiThread {
-                close(encoded)
+                close(encoded.replace("\n", ""))
             }
         }
     }
