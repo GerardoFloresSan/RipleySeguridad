@@ -1,5 +1,6 @@
 package com.example.myfirstapp.ui.activity.seguridad
 
+import android.device.PrinterManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myfirstapp.R
@@ -16,6 +17,8 @@ class EndOrderActivity : RipleyBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
 
+    lateinit var printerManager: PrinterManager
+
     override fun getView(): Int  = R.layout.activity_end_order
 
     override fun onCreate() {
@@ -27,6 +30,9 @@ class EndOrderActivity : RipleyBaseActivity() {
         btn_print.setOnClickListener {
 
         }
+
+        printerManager = PrinterManager()
+
         super.onCreate()
     }
 
