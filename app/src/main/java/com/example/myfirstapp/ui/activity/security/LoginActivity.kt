@@ -89,7 +89,9 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
             }
             else -> {
-                toast("Vuelva a intentarlo")
+                txt_error.visibility = View.VISIBLE
+                txt_input_user.setBackgroundResource(R.drawable.shape_text_error)
+                txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
             }
         }
     }
