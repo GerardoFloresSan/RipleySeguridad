@@ -154,7 +154,11 @@ class PrinterRipleyManager(
         }
     }
 
-    override fun printBoletaJson(jsonNode: JsonNode, imagesJson: Map<String, Bitmap>?, numTickets: Long) {
+    override fun printBoletaJson(
+        jsonNode: JsonNode,
+        imagesJson: Map<String, Bitmap>?,
+        numTickets: Long
+    ) {
         if (checkPrinterStatus()) {
             Thread(Runnable {
                 try {
@@ -224,12 +228,10 @@ class PrinterRipleyManager(
 
     private fun printJsonLine(line: JsonNode, imagesJson: Map<String, Bitmap>?) {
         if (line.hasNonNull("tipo")) {
-            val lineType: LineType
-            lineType = try {
+            val lineType: LineType? = try {
                 LineType.valueOf(line["tipo"].asText().toUpperCase())
             } catch (e: Exception) {
-                e.printStackTrace()
-                return
+                null
             }
             @Suppress("IntroduceWhenSubject")
             when {

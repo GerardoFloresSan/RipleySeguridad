@@ -1,9 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:utils:unspecified@jar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/utils/build/.transforms/0317c35f82992f5c2b8a98846e0ec8db/jetified-utils/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/utils/build/.transforms/0317c35f82992f5c2b8a98846e0ec8db/jetified-utils/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/utils/build/.transforms/0317c35f82992f5c2b8a98846e0ec8db/jetified-utils/res" />
+      <root url="jar://$PROJECT_DIR$/utils/build/.transforms/4b7a4dae49c4ece38e04cde30d45db25/jetified-utils/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/utils/build/.transforms/4b7a4dae49c4ece38e04cde30d45db25/jetified-utils/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

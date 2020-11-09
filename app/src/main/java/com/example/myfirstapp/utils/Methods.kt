@@ -202,8 +202,8 @@ class Methods(private val context: Context) {
         }
 
         fun generateQRCode(text: String): Bitmap {
-            val width = 500
-            val height = 500
+            val width = 220
+            val height = 220
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val codeWriter = MultiFormatWriter()
             try {

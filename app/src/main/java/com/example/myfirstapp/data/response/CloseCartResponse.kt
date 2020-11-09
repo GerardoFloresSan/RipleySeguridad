@@ -15,7 +15,8 @@ data class CloseCartResponse(
         @SerializedName("sizeColumn1") var sizeColumn1: String = "",
         @SerializedName("sizeColumn3") var sizeColumn3: String = "",
         @SerializedName("textLeft") var textLeft: String = "",
-        @SerializedName("textRight") var textRight: String = ""
+        @SerializedName("textRight") var textRight: String = "",
+        @SerializedName("value") var value: String = ""
 
     ) : Serializable
 }
