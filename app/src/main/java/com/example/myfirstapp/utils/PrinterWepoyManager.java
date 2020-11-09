@@ -2,37 +2,19 @@ package com.example.myfirstapp.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import cl.mbaas.baytex.api.utils.PrintUtils;
-import cl.mbaas.baytex.api.utils.PrintUtils.TextAlign;
 import cl.mbaas.baytex.api.utils.PrintUtils.LineType;
-import cl.mbaas.baytex.api.utils.PrintUtils.TextSize;
-
 import static cl.mbaas.baytex.api.utils.PrintUtils.TextAlign.LEFT;
 import static cl.mbaas.baytex.api.utils.PrintUtils.TextSize.NORMAL;
 import static cl.mbaas.baytex.api.utils.PrintUtils.TextSize.SMALL;
 import static cl.mbaas.baytex.api.utils.PrintUtils.code128;
 import static cl.mbaas.baytex.api.utils.PrintUtils.fixTransparence;
 
-
-/**
- * Created by agustin on 7/19/17.
- */
-
 public class PrinterWepoyManager {
 
     private WepoyPrinter wepoyPrinter = new WepoyPrinter();
-
 
     public PrinterWepoyManager(Context mContext) {
         configPrinter();
@@ -45,8 +27,6 @@ public class PrinterWepoyManager {
     }
 
     private void printJsonLine(JsonNode line, Map<String, Bitmap> imagesJson) {
-
-
         if (line.hasNonNull("tipo")) {
             LineType lineType;
             try {

@@ -45,7 +45,12 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 this.session = Methods.generateRandomString()
             })
         }
-     }
+
+        button.setOnClickListener {
+            val wepoy = WepoyPrinter()
+            wepoy.printPage()
+        }
+    }
 
     override fun onResume() {
         userPresenter.attachView(this)
@@ -64,7 +69,8 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
     }
 
     private fun validButton() {
-        val validation = ( txt_input_user.getString().isNotEmpty() && txt_input_password.getString().isNotEmpty())
+        val validation =
+            (txt_input_user.getString().isNotEmpty() && txt_input_password.getString().isNotEmpty())
         btnStartShop.isEnabled = validation
         btnStartShop.isClickable = validation
         btnStartShop.isFocusable = validation
@@ -77,7 +83,7 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
     }
 
     override fun userSuccessPresenter(status: Int, vararg args: Serializable) {
-        when(status) {
+        when (status) {
             200 -> {
                 finish()
                 PapersManager.username = txt_input_user.getString()
