@@ -1,4 +1,4 @@
-package com.example.myfirstapp.utils;
+package com.example.myfirstapp.utils.printer.wepoyprinter;
 
 import android.device.PrinterManager;
 import android.graphics.Bitmap;
@@ -36,12 +36,12 @@ public class WepoyPrinter {
         printerManager.setupPage(384, -1);
     }
     public void drawText(String data) {
-        if(textAlign == PrintUtils.TextAlign.LEFT) {
-            positionY += printerManager.drawTextEx(data, 0, positionY, 384, -1, fontName, textSize.getValue(), 0, getStyle(), 0);
-        }else {
-            Bitmap b = PrintUtils.textAsBitmap(data, textSize, textAlign, bold);
-            drawBitmap(b);
-        }
+            if(textAlign == PrintUtils.TextAlign.LEFT) {
+                positionY += printerManager.drawTextEx(data, 0, positionY, 384, -1, fontName, textSize.getValue(), 0, getStyle(), 0);
+            }else {
+                Bitmap b = PrintUtils.textAsBitmap(data, textSize, textAlign, bold);
+                drawBitmap(b);
+            }
     }
     public void drawTextLeftRight(String dataLeft, String dataRight) {
         Bitmap b = PrintUtils.textLeftRightAsBitmap(dataLeft, dataRight, textSize, bold, null);
