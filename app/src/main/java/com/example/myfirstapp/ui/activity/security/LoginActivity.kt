@@ -45,11 +45,7 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 this.session = Methods.generateRandomString()
             })
         }
-
-        button.setOnClickListener {
-            val wepoy = WepoyPrinter()
-            wepoy.printPage()
-        }
+        
     }
 
     override fun onResume() {

@@ -1,4 +1,5 @@
 package com.example.myfirstapp.ui.activity.seguridad
+
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.activity.security.WelcomeSecurityActivity
@@ -13,10 +14,8 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToBoleta.IPrinterListener 
 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer: PrinterToBoleta
-    lateinit var printerManager: PrinterManager
-    lateinit var printerWepor: PrinterWepoyManager
 
-    override fun getView(): Int  = R.layout.activity_end_order
+    override fun getView(): Int = R.layout.activity_end_order
 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
@@ -40,7 +39,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToBoleta.IPrinterListener 
     }
 
     override fun warning(warning: String?) {
-        toast("warning")
+        toast("Falta papel")
     }
 
     override fun endPrint() {
@@ -52,7 +51,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToBoleta.IPrinterListener 
     }
 
     override fun error(error: String?) {
-        toast("error")
+        toast("Error con la impresion" + error.toString())
     }
 
 }

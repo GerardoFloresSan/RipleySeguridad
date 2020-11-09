@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.example.myfirstapp.R;
 import com.example.myfirstapp.data.response.CloseCartResponse;
+import com.example.myfirstapp.utils.Methods;
 import com.example.myfirstapp.utils.printer.PrinterToBoleta;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -277,12 +278,13 @@ public class PrinterWepoyManager extends PrinterToBoleta {
                     readSize(line);
                     readBold(line);
 
-
-                    if(!line.get("text1").asText().isEmpty() && !line.get("text2").asText().isEmpty()) {
-                        if (line.get("text1").asText().startsWith("Nombre Cliente") && !line.get("text2").asText().startsWith(" 0 0")) {
-                            wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text2").asText());
-                        }else if (!line.get("text1").asText().startsWith("Nombre Cliente")){
-                            wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text2").asText());
+                    if(line.get("text1") != null && line.get("text2") != null) {
+                        if(!line.get("text1").asText().isEmpty() && !line.get("text2").asText().isEmpty()) {
+                            if (line.get("text1").asText().startsWith("Nombre Cliente") && !line.get("text2").asText().startsWith(" 0 0")) {
+                                wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text2").asText());
+                            } else if (!line.get("text1").asText().startsWith("Nombre Cliente")){
+                                wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text2").asText());
+                            }
                         }
                     }
                     break;
@@ -291,10 +293,13 @@ public class PrinterWepoyManager extends PrinterToBoleta {
                     readSize(line);
                     readBold(line);
 
-                    if(!line.get("text1").asText().isEmpty() || !line.get("text3").asText().isEmpty())
-                        wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text3").asText());
-                    if(!line.get("text2").asText().isEmpty())
-                        wepoyPrinter.drawText(line.get("text2").asText().replace("CANTIDAD", "CANT."));
+                    if(line.get("text1") != null && line.get("text3") != null) {
+                        if(!line.get("text1").asText().isEmpty() || !line.get("text3").asText().isEmpty()) wepoyPrinter.drawTextLeftRight(line.get("text1").asText(), line.get("text3").asText());
+                    }
+
+                    if(line.get("text2") != null) {
+                        if(!line.get("text2").asText().isEmpty()) wepoyPrinter.drawText(line.get("text2").asText().replace("CANTIDAD", "CANT."));
+                    }
 
                     break;
                 case TEXT_LEFT_RIGHT:
@@ -368,6 +373,24 @@ public class PrinterWepoyManager extends PrinterToBoleta {
                     wepoyPrinter.lineBreak();
                     wepoyPrinter.lineBreak();
                     break;
+
+                default:
+                    if(line.get("tipo") != null) {
+                        if(line.get("tipo").asText().equals("CODE_TEXT_QR")) {
+                            try {
+                                Bitmap image = Methods.Companion.generateQRCode(line.get("value").asText());
+                                wepoyPrinter.drawBitmap(image);
+
+                                wepoyPrinter.setTextAlign(TextAlign.CENTER);
+                                wepoyPrinter.drawText(line.get("value").asText());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    break;
+
             }
         }
 

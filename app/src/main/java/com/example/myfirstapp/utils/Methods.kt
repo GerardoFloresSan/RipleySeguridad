@@ -3,6 +3,8 @@ package com.example.myfirstapp.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.Point
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -11,6 +13,9 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
 import java.text.NumberFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -194,6 +199,24 @@ class Methods(private val context: Context) {
                 minutes < (60 * 24 * 30) -> "hace " + (minutes / (60 * 24)) + " días"
                 else -> "hace " + (minutes / (60 * 24 * 30)) + " meses"
             }
+        }
+
+        fun generateQRCode(text: String): Bitmap {
+            val width = 500
+            val height = 500
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            val codeWriter = MultiFormatWriter()
+            try {
+                val bitMatrix = codeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
+                for (x in 0 until width) {
+                    for (y in 0 until height) {
+                        bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
+                    }
+                }
+            } catch (e: WriterException) {
+                Log.d("TAG", "generateQRCode: ${e.message}")
+            }
+            return bitmap
         }
     }
 }
