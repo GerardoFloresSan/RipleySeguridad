@@ -16,14 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingEnd="8dp"
-        android:paddingTop="16dp"
         android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
         android:paddingBottom="16dp">
 
-
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/lnl_total_detail"
+            android:id="@+id/lnl_number_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -36,21 +35,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat"
+                android:text="N° de orden:"
+                android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/c_order_ticket" />
+
+            <TextView
+                android:id="@+id/txt_number_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lnl_total_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lnl_number_order">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Total:"
-                android:textSize="13sp"
                 android:textColor="@color/colorCuponText"
-                android:drawablePadding="8dp"
+                android:textSize="13sp"
                 app:drawableStartCompat="@drawable/ic_dolar_detail" />
 
             <TextView
                 android:id="@+id/txt_total_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
                 android:layout_marginStart="4dp"
-                android:textSize="13sp"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -59,7 +91,7 @@
             android:id="@+id/lnl_status_shop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,11 +102,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Estado de compra:"
-                android:textSize="13sp"
                 android:textColor="@color/colorCuponText"
-                android:drawablePadding="8dp"
+                android:textSize="13sp"
                 app:drawableStartCompat="@drawable/ic_status_shop" />
 
             <TextView
@@ -83,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/montserrat"
-                android:textSize="13sp"
                 android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -93,7 +125,7 @@
             android:id="@+id/lnl_date_shop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,21 +136,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Fecha:"
-                android:textSize="13sp"
                 android:textColor="@color/colorCuponText"
-                android:drawablePadding="8dp"
+                android:textSize="13sp"
                 app:drawableStartCompat="@drawable/ic_calendar" />
 
             <TextView
                 android:id="@+id/txt_date_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
                 android:layout_marginStart="4dp"
-                android:textSize="13sp"
+                android:fontFamily="@font/montserrat"
+                android:maxLines="2"
                 android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -127,7 +160,7 @@
             android:id="@+id/lnl_hour_shop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,21 +171,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Hora:"
-                android:textSize="13sp"
                 android:textColor="@color/colorCuponText"
-                android:drawablePadding="8dp"
+                android:textSize="13sp"
                 app:drawableStartCompat="@drawable/ic_reloj" />
 
             <TextView
                 android:id="@+id/txt_hour_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
                 android:layout_marginStart="4dp"
-                android:textSize="13sp"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorCuponText"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

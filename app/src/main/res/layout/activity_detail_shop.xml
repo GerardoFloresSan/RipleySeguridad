@@ -59,6 +59,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
+                android:id="@+id/txt_number_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/c_order_ticket"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14sp" />
+
+
+            <TextView
                 android:id="@+id/txt_name_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -29,6 +29,7 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) : Re
 
         @SuppressLint("SetTextI18n")
         fun bind(sale: SalesGetByResponse, listener: (Int, SalesGetByResponse) -> Unit) = with(itemView) {
+            txt_number_order.text = sale.orderId.toString()
             txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
             val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
             txt_status_detail.text = sale.status

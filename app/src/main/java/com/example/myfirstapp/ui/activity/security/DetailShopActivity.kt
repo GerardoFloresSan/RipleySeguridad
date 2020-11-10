@@ -22,6 +22,7 @@ class DetailShopActivity : RipleyBaseActivity() {
     override fun onCreate() {
         sale = intent.getSerializableExtra("extra0") as SalesGetByResponse
 
+        txt_number_order.text = sale.orderId.toString()
         txt_name_person.text = sale.clientName + " " + sale.clientLast
         txt_subsidiary.text = "Ripley " + sale.subsidiaryName
 
