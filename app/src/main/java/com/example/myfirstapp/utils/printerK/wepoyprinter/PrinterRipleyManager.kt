@@ -154,7 +154,11 @@ class PrinterRipleyManager(
         }
     }
 
-    override fun printBoletaJson(jsonNode: JsonNode, imagesJson: Map<String, Bitmap>?, numTickets: Long) {
+    override fun printBoletaJson(
+        jsonNode: JsonNode,
+        imagesJson: Map<String, Bitmap>?,
+        numTickets: Long
+    ) {
         if (checkPrinterStatus()) {
             Thread(Runnable {
                 try {

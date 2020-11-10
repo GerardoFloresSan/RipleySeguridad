@@ -134,7 +134,7 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
                 startActivityE(EndOrderActivity::class.java, args[0] as CloseCartResponse)
             }
             else -> {
-                toast("Error interno")
+                toast("Obteniendo la informacion de la caja.")
             }
         }
     }
