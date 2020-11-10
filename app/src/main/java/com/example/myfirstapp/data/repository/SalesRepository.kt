@@ -14,34 +14,31 @@ import io.reactivex.schedulers.Schedulers
 class SalesRepository(var apiService: ApiService, var methods: Methods) {
 
     fun getStateByQr(request: GetStateByQrRequest): Observable<SalesGetByResponse> {
-        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/getstate"
         val headers = mapOf(
             "Content-Type" to "application/json",
             "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
 
-        return apiService.getStateByQr(url, headers, request)
+        return apiService.getStateByQrV2(headers, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun getStateByDoc(request: GetStateByDocRequest): Observable<List<SalesGetByResponse>> {
-        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/getbydni"
         val headers = mapOf(
             "Content-Type" to "application/json",
             "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
 
-        return apiService.getStateByDoc(url, headers, request)
+        return apiService.getStateByDocV2(headers, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
     fun salesCloseCart(request: CloseCartRequest): Observable<CloseCartResponse > {
-        val url = "https://api-ripleymobile-qa.ripley.com.pe/api/sales/closecart"
         val headers = mapOf(
             "Content-Type" to "application/json",
             "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
 
-        return apiService.salesCloseCart(url, headers, request)
+        return apiService.salesCloseCartV2(headers, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

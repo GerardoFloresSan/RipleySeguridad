@@ -42,13 +42,13 @@ android {
 
     productFlavors {
         dev {
-            buildConfigField 'String', 'URL_BASE', '"https://ux9wpccub6.execute-api.us-east-1.amazonaws.com"'
-            buildConfigField 'String', 'URL_BASE_TRACE', '"/qa/api"'
+            buildConfigField 'String', 'URL_BASE', '"https://api-ripleymobile-qa.ripley.com.pe/"'
+            buildConfigField 'String', 'URL_BASE_TRACE', '"api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
         }
         prod {
-            buildConfigField 'String', 'URL_BASE', '"https://ux9wpccub6.execute-api.us-east-1.amazonaws.com"'
-            buildConfigField 'String', 'URL_BASE_TRACE', '"/qa/api"'
+            buildConfigField 'String', 'URL_BASE', '"https://api-ripleymobile.ripley.com.pe/"'
+            buildConfigField 'String', 'URL_BASE_TRACE', '"api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'
         }
     }
