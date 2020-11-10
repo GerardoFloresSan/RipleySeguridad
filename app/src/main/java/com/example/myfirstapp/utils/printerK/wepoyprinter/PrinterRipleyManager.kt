@@ -224,12 +224,10 @@ class PrinterRipleyManager(
 
     private fun printJsonLine(line: JsonNode, imagesJson: Map<String, Bitmap>?) {
         if (line.hasNonNull("tipo")) {
-            val lineType: LineType
-            lineType = try {
+            val lineType: LineType? = try {
                 LineType.valueOf(line["tipo"].asText().toUpperCase())
             } catch (e: Exception) {
-                e.printStackTrace()
-                return
+                null
             }
             @Suppress("IntroduceWhenSubject")
             when {

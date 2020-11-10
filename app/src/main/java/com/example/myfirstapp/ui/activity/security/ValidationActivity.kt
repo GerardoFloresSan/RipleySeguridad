@@ -66,6 +66,7 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
             finish()
         }
         add_doc.setOnClickListener {
+            stopScan = true
             showDialog()
         }
     }

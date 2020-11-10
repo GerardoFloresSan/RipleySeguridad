@@ -45,6 +45,19 @@ class Methods(private val context: Context) {
         return getPoint().y
     }
 
+
+    /*private fun primeraLetraMayuscula(cadena: String?): String {
+        if (cadena == null || cadena.isEmpty()) {
+            return ""
+        }
+        val primeraLetra = cadena[0]
+        return if (Character.isUpperCase(primeraLetra)) {
+            cadena
+        } else {
+            Character.toUpperCase(primeraLetra).toString() + cadena.substring(1)
+        }
+    }*/
+
     @SuppressLint("NewApi")
     fun isInternetConnected(): Boolean {
         var isConnected = false
@@ -199,6 +212,10 @@ class Methods(private val context: Context) {
                 minutes < (60 * 24 * 30) -> "hace " + (minutes / (60 * 24)) + " días"
                 else -> "hace " + (minutes / (60 * 24 * 30)) + " meses"
             }
+        }
+
+        fun getNameModelDevice(): String? {
+            return Build.MODEL
         }
 
         fun generateQRCode(text: String): Bitmap {

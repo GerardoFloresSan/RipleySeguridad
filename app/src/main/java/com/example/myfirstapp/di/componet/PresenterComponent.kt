@@ -3,7 +3,7 @@ package com.example.myfirstapp.di.componet
 import com.example.myfirstapp.di.PresenterScope
 import com.example.myfirstapp.di.module.PresenterModule
 import com.example.myfirstapp.ui.activity.security.*
-import com.example.myfirstapp.ui.activity.seguridad.FirmActivity
+import com.example.myfirstapp.ui.activity.security.FirmActivity
 import dagger.Component
 
 @PresenterScope
@@ -14,5 +14,7 @@ interface PresenterComponent {
     fun inject(activity: DetailShopActivity)
     fun inject(activity: ValidationActivity)
     fun inject(activity: FirmActivity)
+    fun inject(activity: ScanQrActivity)
+
     //
 }
