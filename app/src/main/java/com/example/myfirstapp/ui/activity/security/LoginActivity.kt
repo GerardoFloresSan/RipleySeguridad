@@ -1,7 +1,8 @@
 package com.example.myfirstapp.ui.activity.security
 
-import android.os.Bundle
+import android.os.Build
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
@@ -12,6 +13,7 @@ import com.example.myfirstapp.utils.*
 import kotlinx.android.synthetic.main.activity_login.*
 import java.io.Serializable
 import javax.inject.Inject
+
 
 class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
 
@@ -45,7 +47,8 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 this.session = Methods.generateRandomString()
             })
         }
-        
+
+
     }
 
     override fun onResume() {
