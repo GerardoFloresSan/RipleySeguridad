@@ -358,7 +358,7 @@ class PrinterRipleyManager(
                                 generateQRCode(line["value"].asText())
                             ripleyPrinter.drawBitmap(image)
                             ripleyPrinter.textAlign = TextAlign.CENTER
-                            ripleyPrinter.drawText(line["value"].asText())
+                            //ripleyPrinter.drawText(line["value"].asText()) //todo se comento para quitar el texto debajo del urobo
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
