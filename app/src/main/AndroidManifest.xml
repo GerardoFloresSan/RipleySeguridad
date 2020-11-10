@@ -24,7 +24,6 @@
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode,UnusedAttribute"
         tools:replace="allowBackup">
-        <activity android:name=".ui.activity.seguridad.EndOrderActivity"></activity>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -78,7 +77,21 @@
             android:windowSoftInputMode="stateHidden"
             tools:targetApi="n" />
         <activity
-            android:name=".ui.activity.seguridad.FirmActivity"
+            android:name=".ui.activity.security.FirmActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n" />
+        <activity
+            android:name=".ui.activity.security.ScanQrActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n"/>
+        <activity
+            android:name=".ui.activity.security.EndOrderActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"

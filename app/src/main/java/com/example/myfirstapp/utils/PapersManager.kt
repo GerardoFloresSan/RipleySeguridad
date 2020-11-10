@@ -30,4 +30,13 @@ object PapersManager {
         get() {
             return Paper.book(BuildConfig.FLAVOR).read("login", false)
         }
+    var device: ArrayList<String>
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("device", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("device", arrayListOf())
+        }
+
+    //i9000s  y el tr150h
 }

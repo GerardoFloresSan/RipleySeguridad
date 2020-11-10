@@ -1,10 +1,12 @@
-package com.example.myfirstapp.ui.activity.seguridad
+package com.example.myfirstapp.ui.activity.security
 
+import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
-import com.example.myfirstapp.ui.activity.security.WelcomeSecurityActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.utils.Methods
+import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.printerK.PrinterToTicket
 import com.example.myfirstapp.utils.printerK.SearchPrinter
 import com.example.myfirstapp.utils.startActivityE
@@ -29,6 +31,9 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener{
 
         btn_print.setOnClickListener {
             printer2.printComprobante(closeCart)
+        }
+        if(!PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+            btn_print.visibility = View.GONE
         }
 
         super.onCreate()

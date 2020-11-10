@@ -17,6 +17,7 @@ class SplashActivity : RipleyBaseActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({
+            PapersManager.device = arrayListOf("i9000s", "tr150h")
             if (PapersManager.login) startActivityE(WelcomeSecurityActivity::class.java) else startActivityE(LoginActivity::class.java)
         }, 3000)
     }

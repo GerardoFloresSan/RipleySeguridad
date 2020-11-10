@@ -8,6 +8,7 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.ui.activity.SplashActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
@@ -31,12 +32,16 @@ class WelcomeSecurityActivity : RipleyBaseActivity() {
         }
 
         btn_start_shop.setOnClickListener {
-            if(checkPermissionsCamera()) {
-                startActivityE(ValidationActivity::class.java)
-            } //
-            else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    getCameraPermission()
+            if(PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+                startActivityE(ScanQrActivity::class.java)
+            } else {
+                if(checkPermissionsCamera()) {
+                    startActivityE(ValidationActivity::class.java)
+                } //
+                else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        getCameraPermission()
+                    }
                 }
             }
         }

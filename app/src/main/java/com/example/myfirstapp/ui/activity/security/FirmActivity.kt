@@ -1,4 +1,4 @@
-package com.example.myfirstapp.ui.activity.seguridad
+package com.example.myfirstapp.ui.activity.security
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList

@@ -3,7 +3,6 @@ package com.example.myfirstapp.ui.activity.security
 import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.SalesGetByResponse
-import com.example.myfirstapp.ui.activity.seguridad.FirmActivity
 import com.example.myfirstapp.ui.adapter.ProductAdapter
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.Methods
@@ -11,7 +10,6 @@ import com.example.myfirstapp.utils.startActivityE
 import com.example.myfirstapp.utils.toSimpleString
 import com.example.myfirstapp.utils.toSimpleTime
 import kotlinx.android.synthetic.main.activity_detail_shop.*
-import kotlinx.android.synthetic.main.item_detail_cart.view.*
 import java.text.SimpleDateFormat
 
 class DetailShopActivity : RipleyBaseActivity() {
