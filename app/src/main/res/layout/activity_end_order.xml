@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.myfirstapp.ui.activity.security.EndOrderActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textView14"
@@ -49,8 +48,8 @@
         android:background="@drawable/round_shape"
         android:backgroundTint="@color/colorPrimary"
         android:text="Iniciar nueva validación"
-        android:textColor="@color/white"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btn_print"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -66,9 +65,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="44dp"
-        android:textAllCaps="false"
         android:background="@drawable/round_shape_white"
         android:text="Imprimir voucher de verificación"
+        android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

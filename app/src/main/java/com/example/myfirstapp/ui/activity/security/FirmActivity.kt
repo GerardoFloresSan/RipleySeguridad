@@ -12,6 +12,7 @@ import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.data.response.SalesGetByResponse
 import com.example.myfirstapp.presenter.SalesPresenter
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_firma.*
@@ -25,7 +26,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
+class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
 
     @Inject
     lateinit var salesPresenter: SalesPresenter
@@ -78,10 +79,16 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         btn_valid.isClickable = validation
         btn_valid.isFocusable = validation
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            btn_valid.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
-        }
-        else {
-            btn_valid.background.setTint(ContextCompat.getColor(this, if(validation) R.color.colorPrimary else R.color.colorPrimaryOpa))
+            btn_valid.backgroundTintList = ColorStateList.valueOf(
+                if (validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa)
+            )
+        } else {
+            btn_valid.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    if (validation) R.color.colorPrimary else R.color.colorPrimaryOpa
+                )
+            )
         }
     }
 
@@ -99,7 +106,7 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
     fun close(sign: String) {
         salesPresenter.closeSales(CloseCartRequest().apply {
             this.orderId = sale.orderId.toString()
-            this.hashQr = if(sale.hashQr != null) sale.hashQr else ""
+            this.hashQr = if (sale.hashQr != null) sale.hashQr else ""
             this.clientSignature = sign
             this.username = PapersManager.username
             this.token = PapersManager.loginAccess.token
@@ -129,9 +136,13 @@ class FirmActivity: RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         get() = Dispatchers.IO + job
 
     override fun salesSuccessPresenter(status: Int, vararg args: Serializable) {
-        when(status) {
+        when (status) {
             200 -> {
-                startActivityE(EndOrderActivity::class.java, args[0] as CloseCartResponse)
+                if (PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+                    startActivityE(EndOrderActivity::class.java, args[0] as CloseCartResponse)
+                } else {
+                    startActivityE(EndOrderAppActivity::class.java, args[0] as CloseCartResponse)
+                }
             }
             else -> {
                 toast("Obteniendo la informacion de la caja.")

@@ -181,7 +181,7 @@ class Methods(private val context: Context) {
         fun formatMoney(number: Double) : String {
             val COUNTRY = "PE"
             val LANGUAGE = "es"
-            return NumberFormat.getCurrencyInstance(Locale(LANGUAGE, COUNTRY)).format(number).replace("/", "/ ")
+            return NumberFormat.getCurrencyInstance(Locale(LANGUAGE, COUNTRY)).format(number).replace("/", "/ ").replace("/ .", "/ ")
         }
 
         fun setColorBackground(validation: Boolean, btn: View, context: Context, colorTrue: Int, colorFalse: Int) {

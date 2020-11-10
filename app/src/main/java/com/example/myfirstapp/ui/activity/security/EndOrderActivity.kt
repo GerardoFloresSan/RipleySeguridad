@@ -12,7 +12,7 @@ import com.example.myfirstapp.utils.printerK.SearchPrinter
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_end_order.*
 
-class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener{
+class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener {
 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer2: PrinterToTicket
@@ -21,7 +21,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener{
 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
-        printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
+
 
 
         btn_close_all.setOnClickListener {
@@ -30,9 +30,12 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener{
         }
 
         btn_print.setOnClickListener {
+            //showLoading()
             printer2.printComprobante(closeCart)
         }
-        if(!PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+
+        if (!PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+            printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
             btn_print.visibility = View.GONE
         }
 
@@ -44,18 +47,22 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener{
     }
 
     override fun connectedPrinter() {
+        //hideLoading()
         toast("connectedPrinter")
     }
 
     override fun endPrint() {
+        //hideLoading()
         toast("endPrint")
     }
 
     override fun warning(warning: String?) {
+        //hideLoading()
         toast("Falta papel")
     }
 
     override fun error(error: String?) {
+        //hideLoading()
         toast("Error con la impresion" + error.toString())
     }
 

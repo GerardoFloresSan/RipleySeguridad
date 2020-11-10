@@ -89,9 +89,16 @@
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
-            tools:targetApi="n"/>
+            tools:targetApi="n" />
         <activity
             android:name=".ui.activity.security.EndOrderActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n" />
+        <activity
+            android:name=".ui.activity.security.EndOrderAppActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:resizeableActivity="false"
             android:screenOrientation="portrait"
