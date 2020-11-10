@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorBlackRipley"
     tools:context="com.example.myfirstapp.ui.activity.security.ScanQrActivity">
 
 
@@ -18,9 +18,12 @@
         android:background="@drawable/shape_text"
         android:ellipsize="end"
         android:fontFamily="@font/montserrat"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:text="Coloque el código QR dentro del recuadro"
+        android:maxLines="2"
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="Para activar el scanner, \npresione el botón infrarrojo"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,17 +49,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.019" />
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ImageView
         android:id="@+id/animation_email"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="24dp"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="qr_code_scanner.json"
-        app:lottie_loop="true"
+        android:background="@drawable/ic_urovo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_info"
         app:layout_constraintVertical_bias="0.157" />

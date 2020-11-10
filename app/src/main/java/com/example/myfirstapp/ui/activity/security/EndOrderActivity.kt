@@ -21,7 +21,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
-
+        printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
 
 
         btn_close_all.setOnClickListener {
@@ -32,11 +32,6 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
         btn_print.setOnClickListener {
             //showLoading()
             printer2.printComprobante(closeCart)
-        }
-
-        if (!PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
-            printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
-            btn_print.visibility = View.GONE
         }
 
         super.onCreate()
