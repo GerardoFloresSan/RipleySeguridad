@@ -48,7 +48,7 @@ fun AppCompatActivity.startActivityPostDelayed(cls: Class<out AppCompatActivity>
 fun Double.isEmpty() = this == 0.0
 
 fun Date.toSimpleString() : String {
-    val format = SimpleDateFormat("dd MMMM, yyyy")
+    val format = SimpleDateFormat("dd/MM/yyyy")
     return format.format(this)
 }
 

@@ -56,6 +56,11 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
         add_doc.setOnClickListener {
             showDialog()
         }
+
+        btn_back.setOnClickListener {
+            finish()
+        }
+
     }
 
     override fun onResume() {

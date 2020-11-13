@@ -22,12 +22,20 @@ class DetailShopActivity : RipleyBaseActivity() {
     override fun onCreate() {
         sale = intent.getSerializableExtra("extra0") as SalesGetByResponse
 
-        txt_number_order.text = sale.orderId.toString()
+        txt_number_id.text = "Orden de compra: ${sale.orderId}"
+
+        if (sale.trxNumber == null) {
+            txt_number_order.text = "Pendiente"
+        } else {
+            txt_number_order.text = "N° de transacción: ${sale.trxNumber}"
+        }
+
+
         txt_name_person.text = sale.clientName + " " + sale.clientLast
         txt_subsidiary.text = "Ripley " + sale.subsidiaryName
 
         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
-        txt_date.text = date.toSimpleString().replaceFirst(" ", " de ")
+        txt_date.text = date.toSimpleString()
         txt_time.text = date.toSimpleTime()
 
         adapter = ProductAdapter()

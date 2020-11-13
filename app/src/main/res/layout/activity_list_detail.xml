@@ -51,6 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         style="@style/RecyclerDetail"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="1"
         tools:listitem="@layout/item_detail_cart" />

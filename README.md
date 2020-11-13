@@ -1,4 +1,4 @@
-# Introduction
+|# Introduction
 
 This is a template for doing Android development using GitLab and [fastlane](https://fastlane.tools/).
 It is based on the tutorial for Android apps in general that can be found [here](https://developer.android.com/training/basics/firstapp/). 

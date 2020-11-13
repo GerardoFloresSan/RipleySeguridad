@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.SalesGetByResponse
+import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.inflate
+import com.example.myfirstapp.utils.toInt
 import kotlinx.android.synthetic.main.item_product_detail.view.*
 
 class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.CommentHolder>() {
@@ -25,6 +27,8 @@ class ProductAdapter() : RecyclerView.Adapter<ProductAdapter.CommentHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(prod: SalesGetByResponse.Product) = with(itemView) {
             txt_title_product.text = "(${prod.quantity}) ${prod.description}"
+            txt_description_product.text = "SKU: " + prod.sku
+            txt_price_normal.text =  Methods.formatMoney(((prod.price).toDouble() / 100))
         }
 
         companion object {

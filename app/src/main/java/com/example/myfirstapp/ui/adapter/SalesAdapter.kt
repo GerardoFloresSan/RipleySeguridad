@@ -14,34 +14,46 @@ import kotlinx.android.synthetic.main.activity_validation.view.*
 import kotlinx.android.synthetic.main.item_detail_cart.view.*
 import java.text.SimpleDateFormat
 
-class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) : RecyclerView.Adapter<SalesAdapter.CommentHolder>() {
+class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) :
+    RecyclerView.Adapter<SalesAdapter.CommentHolder>() {
     var data: List<SalesGetByResponse> = arrayListOf()
 
-    override fun onBindViewHolder(holder: CommentHolder, position: Int) = holder.bind(data[position], listener)
+    override fun onBindViewHolder(holder: CommentHolder, position: Int) =
+        holder.bind(data[position], listener)
 
     override fun getItemCount() = data.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CommentHolder.init(parent, viewType)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        CommentHolder.init(parent, viewType)
 
     override fun getItemViewType(position: Int) = if (position == 0) 0 else 1
 
     class CommentHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(sale: SalesGetByResponse, listener: (Int, SalesGetByResponse) -> Unit) = with(itemView) {
-            txt_number_order.text = sale.orderId.toString()
-            txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
-            val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
-            txt_status_detail.text = sale.status
-            txt_date_detail.text = date.toSimpleString().replaceFirst(" ", " de ")
-            txt_hour_detail.text = date.toSimpleTime()
-            this.setOnClickListener {
-                listener(0, sale)
+        fun bind(sale: SalesGetByResponse, listener: (Int, SalesGetByResponse) -> Unit) =
+            with(itemView) {
+                txt_number.text = "Orden de compra: " + sale.orderId.toString()
+
+                if (sale.trxNumber == null) {
+                    txt_number_order.text = "Pendiente"
+                } else {
+                    txt_number_order.text = sale.trxNumber
+                }
+
+
+                txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
+                val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
+                txt_status_detail.text = sale.status
+                txt_date_detail.text = date.toSimpleString()
+                txt_hour_detail.text = date.toSimpleTime()
+                this.setOnClickListener {
+                    listener(0, sale)
+                }
             }
-        }
 
         companion object {
-            fun init(parent: ViewGroup, viewType: Int) : SalesAdapter.CommentHolder {
+            fun init(parent: ViewGroup, viewType: Int): SalesAdapter.CommentHolder {
                 val view = parent.inflate(R.layout.item_detail_cart)
                 return SalesAdapter.CommentHolder(view)
             }
