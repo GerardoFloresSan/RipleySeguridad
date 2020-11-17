@@ -14,6 +14,11 @@ interface ApiService {
         @Body request: LoginRequest
     ): Observable<LoginResponse>
 
+    @GET(BuildConfig.URL_GetParameterAll)
+    fun getParameterAll(
+        @HeaderMap headers: Map<String, String>
+    ): Observable<List<Parameter>>
+
     //USE URL_BASE AND URL_TRACE
     @POST(BuildConfig.URL_LOGIN)
     fun loginV2(

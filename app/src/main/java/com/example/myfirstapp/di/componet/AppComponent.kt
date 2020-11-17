@@ -19,6 +19,7 @@ interface AppComponent {
     fun methods(): Methods
     /**use case */
     fun getUser(): GetUser
+    fun getParameters(): GetParameters
     fun getSalesQr(): GetSalesQr
     fun getSalesByDoc(): GetSalesByDoc
     fun closeSales(): CloseSales

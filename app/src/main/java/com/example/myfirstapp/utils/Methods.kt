@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
+import com.example.myfirstapp.data.response.Parameter
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -117,6 +118,17 @@ class Methods(private val context: Context) {
                 randStr.append(ch)
             }
             return randStr.toString()
+        }
+
+        fun getParameter(code: String): Parameter {
+            lateinit var parameter: Parameter
+            for (p in PapersManager.parametersAll) {
+                if (p.code == code) {
+                    parameter = p
+                    break
+                }
+            }
+            return parameter
         }
 
         @SuppressLint("NewApi")

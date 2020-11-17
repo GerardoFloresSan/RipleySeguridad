@@ -26,4 +26,11 @@ class PresenterModule {
         useCase3: CloseSales,
         methods: Methods
     ) = SalesPresenter(useCase, useCase2, useCase3, methods)
+
+    @Provides
+    @PresenterScope
+    fun parameterPresenter(
+        useCase: GetParameters,
+        methods: Methods
+    ) = ParameterPresenter(useCase, methods)
 }

@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import com.example.myfirstapp.R
+import com.example.myfirstapp.presenter.ParameterPresenter
+import com.example.myfirstapp.presenter.UserPresenter
 import com.example.myfirstapp.ui.activity.SplashActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
@@ -12,15 +14,23 @@ import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
+import java.io.Serializable
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
-class WelcomeSecurityActivity : RipleyBaseActivity() {
+class WelcomeSecurityActivity : RipleyBaseActivity(), ParameterPresenter.View {
+
+    @Inject
+    lateinit var parameterPresenter: ParameterPresenter
 
     override fun getView(): Int = R.layout.activity_welcome_seguridad
 
     @SuppressLint("SetTextI18n")
     override fun onCreate() {
         super.onCreate()
+        component.inject(this)
+        parameterPresenter.attachView(this)
+        parameterPresenter.getParameters()
 
         lbl_text_name_user.text = "${PapersManager.loginAccess.name} ${PapersManager.loginAccess.lastName}"
         txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
@@ -32,19 +42,33 @@ class WelcomeSecurityActivity : RipleyBaseActivity() {
         }
 
         btn_start_shop.setOnClickListener {
-            if(PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
-                startActivityE(ScanQrActivity::class.java)
-            } else {
-                if(checkPermissionsCamera()) {
-                    startActivityE(ValidationActivity::class.java)
-                } //
-                else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        getCameraPermission()
+            if(PapersManager.parametersAll.isNotEmpty()) {
+                if(PapersManager.device.contains(Methods.getNameModelDevice()!!.toLowerCase())) {
+                    startActivityE(ScanQrActivity::class.java)
+                } else {
+                    if(checkPermissionsCamera()) {
+                        startActivityE(ValidationActivity::class.java)
+                    } //
+                    else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            getCameraPermission()
+                        }
                     }
                 }
+            } else {
+                toast("Obteniendo parametros por favor espere")
             }
         }
+    }
+
+    override fun onResume() {
+        parameterPresenter.attachView(this)
+        super.onResume()
+    }
+
+    override fun onPause() {
+        parameterPresenter.detachView()
+        super.onPause()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -64,5 +88,8 @@ class WelcomeSecurityActivity : RipleyBaseActivity() {
 
     override fun onBackPressed() {
 
+    }
+
+    override fun parameterSuccessPresenter(status: Int, vararg args: Serializable) {
     }
 }

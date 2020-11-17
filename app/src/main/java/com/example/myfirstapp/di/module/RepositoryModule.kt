@@ -18,4 +18,8 @@ class RepositoryModule {
     @Singleton
     fun salesRepository(apiService: ApiService, methods: Methods) = SalesRepository(apiService, methods)
 
+    @Provides
+    @Singleton
+    fun parameterRepository(apiService: ApiService, methods: Methods) = ParameterRepository(apiService, methods)
+
 }

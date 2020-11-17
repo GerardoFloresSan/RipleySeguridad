@@ -1,5 +1,6 @@
 package com.example.myfirstapp.di.module
 
+import com.example.myfirstapp.data.repository.ParameterRepository
 import com.example.myfirstapp.data.repository.SalesRepository
 import com.example.myfirstapp.data.repository.UserRepository
 import com.example.myfirstapp.domain.useCase.*
@@ -29,6 +30,14 @@ class UsesCaseModule {
         @Named("executor_thread") executorThread: Scheduler,
         @Named("ui_thread") uiThread: Scheduler
     ) = GetSalesQr(executorThread, uiThread, repository)
+
+    @Provides
+    @Singleton
+    fun getParameters(
+        repository: ParameterRepository,
+        @Named("executor_thread") executorThread: Scheduler,
+        @Named("ui_thread") uiThread: Scheduler
+    ) = GetParameters(executorThread, uiThread, repository)
 
     @Provides
     @Singleton

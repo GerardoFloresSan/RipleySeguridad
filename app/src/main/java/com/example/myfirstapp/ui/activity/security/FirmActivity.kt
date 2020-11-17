@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Build
 import android.util.Base64
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.request.CloseCartRequest
@@ -65,6 +66,12 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
             close("")
         }
         set(!sssvCheckoutSign.isCanvasBlank())
+
+        if(Methods.getParameter("sgSignatureInd").value == "1") {
+            btn_skip.visibility = View.GONE
+        } else {
+            btn_skip.visibility = View.VISIBLE
+        }
     }
 
     fun main() = runBlocking {

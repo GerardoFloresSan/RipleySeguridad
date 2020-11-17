@@ -22,6 +22,14 @@ object PapersManager {
             return Paper.book(BuildConfig.FLAVOR).read("username", "")
         }
 
+    var parametersAll: ArrayList<Parameter>
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("parameters", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("parameters", arrayListOf())
+        }
+
     //username
     var login: Boolean
         set(value) {
