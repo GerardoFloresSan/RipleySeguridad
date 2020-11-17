@@ -1,12 +1,10 @@
 package com.example.myfirstapp.ui.activity.security
 
-import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.Methods
-import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.printerK.PrinterToTicket
 import com.example.myfirstapp.utils.printerK.SearchPrinter
 import com.example.myfirstapp.utils.startActivityE
@@ -16,6 +14,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer2: PrinterToTicket
+    var needPrint = false
 
     override fun getView(): Int = R.layout.activity_end_order
 
@@ -25,14 +24,21 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
 
 
         btn_close_all.setOnClickListener {
-            RipleyApplication.closeAll()
-            startActivityE(WelcomeSecurityActivity::class.java)
+            if(!needPrint) {
+                RipleyApplication.closeAll()
+                startActivityE(WelcomeSecurityActivity::class.java)
+            } else {
+                toast("Voucher obligatorio")
+            }
         }
 
         btn_print.setOnClickListener {
             //showLoading()
+            needPrint = true
             printer2.printComprobante(closeCart)
         }
+
+        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
 
         super.onCreate()
     }
@@ -43,21 +49,25 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
 
     override fun connectedPrinter() {
         //hideLoading()
+        needPrint = false
         toast("connectedPrinter")
     }
 
     override fun endPrint() {
         //hideLoading()
+        needPrint = false
         toast("endPrint")
     }
 
     override fun warning(warning: String?) {
         //hideLoading()
+        needPrint = false
         toast("Falta papel")
     }
 
     override fun error(error: String?) {
         //hideLoading()
+        needPrint = false
         toast("Error con la impresion" + error.toString())
     }
 

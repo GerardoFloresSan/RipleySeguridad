@@ -3,6 +3,7 @@ package com.example.myfirstapp.ui.activity
 import android.os.Bundle
 import android.os.Handler
 import com.example.myfirstapp.R
+import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.ui.activity.security.LoginActivity
 import com.example.myfirstapp.ui.activity.security.WelcomeSecurityActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
@@ -17,8 +18,11 @@ class SplashActivity : RipleyBaseActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({
+            PapersManager.username = ""
             PapersManager.device = arrayListOf("i9000s", "tr150h")
-            if (PapersManager.login) startActivityE(WelcomeSecurityActivity::class.java) else startActivityE(LoginActivity::class.java)
+            PapersManager.login = false
+            PapersManager.loginAccess = LoginResponse()
+            startActivityE(LoginActivity::class.java)
         }, 3000)
     }
 

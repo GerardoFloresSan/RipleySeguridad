@@ -11,6 +11,7 @@ import dagger.Component
 interface PresenterComponent {
     /*fun inject(fragment: ExampleFragment)*/
     fun inject(activity: LoginActivity)
+    fun inject(activity: WelcomeSecurityActivity)
     fun inject(activity: DetailShopActivity)
     fun inject(activity: ValidationActivity)
     fun inject(activity: FirmActivity)

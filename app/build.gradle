@@ -50,12 +50,11 @@ android {
             buildConfigField 'String', 'URL_GETSTATE', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/getstate"'
             buildConfigField 'String', 'URL_GETDNI', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/getbydni"'
             buildConfigField 'String', 'URL_CLOSECART', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/closecart"'
+            buildConfigField 'String', 'URL_GetParameterAll', '"https://ux9wpccub6.execute-api.us-east-1.amazonaws.com/qa/api/parameters/getParameterAll"'
 
 
             buildConfigField 'String', 'API_KEY', '"koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX"'
-
-
-
+            buildConfigField 'String', 'API_PARAM', '"e3Z23YLIid93Z7K8bXXGY2MLrAPLHo3w8B9N3MXp"'
         }
         prod {
             buildConfigField 'String', 'URL_BASE', '"https://api-ripleymobile.ripley.com.pe/"'
@@ -66,9 +65,11 @@ android {
             buildConfigField 'String', 'URL_GETSTATE', '"https://api-ripleymobile.ripley.com.pe/api/sales/getstate"'
             buildConfigField 'String', 'URL_GETDNI', '"https://api-ripleymobile.ripley.com.pe/api/sales/getbydni"'
             buildConfigField 'String', 'URL_CLOSECART', '"https://api-ripleymobile.ripley.com.pe/api/sales/closecart"'
+            buildConfigField 'String', 'URL_GetParameterAll', '"https://api-ripleymobile.ripley.com.pe/api/parameters/getParameterAll"'
 
 
             buildConfigField 'String', 'API_KEY', '"ayDfd6uMEV5XD5okEW7Tx2OU3Zyz8PA69tQHCBrQ"'
+            buildConfigField 'String', 'API_PARAM', '"ayDfd6uMEV5XD5okEW7Tx2OU3Zyz8PA69tQHCBrQ"'
 
         }
     }
