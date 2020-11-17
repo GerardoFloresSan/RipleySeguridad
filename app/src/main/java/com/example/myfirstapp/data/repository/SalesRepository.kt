@@ -1,5 +1,6 @@
 package com.example.myfirstapp.data.repository
 
+import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.data.request.CloseCartRequest
 import com.example.myfirstapp.data.request.GetStateByDocRequest
 import com.example.myfirstapp.data.request.GetStateByQrRequest
@@ -16,7 +17,8 @@ class SalesRepository(var apiService: ApiService, var methods: Methods) {
     fun getStateByQr(request: GetStateByQrRequest): Observable<SalesGetByResponse> {
         val headers = mapOf(
             "Content-Type" to "application/json",
-            "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
+            "x-api-key" to BuildConfig.API_KEY
+        )
 
         return apiService.getStateByQrV2(headers, request)
             .subscribeOn(Schedulers.io())
@@ -26,17 +28,19 @@ class SalesRepository(var apiService: ApiService, var methods: Methods) {
     fun getStateByDoc(request: GetStateByDocRequest): Observable<List<SalesGetByResponse>> {
         val headers = mapOf(
             "Content-Type" to "application/json",
-            "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
+            "x-api-key" to BuildConfig.API_KEY
+        )
 
         return apiService.getStateByDocV2(headers, request)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun salesCloseCart(request: CloseCartRequest): Observable<CloseCartResponse > {
+    fun salesCloseCart(request: CloseCartRequest): Observable<CloseCartResponse> {
         val headers = mapOf(
             "Content-Type" to "application/json",
-            "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
+            "x-api-key" to BuildConfig.API_KEY
+        )
 
         return apiService.salesCloseCartV2(headers, request)
             .subscribeOn(Schedulers.io())

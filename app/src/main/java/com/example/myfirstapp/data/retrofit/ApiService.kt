@@ -14,48 +14,26 @@ interface ApiService {
         @Body request: LoginRequest
     ): Observable<LoginResponse>
 
-    @POST
-    fun getStateByQr(
-        @Url url: String,
-        @HeaderMap headers: Map<String, String>,
-        @Body request: GetStateByQrRequest
-    ): Observable<SalesGetByResponse>
-
-    @POST
-    fun getStateByDoc(
-        @Url url: String,
-        @HeaderMap headers: Map<String, String>,
-        @Body request: GetStateByDocRequest
-    ): Observable<List<SalesGetByResponse>>
-
-    @POST
-    fun salesCloseCart(
-        @Url url: String,
-        @HeaderMap headers: Map<String, String>,
-        @Body request: CloseCartRequest
-    ): Observable<CloseCartResponse>
-
-
     //USE URL_BASE AND URL_TRACE
-    @POST(BuildConfig.URL_BASE_TRACE + "sales/login")
+    @POST(BuildConfig.URL_LOGIN)
     fun loginV2(
         @HeaderMap headers: Map<String, String>,
         @Body request: LoginRequest
     ): Observable<LoginResponse>
 
-    @POST(BuildConfig.URL_BASE_TRACE + "sales/getstate")
+    @POST(BuildConfig.URL_GETSTATE)
     fun getStateByQrV2(
         @HeaderMap headers: Map<String, String>,
         @Body request: GetStateByQrRequest
     ): Observable<SalesGetByResponse>
 
-    @POST(BuildConfig.URL_BASE_TRACE + "sales/getbydni")
+    @POST(BuildConfig.URL_GETDNI)
     fun getStateByDocV2(
         @HeaderMap headers: Map<String, String>,
         @Body request: GetStateByDocRequest
     ): Observable<List<SalesGetByResponse>>
 
-    @POST(BuildConfig.URL_BASE_TRACE + "sales/closecart")
+    @POST(BuildConfig.URL_CLOSECART)
     fun salesCloseCartV2(
         @HeaderMap headers: Map<String, String>,
         @Body request: CloseCartRequest

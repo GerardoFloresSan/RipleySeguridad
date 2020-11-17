@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.firebase.crashlytics'
 
-def version = 12
+def version = 1
 
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
@@ -25,7 +25,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode version
-        versionName "1.0.0-${version}A:QA"
+        versionName "1.0.0-${version}A:PRD"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -45,11 +45,39 @@ android {
             buildConfigField 'String', 'URL_BASE', '"https://api-ripleymobile-qa.ripley.com.pe/"'
             buildConfigField 'String', 'URL_BASE_TRACE', '"api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
+
+            /*
+            buildConfigField 'String', 'URL_LOGIN', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/login"'
+            buildConfigField 'String', 'URL_GETSTATE', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/getstate"'
+            buildConfigField 'String', 'URL_GETDNI', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/getbydni"'
+            buildConfigField 'String', 'URL_CLOSECART', '"https://api-ripleymobile-qa.ripley.com.pe/api/sales/closecart"'
+
+
+            buildConfigField 'String', 'API_KEY', '"koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX"'
+            */
+            buildConfigField 'String', 'URL_LOGIN', '"https://api-ripleymobile.ripley.com.pe/api/sales/login"'
+            buildConfigField 'String', 'URL_GETSTATE', '"https://api-ripleymobile.ripley.com.pe/api/sales/getstate"'
+            buildConfigField 'String', 'URL_GETDNI', '"https://api-ripleymobile.ripley.com.pe/api/sales/getbydni"'
+            buildConfigField 'String', 'URL_CLOSECART', '"https://api-ripleymobile.ripley.com.pe/api/sales/closecart"'
+
+
+            buildConfigField 'String', 'API_KEY', '"ayDfd6uMEV5XD5okEW7Tx2OU3Zyz8PA69tQHCBrQ"'
+
+
         }
         prod {
             buildConfigField 'String', 'URL_BASE', '"https://api-ripleymobile.ripley.com.pe/"'
             buildConfigField 'String', 'URL_BASE_TRACE', '"api/"'
-            buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'
+            buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
+
+            buildConfigField 'String', 'URL_LOGIN', '"https://api-ripleymobile.ripley.com.pe/api/sales/login"'
+            buildConfigField 'String', 'URL_GETSTATE', '"https://api-ripleymobile.ripley.com.pe/api/sales/getstate"'
+            buildConfigField 'String', 'URL_GETDNI', '"https://api-ripleymobile.ripley.com.pe/api/sales/getbydni"'
+            buildConfigField 'String', 'URL_CLOSECART', '"https://api-ripleymobile.ripley.com.pe/api/sales/closecart"'
+
+
+            buildConfigField 'String', 'API_KEY', '"ayDfd6uMEV5XD5okEW7Tx2OU3Zyz8PA69tQHCBrQ"'
+
         }
     }
 

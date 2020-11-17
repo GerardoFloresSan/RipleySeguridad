@@ -1,5 +1,6 @@
 package com.example.myfirstapp.data.repository
 
+import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.data.request.LoginRequest
 import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.data.retrofit.ApiService
@@ -13,7 +14,7 @@ class UserRepository(var apiService: ApiService, var methods: Methods) {
     fun login(loginRequest: LoginRequest): Observable<LoginResponse> {
         val headers = mapOf(
             "Content-Type" to "application/json",
-            "x-api-key" to "koXPLPvtXK8BKzi4tHkdk3h1JA6yVr5K4w5tr6eX")
+            "x-api-key" to BuildConfig.API_KEY)
 
         return apiService.loginV2(headers, loginRequest)
             .subscribeOn(Schedulers.io())
