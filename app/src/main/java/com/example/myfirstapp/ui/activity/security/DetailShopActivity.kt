@@ -50,17 +50,13 @@ class DetailShopActivity : RipleyBaseActivity() {
         txt_total_other_payed.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
 
         when (sale.statusId) {
-            1 -> {
-                btn_next_shopping_cart.visibility = View.VISIBLE
-                btn_check_shopping_cart.visibility = View.GONE
-            }
             2 -> {
                 btn_next_shopping_cart.visibility = View.VISIBLE
                 btn_check_shopping_cart.visibility = View.GONE
             }
             3 -> {
-                btn_next_shopping_cart.visibility = View.VISIBLE
-                btn_check_shopping_cart.visibility = View.GONE
+                btn_next_shopping_cart.visibility = View.GONE
+                btn_check_shopping_cart.visibility = View.VISIBLE
             }
             else -> {
                 btn_next_shopping_cart.visibility = View.GONE

@@ -9,6 +9,7 @@ import com.example.myfirstapp.domain.useCase.*
 import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.utils.Methods
 import io.reactivex.observers.DisposableObserver
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.Serializable
 
@@ -97,11 +98,20 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
             override fun onError(e: Throwable) {
                 view?.hideLoading()
+
                 when (e) {
                     is HttpException -> {
+                        val msg: String
+                        msg = try {
+                            val strJson = e.response()?.errorBody()?.string() ?: "{}"
+                            val json = JSONObject(strJson)
+                            json.getString("mensaje")
+                        } catch (e: Exception) {
+                            ""
+                        }
                         when {
                             e.code() == 401 -> view?.tokenExpired()
-                            else -> view?.salesSuccessPresenter(202, "error")
+                            else -> view?.salesSuccessPresenter(202, msg)
                         }
                     }
                     else -> view?.salesSuccessPresenter(202, "error")

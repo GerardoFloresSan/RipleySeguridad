@@ -67,7 +67,7 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
         }
         set(!sssvCheckoutSign.isCanvasBlank())
 
-        if(Methods.getParameter("sgSignatureInd").value == "1") {
+        if (Methods.getParameter("sgSignatureInd").value == "1") {
             btn_skip.visibility = View.GONE
         } else {
             btn_skip.visibility = View.VISIBLE
@@ -152,7 +152,7 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
                 }
             }
             else -> {
-                toast("Obteniendo la informacion de la caja.")
+                toast(args[0] as String)
             }
         }
     }

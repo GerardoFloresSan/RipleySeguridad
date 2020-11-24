@@ -1,8 +1,6 @@
 package com.example.myfirstapp.ui.activity.security
 
-import android.os.Build
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
@@ -92,6 +90,9 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 txt_error.visibility = View.VISIBLE
                 txt_input_user.setBackgroundResource(R.drawable.shape_text_error)
                 txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
+            }
+            666 -> {
+                toast(args[0] as String)
             }
             else -> {
                 txt_error.visibility = View.VISIBLE

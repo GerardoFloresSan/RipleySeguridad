@@ -1,5 +1,6 @@
 package com.example.myfirstapp.presenter
 
+import com.example.myfirstapp.R
 import com.example.myfirstapp.data.request.LoginRequest
 import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.domain.useCase.GetUser
@@ -9,6 +10,7 @@ import com.example.myfirstapp.utils.PapersManager
 import io.reactivex.observers.DisposableObserver
 import retrofit2.HttpException
 import java.io.Serializable
+import java.net.SocketTimeoutException
 
 class UserPresenter (private var useCase: GetUser, private var methods: Methods) : BasePresenter<UserPresenter.View>() {
 
@@ -37,6 +39,10 @@ class UserPresenter (private var useCase: GetUser, private var methods: Methods)
                             e.code() == 401 -> view?.userSuccessPresenter(401, "error")
                             else -> view?.userSuccessPresenter(203, "error")
                         }
+                    }
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.userSuccessPresenter(666, "No se tiene conexión a internet")
                     }
                     else -> view?.userSuccessPresenter(203, "error")
                 }

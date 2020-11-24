@@ -3,6 +3,7 @@ package com.example.myfirstapp.ui.adapter
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.SalesGetByResponse
@@ -44,7 +45,26 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) :
 
                 txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
                 val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
-                txt_status_detail.text = sale.status
+                //TODO txt_status_detail color morado !! LOGICA ---> status != 2
+                if (sale.status != "2") {
+                    txt_status_detail.text = sale.status
+                    txt_status_detail.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorPrimary
+                        )
+                    )
+                } else {
+                    txt_status_detail.text = sale.status
+                    txt_status_detail.setTextColor(
+                        ContextCompat.getColor(
+                            context,
+                            R.color.colorCuponText
+                        )
+                    )
+                }
+
+
                 txt_date_detail.text = date.toSimpleString()
                 txt_hour_detail.text = date.toSimpleTime()
                 this.setOnClickListener {

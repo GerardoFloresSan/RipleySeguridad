@@ -127,7 +127,7 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Estado de compra:"
+                android:text="Estado:"
                 android:textColor="@color/colorCuponText"
                 android:textSize="13sp"
                 app:drawableStartCompat="@drawable/ic_status_shop" />
