@@ -12,10 +12,15 @@ import retrofit2.HttpException
 import java.io.Serializable
 import java.net.SocketTimeoutException
 
-class UserPresenter (private var useCase: GetUser, private var methods: Methods) : BasePresenter<UserPresenter.View>() {
+class UserPresenter(private var useCase: GetUser, private var methods: Methods) :
+    BasePresenter<UserPresenter.View>() {
 
     fun login(request: LoginRequest) {
-        if (!methods.isInternetConnected()) return
+        if (!methods.isInternetConnected()) {
+            view?.showError("No se tiene conexión a internet")
+            return
+        }
+
         view?.showLoading()
 
         useCase.request = request
@@ -34,17 +39,17 @@ class UserPresenter (private var useCase: GetUser, private var methods: Methods)
             override fun onError(e: Throwable) {
                 view?.hideLoading()
                 when (e) {
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.showError("No se tiene conexión a internet")
+                    }
                     is HttpException -> {
                         when {
                             e.code() == 401 -> view?.userSuccessPresenter(401, "error")
                             else -> view?.userSuccessPresenter(203, "error")
                         }
                     }
-                    is SocketTimeoutException -> {
-                        view?.hideLoading()
-                        view?.userSuccessPresenter(666, "No se tiene conexión a internet")
-                    }
-                    else -> view?.userSuccessPresenter(203, "error")
+                    else -> view?.userSuccessPresenter(666, "Error desconocido")
                 }
             }
 

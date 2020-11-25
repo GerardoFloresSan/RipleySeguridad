@@ -152,7 +152,7 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
                 }
             }
             else -> {
-                toast(args[0] as String)
+                showError(args[0] as String)
             }
         }
     }

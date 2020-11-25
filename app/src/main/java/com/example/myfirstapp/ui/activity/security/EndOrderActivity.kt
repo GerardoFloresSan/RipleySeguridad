@@ -1,5 +1,7 @@
 package com.example.myfirstapp.ui.activity.security
 
+import android.os.SystemClock
+import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
@@ -16,6 +18,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer2: PrinterToTicket
     var needPrint = false
+    private var mLastClickTime: Long = 0
 
     override fun getView(): Int = R.layout.activity_end_order
 
@@ -34,7 +37,11 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
         }
 
         btn_print.setOnClickListener {
-            //showLoading()
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
+            showLoading()
             needPrint = true
             validButton()
             printer2.printComprobante(closeCart)
@@ -69,21 +76,22 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
     }
 
     override fun endPrint() {
-        //hideLoading()
+        hideLoading()
         needPrint = false
         validButton()
+        btn_print.visibility = View.GONE
         toast("Fin de impresión")
     }
 
     override fun warning(warning: String?) {
-        //hideLoading()
+        hideLoading()
         needPrint = false
         validButton()
         toast("Falta papel")
     }
 
     override fun error(error: String?) {
-        //hideLoading()
+        hideLoading()
         needPrint = false
         validButton()
         toast("Error con la impresion" + error.toString())
