@@ -92,7 +92,7 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
             }
             666 -> {
-                toast(args[0] as String)
+                showError(args[0] as String)
             }
             else -> {
                 txt_error.visibility = View.VISIBLE
