@@ -1,19 +1,22 @@
 package com.example.myfirstapp.ui.activity.security
 
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
+import com.example.myfirstapp.ui.base.PdfBaseActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.Methods
+import com.example.myfirstapp.utils.ProcessBitmap
 import com.example.myfirstapp.utils.printerK.PrinterToTicket
 import com.example.myfirstapp.utils.printerK.SearchPrinter
 import com.example.myfirstapp.utils.setColorBackground
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_end_order.*
 
-class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener {
+class EndOrderActivity : PdfBaseActivity(), PrinterToTicket.IPrinterListener {
 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer2: PrinterToTicket
@@ -25,7 +28,7 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
         printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
-
+        initTextPaint()
 
         btn_close_all.setOnClickListener {
             if (!needPrint) {
@@ -49,6 +52,23 @@ class EndOrderActivity : RipleyBaseActivity(), PrinterToTicket.IPrinterListener 
 
         needPrint = Methods.getParameter("sgVoucherInd").value == "1"
 
+        btn_print_2.setOnClickListener {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
+
+            val bitmap = generateBitmap(closeCart.clientVoucher)
+            ProcessBitmap(object : ProcessBitmap.DoStuff {
+                override fun getContext() = this@EndOrderActivity
+                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+                override fun done(filePath: String) {
+                    Log.d("IMAGE", "-------------------------$filePath")
+                    toast("Imagen guardada")
+                }
+            }).execute(bitmap)
+
+        }
         validButton()
         super.onCreate()
     }

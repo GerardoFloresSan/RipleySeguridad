@@ -3,7 +3,6 @@ package com.example.myfirstapp.ui.base
 import android.Manifest
 import android.app.Dialog
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Build
 import android.text.Spanned
 import android.view.View
@@ -17,21 +16,22 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
-import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
 import com.example.myfirstapp.di.Orchestrator
 import com.example.myfirstapp.ui.activity.SplashActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
-import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
-import com.example.myfirstapp.utils.getString
 import com.example.myfirstapp.utils.startActivityE
 
-@Suppress("PropertyName")
 abstract class RipleyBaseActivity : BaseActivity() {
     private var dialog: MaterialDialog? = null
     private var dialogCustom : Dialog? = null
+    @Suppress("PropertyName")
     val PERMISSION_CAMERA = 4567
+    @Suppress("PropertyName")
+    val PERMISSION_WRITE = 7489
+    @Suppress("PropertyName")
+    val PERMISSION_READ = 3389
 
     protected val component by lazy { Orchestrator.presenterComponent }
 
@@ -72,6 +72,36 @@ abstract class RipleyBaseActivity : BaseActivity() {
 
     fun showError(message: Int) {
         showError(getString(message))
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun getWritePermission() {
+        val permissionArrays = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (checkPermissionsCamera()) {
+            toast("Permiso otorgado --- PERMISSION_CAMERA")
+        } else {
+            requestPermissions(permissionArrays, PERMISSION_WRITE)
+        }
+    }
+
+    fun checkPermissionsWrite(): Boolean {
+        val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        return permissionState == PackageManager.PERMISSION_GRANTED
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun getReadPermission() {
+        val permissionArrays = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (checkPermissionsCamera()) {
+            toast("Permiso otorgado --- PERMISSION_CAMERA")
+        } else {
+            requestPermissions(permissionArrays, PERMISSION_READ)
+        }
+    }
+
+    fun checkPermissionsRead(): Boolean {
+        val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        return permissionState == PackageManager.PERMISSION_GRANTED
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

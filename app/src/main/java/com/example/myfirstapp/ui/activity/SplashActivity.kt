@@ -23,7 +23,7 @@ class SplashActivity : RipleyBaseActivity() {
             PapersManager.login = false
             PapersManager.loginAccess = LoginResponse()
             startActivityE(LoginActivity::class.java)
-        }, 3000)
+        }, 1000)
     }
 
     override fun onResume() {

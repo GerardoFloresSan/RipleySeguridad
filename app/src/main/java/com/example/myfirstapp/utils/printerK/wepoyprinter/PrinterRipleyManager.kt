@@ -354,8 +354,7 @@ class PrinterRipleyManager(
                 else -> if (line["tipo"] != null) {
                     if (line["tipo"].asText() == "CODE_TEXT_QR") {
                         try {
-                            val image =
-                                generateQRCode(line["value"].asText())
+                            val image = generateQRCode(line["value"].asText(), 220, 220)
                             ripleyPrinter.drawBitmap(image)
                             ripleyPrinter.textAlign = TextAlign.CENTER
                             //ripleyPrinter.drawText(line["value"].asText()) //todo se comento para quitar el texto debajo del urobo

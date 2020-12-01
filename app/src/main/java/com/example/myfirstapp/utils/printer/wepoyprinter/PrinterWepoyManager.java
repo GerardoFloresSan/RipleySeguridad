@@ -378,7 +378,7 @@ public class PrinterWepoyManager extends PrinterToBoleta {
                     if(line.get("tipo") != null) {
                         if(line.get("tipo").asText().equals("CODE_TEXT_QR")) {
                             try {
-                                Bitmap image = Methods.Companion.generateQRCode(line.get("value").asText());
+                                Bitmap image = Methods.Companion.generateQRCode(line.get("value").asText(), 220, 220);
                                 wepoyPrinter.drawBitmap(image);
 
                                 wepoyPrinter.setTextAlign(TextAlign.CENTER);
