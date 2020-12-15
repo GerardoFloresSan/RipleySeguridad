@@ -45,8 +45,8 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) :
 
                 txt_total_detail.text = Methods.formatMoney((sale.totalAmount.toDouble() / 100))
                 val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(sale.date)
-                //TODO txt_status_detail color morado !! LOGICA ---> status != 2
-                if (sale.status != "2") {
+                //TODO txt_status_detail color morado !! LOGICA === Estado verificado == 3
+                if (sale.statusId == 3) {
                     txt_status_detail.text = sale.status
                     txt_status_detail.setTextColor(
                         ContextCompat.getColor(

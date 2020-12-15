@@ -17,7 +17,7 @@ class UserPresenter(private var useCase: GetUser, private var methods: Methods) 
 
     fun login(request: LoginRequest) {
         if (!methods.isInternetConnected()) {
-            view?.showError("No se tiene conexión a internet")
+            view?.customWifi()
             return
         }
 
@@ -41,7 +41,7 @@ class UserPresenter(private var useCase: GetUser, private var methods: Methods) 
                 when (e) {
                     is SocketTimeoutException -> {
                         view?.hideLoading()
-                        view?.showError("No se tiene conexión a internet")
+                        view?.customTimeOut()
                     }
                     is HttpException -> {
                         when {
