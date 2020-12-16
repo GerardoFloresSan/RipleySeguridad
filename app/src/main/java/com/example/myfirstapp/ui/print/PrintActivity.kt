@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfirstapp.R
+import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.print.helper.BTPrinter
 import com.example.myfirstapp.ui.print.helper.IBTPrinter
 import com.google.gson.Gson
@@ -27,6 +28,7 @@ import com.example.myfirstapp.ui.print.models.PrintRequestModel
 import com.example.myfirstapp.ui.print.models.PrintResultModel
 import com.example.myfirstapp.utils.Methods
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PrintActivity: AppCompatActivity() {
 
@@ -67,11 +69,13 @@ class PrintActivity: AppCompatActivity() {
         _textPaint.textAlign = Paint.Align.LEFT
 
         try {
-            val printRequest = _gson.fromJson(data?.getString("print"), PrintRequestModel::class.java) ?: throw Exception("Bad Request")
+            val list = data?.getSerializable("list") as ArrayList<CloseCartResponse.ClientVoucher>
+            val mac = data?.getString("mac")
+            //val printRequest = _gson.fromJson(data?.getString("print"), PrintRequestModel::class.java) ?: throw Exception("Bad Request")
 
-            val bitmap = generateBitmap(printRequest.Ticket)
+            val bitmap = generateBitmap(list)
             //sendResult()
-            printRequest.Mac?.let { printBitmap(it, bitmap) }
+            mac?.let { printBitmap(it, bitmap) }
 
         } catch (e: Exception) {
             e.message?.let { Log.d(_tag, it) }
@@ -91,20 +95,20 @@ class PrintActivity: AppCompatActivity() {
         finish()
     }
 
-    private fun generateBitmap(ticket: List<OrderTicketLineModel>?): Bitmap {
+    fun generateBitmap(ticket: ArrayList<CloseCartResponse.ClientVoucher>?): Bitmap {
         var bitmapTicket = textAsBitmap()
         if (ticket != null) {
             transaction@ for (line in ticket) {
                 when (line.tipo) {
                     "BARCODE_GS1_128" -> {
-                        if (isNullOrEmpty(line.values)) {
+                        if (line.value.isNullOrEmpty()) {
                             continue@transaction
                         }
 
                         var hints: Map<EncodeHintType?, Any?>? = null
                         hints = EnumMap<EncodeHintType, Any>(EncodeHintType::class.java)
-                        hints.put(EncodeHintType.CHARACTER_SET, line.values)
-                        val bitMatrix: BitMatrix = Code128Writer().encode(line.values, BarcodeFormat.CODE_128, _maxWidth, 50, hints)
+                        hints.put(EncodeHintType.CHARACTER_SET, line.value)
+                        val bitMatrix: BitMatrix = Code128Writer().encode(line.value, BarcodeFormat.CODE_128, _maxWidth, 50, hints)
                         val width: Int = bitMatrix.width
                         val height: Int = bitMatrix.height
                         val pixels = IntArray(width * height)
@@ -121,15 +125,15 @@ class PrintActivity: AppCompatActivity() {
                         bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
                     }
                     "BASE64" -> {
-                        if (isNullOrEmpty(line.text)) {
+                        if (line.text.isNullOrEmpty()) {
                             continue@transaction
                         }
 
-                        val bitmap = Common.string64ToBitmap(line.text)
-                        bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
+                        val bitmap = string64ToBitmap(line.text!!)
+                        bitmapTicket = mergeBitmap(bitmapTicket, bitmap!!)
                     }
                     "TEXT" -> {
-                        if (isNullOrEmpty(line.text)) {
+                        if (line.text.isNullOrEmpty()) {
                             continue@transaction
                         }
 
@@ -155,13 +159,13 @@ class PrintActivity: AppCompatActivity() {
                         }
                     }
                     "TEXT_COLUMN_2" -> {
-                        if (isNullOrEmpty(line.text1) && isNullOrEmpty(line.text2)) {
+                        if (line.text1.isNullOrEmpty() && line.text2.isNullOrEmpty()) {
                             continue@transaction
                         }
-                        if (isNullOrEmpty(line.text1)) {
+                        if (line.text1.isNullOrEmpty()) {
                             line.text1 = ""
                         }
-                        if (isNullOrEmpty(line.text2)) {
+                        if (line.text2.isNullOrEmpty()) {
                             line.text2 = ""
                         }
 
@@ -180,14 +184,32 @@ class PrintActivity: AppCompatActivity() {
 
                         bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
                     }
+                    /*"TEXT_COLUMN_3" -> {
+                        line.textRight = ""
+                        line.textRight = ""
+                        line.textRight = ""
+                        if (line.text1 != null && line.text3 != null) {
+                            if (!line["text1"].asText().isEmpty() || !line["text3"].asText()
+                                    .isEmpty()
+                            ) ripleyPrinter.drawTextLeftRight(
+                                line["text1"].asText(),
+                                line["text3"].asText()
+                            )
+                        }
+                        if (line.text2 != null) {
+                            if (!line["text2"].asText().isEmpty()) ripleyPrinter.drawText(
+                                line["text2"].asText().replace("CANTIDAD", "CANT.")
+                            )
+                        }
+                    }*/
                     "TEXT_LEFT_RIGHT" -> {
-                        if (isNullOrEmpty(line.textLeft) && isNullOrEmpty(line.textRight)) {
+                        if (line.textLeft.isNullOrEmpty() && line.textRight.isNullOrEmpty()) {
                             continue@transaction
                         }
-                        if (isNullOrEmpty(line.textLeft)) {
+                        if (line.textLeft.isNullOrEmpty()) {
                             line.textLeft = ""
                         }
-                        if (isNullOrEmpty(line.textRight)) {
+                        if (line.textRight.isNullOrEmpty()) {
                             line.textRight = ""
                         }
 
@@ -216,7 +238,7 @@ class PrintActivity: AppCompatActivity() {
                     }
                     "CODE_TEXT_QR"-> {
                         try {
-                            val bitmap = Methods.generateQRCode(line.values.toString(), 385, 220)
+                            val bitmap = Methods.generateQRCode(line.value.toString(), 385, 220)
                             /*val final = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height);*/
                             bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
                         } catch (e: Exception) {
@@ -229,83 +251,20 @@ class PrintActivity: AppCompatActivity() {
         return bitmapTicket
     }
 
-    private fun isNullOrEmpty(str: String?): Boolean {
-        return (str == null || str.trim().isEmpty())
+
+    private fun string64ToBitmap(base64String: String): Bitmap? {
+        val base64Image = base64String.split(",".toRegex()).toTypedArray()[1]
+
+        val decodedString: ByteArray = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
     }
 
-    private fun getExceptionMessage(message: String?): String {
-        if (message != null) {
-            if (message.contains("PRINT#-1("))
-            {
-                return "Error desconocido (1)."
-            }
-            if (message.contains("PRINT#-2("))
-            {
-                return "Error de transmisión (3)."
-            }
-            if (message.contains("PRINT#-3("))
-            {
-                return "Error de transmisión (2)."
-            }
-            if (message.contains("PRINT#-4("))
-            {
-                return "Impresión incompleta."
-            }
-            if (message.contains("PRINT#-5("))
-            {
-                return "Impresora sin papel."
-            }
-            if (message.contains("PRINT#-6("))
-            {
-                return "Error de transmisión (1)."
-            }
-            if (message.contains("PRINT#-7("))
-            {
-                return "Impresora sobrecalentada."
-            }
-            if (message.contains("PRINT#-8("))
-            {
-                return "Fallo de impresora."
-            }
-            if (message.contains("PRINT#-9("))
-            {
-                return "Impresora con bajo voltaje."
-            }
-            if (message.contains("PRINT#-10("))
-            {
-                return "Impresora ocupada."
-            }
-            if (message.contains("PRINT#-11("))
-            {
-                return "Error en fuentes de impresora."
-            }
-            if (message.contains("PRINT#-12("))
-            {
-                return "Error de conexión."
-            }
-        }
-        return "Error desconocido (2)."
-    }
-
-    private fun printBitmap(mac: String, bitmap: Bitmap) {
-        RxUtils.addDisposable(
-            _btPrinter.connect(mac).flatMap { it ->
-                if (it) _btPrinter.printBitmap(bitmap) else Observable.error(PrintException(-12))
-            }.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
-            .subscribe({
-                _printResultModel.Estado = 1
-                _printResultModel.Mensaje = ""
-                Handler(Looper.getMainLooper()).post {
-                    sendResult()
-                }
-            }) { e ->
-                _printResultModel.Estado = 0
-                _printResultModel.Mensaje = getExceptionMessage(e.message)
-                Handler(Looper.getMainLooper()).post {
-                    sendResult()
-                }
-            }
-        )
+    fun initTextPaint() {
+        _textPaint.textSize = _textSizeNormal
+        _textPaint.isFakeBoldText = false
+        _textPaint.color = Color.BLACK
+        _textPaint.isAntiAlias = true
+        _textPaint.textAlign = Paint.Align.LEFT
     }
 
     private fun textAsBitmap(text: String = " ", textAlign: String = "LEFT", bold: String = "0", textSize: Float = _textSizeNormal): Bitmap {
@@ -314,7 +273,6 @@ class PrintActivity: AppCompatActivity() {
 
         val baseline = (-1 * _textPaint.ascent())
         val width = (_textPaint.measureText(text) + 0.5F)
-        Log.d(_tag, "width: $width")
         val height = (baseline + _textPaint.descent() + 0.5F)
         val image = Bitmap.createBitmap(_maxWidth, height.toInt(), Bitmap.Config.ARGB_8888)
         val canvas = Canvas(image)
@@ -392,4 +350,80 @@ class PrintActivity: AppCompatActivity() {
         canvas.drawBitmap(toAdd, 0F, main.height.toFloat(), null)
         return final
     }
+
+    private fun getExceptionMessage(message: String?): String {
+        if (message != null) {
+            if (message.contains("PRINT#-1("))
+            {
+                return "Error desconocido (1)."
+            }
+            if (message.contains("PRINT#-2("))
+            {
+                return "Error de transmisión (3)."
+            }
+            if (message.contains("PRINT#-3("))
+            {
+                return "Error de transmisión (2)."
+            }
+            if (message.contains("PRINT#-4("))
+            {
+                return "Impresión incompleta."
+            }
+            if (message.contains("PRINT#-5("))
+            {
+                return "Impresora sin papel."
+            }
+            if (message.contains("PRINT#-6("))
+            {
+                return "Error de transmisión (1)."
+            }
+            if (message.contains("PRINT#-7("))
+            {
+                return "Impresora sobrecalentada."
+            }
+            if (message.contains("PRINT#-8("))
+            {
+                return "Fallo de impresora."
+            }
+            if (message.contains("PRINT#-9("))
+            {
+                return "Impresora con bajo voltaje."
+            }
+            if (message.contains("PRINT#-10("))
+            {
+                return "Impresora ocupada."
+            }
+            if (message.contains("PRINT#-11("))
+            {
+                return "Error en fuentes de impresora."
+            }
+            if (message.contains("PRINT#-12("))
+            {
+                return "Error de conexión."
+            }
+        }
+        return "Error desconocido (2)."
+    }
+
+    private fun printBitmap(mac: String, bitmap: Bitmap) {
+        RxUtils.addDisposable(
+            _btPrinter.connect(mac).flatMap { it ->
+                if (it) _btPrinter.printBitmap(bitmap) else Observable.error(PrintException(-12))
+            }.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
+            .subscribe({
+                _printResultModel.Estado = 1
+                _printResultModel.Mensaje = ""
+                Handler(Looper.getMainLooper()).post {
+                    sendResult()
+                }
+            }) { e ->
+                _printResultModel.Estado = 0
+                _printResultModel.Mensaje = getExceptionMessage(e.message)
+                Handler(Looper.getMainLooper()).post {
+                    sendResult()
+                }
+            }
+        )
+    }
+
 }
