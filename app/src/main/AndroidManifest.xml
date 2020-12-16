@@ -107,6 +107,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             tools:targetApi="n" />
+        <activity android:name=".ui.print.PrintActivity">
+            <intent-filter>
+                <action android:name="ripley.intent.action.INIT_PRINT"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

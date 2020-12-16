@@ -159,8 +159,11 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:17.5.1'
 
+    /*implementation(project(':app_print'))*/
+
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
+    implementation 'pe.com.viergegroup:rompefilassdk:1.0.19'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
