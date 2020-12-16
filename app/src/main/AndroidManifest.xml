@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -21,12 +23,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="HardcodedDebugMode,UnusedAttribute"
-        android:requestLegacyExternalStorage="true"
         tools:replace="allowBackup">
         <activity
             android:name=".ui.activity.SplashActivity"
@@ -108,13 +110,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             tools:targetApi="n" />
-        <activity android:name=".ui.print.PrintActivity">
-            <intent-filter>
-                <action android:name="ripley.intent.action.INIT_PRINT"/>
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain"/>
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".ui.print.PrintActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            tools:targetApi="n" />
 
         <meta-data
             android:name="preloaded_fonts"

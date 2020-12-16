@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
@@ -85,6 +86,7 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
             intent.putExtra("print", "{\"mac\":\"68:9E:19:1D:C3:18\",\"ticket\":[{\"text\":\"RIPLEY\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"TIENDAS POR DEPARTAMENTO RIPLEY S.A.\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"CALLE LAS BEGONIAS 545-577\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"SAN ISIDRO - LIMA\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"RUC 20337564373\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"BP89-60003913\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"CONSTANCIA DE EMISIÓN DEL\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"COMPROBANTE ELECTRÓNICO\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"value\":\"141220000898050005\",\"tipo\":\"BARCODE_GS1_128\"},{\"tipo\":\"LINE_BREAK\"},{\"text\":\"00089/805 14/12/20 15:53 0005\",\"tipo\":\"TEXT\"},{\"text\":\"0000231633 VENDEDOR SUCUR: 89\",\"tipo\":\"TEXT\"},{\"text\":\"SERIE: K3DF035915 01 VENTA\",\"tipo\":\"TEXT\"},{\"text\":\"DIRECCION: AV. LOS ANGELES N° 602 TIENDA TD-2, C.C. MALL PLAZA\",\"tipo\":\"TEXT\"},{\"text\":\"DISTRITO: COMAS - LIMA\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"text1\":\"TICKET NRO :\",\"text2\":\" 0005\",\"sizeColumn1\":\"13\",\"sizeColumn3\":\"10\",\"tipo\":\"TEXT_COLUMN_2\"},{\"text1\":\"Doc Cliente :\",\"text2\":\" DNI 41038615\",\"sizeColumn1\":\"13\",\"sizeColumn3\":\"10\",\"tipo\":\"TEXT_COLUMN_2\"},{\"text1\":\"Nombre Cliente :\",\"text2\":\" Estanislao Chavez\",\"sizeColumn1\":\"13\",\"sizeColumn3\":\"10\",\"tipo\":\"TEXT_COLUMN_2\"},{\"text1\":\"eMail :\",\"text2\":\" EMSAPB@GMAIL.COM\",\"sizeColumn1\":\"13\",\"sizeColumn3\":\"10\",\"tipo\":\"TEXT_COLUMN_2\"},{\"tipo\":\"LINE_BREAK\"},{\"textLeft\":\"2020235119641\",\"textRight\":\"\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"textLeft\":\"SHO UB TRAINING 829T\",\"textRight\":\"69.90\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"text\":\"1 X 69.90\",\"tipo\":\"TEXT\"},{\"textLeft\":\"2005256597333\",\"textRight\":\"\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"textLeft\":\"PANTALON ST PC-52201\",\"textRight\":\"138.60\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"text\":\"1 X 138.60\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"textLeft\":\"SUBTOTAL S/\",\"textRight\":\"208.50\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"text\":\"NRO DE UNIDADES: 2\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"textLeft\":\"OP. GRAVADAS\",\"textRight\":\"176.69\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"textLeft\":\"I.G.V. (18%)\",\"textRight\":\"31.81\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"textLeft\":\"TOTAL A PAGAR S/\",\"textRight\":\"208.50\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"text\":\"SON: DOSCIENTOS OCHO Y 50/100 SOLES\",\"bold\":\"1\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"textLeft\":\"VISA\",\"textRight\":\"\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"textLeft\":\"421355******9077\",\"textRight\":\"208.50\",\"tipo\":\"TEXT_LEFT_RIGHT\"},{\"tipo\":\"LINE_BREAK\"},{\"tipo\":\"LINE_BREAK\"},{\"text\":\"ORDEN DE COMPRA: 32419024\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"text\":\"SI TIENE TC RIPLEY ACTIVA, ESTA COMPRA\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"GANA RIPLEYPUNTOS GO.ABONO 15 MES SGTE\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"tipo\":\"LINE_BREAK\"},{\"text\":\"PARA CONSULTAR TUS VALES\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"GANADOS, INGRESA CON TU DNI A\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"text\":\"usatuvale.ripley.com.pe\",\"align\":\"CENTER\",\"tipo\":\"TEXT\"},{\"tipo\":\"CUT\"}]}")
             this.startActivityForResult(intent, 2000)
     }
+
     override fun onResume() {
         userPresenter.attachView(this)
         super.onResume()
@@ -155,6 +157,16 @@ class LoginActivity : RipleyBaseActivity(), UserPresenter.View {
                 txt_error.visibility = View.VISIBLE
                 txt_input_user.setBackgroundResource(R.drawable.shape_text_error)
                 txt_input_password.setBackgroundResource(R.drawable.shape_text_error)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            var a = data.getStringExtra("ScannerResponse")
+            if (a != null) {
+                Log.d("PrintTesttttt", a)
             }
         }
     }
