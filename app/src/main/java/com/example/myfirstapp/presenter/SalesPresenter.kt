@@ -12,11 +12,15 @@ import io.reactivex.observers.DisposableObserver
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.Serializable
+import java.net.SocketTimeoutException
 
 class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: GetSalesByDoc, private var useCase3: CloseSales, private var methods: Methods) : BasePresenter<SalesPresenter.View>() {
 
     fun getUserByQr(request: GetStateByQrRequest) {
-        if (!methods.isInternetConnected()) return
+        if (!methods.isInternetConnected()) {
+            view?.customWifi()
+            return
+        }
         view?.showLoading()
 
         useCase1.request = request
@@ -33,6 +37,10 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
             override fun onError(e: Throwable) {
                 view?.hideLoading()
                 when (e) {
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.customTimeOut()
+                    }
                     is HttpException -> {
                         when {
                             e.code() == 401 -> view?.tokenExpired()
@@ -46,8 +54,12 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
 
         })
     }
+
     fun getUserByDoc(request: GetStateByDocRequest, listener: (Int, ArrayList<SalesGetByResponse>) -> Unit) {
-        if (!methods.isInternetConnected()) return
+        if (!methods.isInternetConnected()) {
+            view?.customWifi()
+            return
+        }
         view?.showLoading()
 
         useCase2.request = request
@@ -66,6 +78,10 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
             override fun onError(e: Throwable) {
                 view?.hideLoading()
                 when (e) {
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.customTimeOut()
+                    }
                     is HttpException -> {
                         when {
                             e.code() == 401 -> view?.tokenExpired()
@@ -82,7 +98,10 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
     }
 
     fun closeSales(request: CloseCartRequest) {
-        if (!methods.isInternetConnected()) return
+        if (!methods.isInternetConnected()) {
+            view?.customWifi()
+            return
+        }
         view?.showLoading()
 
         useCase3.request = request
@@ -100,6 +119,10 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
                 view?.hideLoading()
 
                 when (e) {
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.customTimeOut()
+                    }
                     is HttpException -> {
                         val msg: String
                         msg = try {

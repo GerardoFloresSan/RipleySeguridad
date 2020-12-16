@@ -34,6 +34,7 @@ class EndOrderAppActivity : PdfBaseActivity() {
 
         list = featuresJsonEntity?.features as MutableList<CloseCartResponse.ClientVoucher>*/
 
+        btn_print.visibility = View.GONE
 
         btn_print_2.setOnClickListener {
             if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
@@ -44,6 +45,7 @@ class EndOrderAppActivity : PdfBaseActivity() {
             val bitmap = generateBitmap(closeCart.clientVoucher)
             ProcessBitmap(object : ProcessBitmap.DoStuff {
                 override fun getContext() = this@EndOrderAppActivity
+
                 @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
                 override fun done(filePath: String) {
                     Log.d("IMAGE", "-------------------------$filePath")

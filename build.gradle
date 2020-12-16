@@ -4,6 +4,14 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/vgdhernandez/rompefilas")
+            credentials {
+                username = "vgdhernandez"
+                password = "25c518278410512dc29b9bf70bb9077bcc27e43c"
+            }
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
@@ -19,6 +27,14 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/vgdhernandez/rompefilas")
+            credentials {
+                username = "vgdhernandez"
+                password = "25c518278410512dc29b9bf70bb9077bcc27e43c"
+            }
+        }
     }
 }
 

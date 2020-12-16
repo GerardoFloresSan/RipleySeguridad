@@ -11,7 +11,10 @@ import java.io.Serializable
 class ParameterPresenter (private var getParameters: GetParameters, private var methods: Methods) : BasePresenter<ParameterPresenter.View>() {
 
     fun getParameters() {
-
+        if (!methods.isInternetConnected()) {
+            view?.customWifi()
+            return
+        }
         getParameters.execute(object : DisposableObserver<List<Parameter>>() {
             override fun onComplete() {
             }

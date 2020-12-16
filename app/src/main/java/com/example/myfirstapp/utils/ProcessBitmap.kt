@@ -17,11 +17,11 @@ class ProcessBitmap(private val doStuff: DoStuff) : AsyncTask<Any, Void, String>
 
     override fun onPreExecute() {
         dialog = MaterialDialog.Builder(doStuff.getContext())
-                .title("Procesando...")
-                .content("Espere un momento")
-                .progress(true, 0)
-                .cancelable(false)
-                .show()
+            .title("Procesando...")
+            .content("Espere un momento")
+            .progress(true, 0)
+            .cancelable(false)
+            .show()
     }
 
     override fun doInBackground(vararg objects: Any): String? {
@@ -41,10 +41,10 @@ class ProcessBitmap(private val doStuff: DoStuff) : AsyncTask<Any, Void, String>
 
         if (s == null) {
             MaterialDialog.Builder(doStuff.getContext())
-                    .title("Ups!")
-                    .content("Hubo un error, inténtelo nuevamente")
-                    .positiveText("Ok")
-                    .show()
+                .title("Ups!")
+                .content("Hubo un error, inténtelo nuevamente")
+                .positiveText("Ok")
+                .show()
             return
         }
 
@@ -82,7 +82,7 @@ class ProcessBitmap(private val doStuff: DoStuff) : AsyncTask<Any, Void, String>
         val month = cal[Calendar.MONTH]
         val day = cal[Calendar.DAY_OF_MONTH]
 
-        @Suppress("NAME_SHADOWING") val id = "${year}_${month}_${day}_${Date().time}.png"
+        @Suppress("NAME_SHADOWING") val id = "${year}_${month + 1}_${day}_${Date().time}.png"
 
         val file = File(Environment.getExternalStorageDirectory(), "Ripley/$id")//${Date().time}.png
         val path = File(file.parent)
