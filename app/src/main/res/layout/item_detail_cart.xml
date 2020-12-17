@@ -164,7 +164,7 @@
                 android:text="Fecha:"
                 android:textColor="@color/colorCuponText"
                 android:textSize="13sp"
-                app:drawableStartCompat="@drawable/ic_calendar" />
+                app:drawableStartCompat="@drawable/ic_calen" />
 
             <TextView
                 android:id="@+id/txt_date_detail"

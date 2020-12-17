@@ -31,7 +31,6 @@ class EndOrderAppActivity : PdfBaseActivity() {
             startActivityE(WelcomeSecurityActivity::class.java)
         }
 
-        btn_print.visibility = View.GONE
 
         btn_print.setOnClickListener {
             //TODO OPCION 1 DE PREFERENCIA QUE LA MAC DE LA IMPRESORA SEA OTORGADA POR EL LOGIN DEL USUARIO 1 CELULAR 1 IMPRESORA ASIGNADA
@@ -39,24 +38,6 @@ class EndOrderAppActivity : PdfBaseActivity() {
             initPrint("68:9E:19:17:8A:85", closeCart.clientVoucher)
         }
 
-        btn_print_2.setOnClickListener {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                return@setOnClickListener
-            }
-            mLastClickTime = SystemClock.elapsedRealtime()
-
-            val bitmap = generateBitmap(closeCart.clientVoucher)
-            ProcessBitmap(object : ProcessBitmap.DoStuff {
-                override fun getContext() = this@EndOrderAppActivity
-
-                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-                override fun done(filePath: String) {
-                    Log.d("IMAGE", "-------------------------$filePath")
-                    toast("Imagen guardada")
-                }
-            }).execute(bitmap)
-
-        }
 
         super.onCreate()
     }
