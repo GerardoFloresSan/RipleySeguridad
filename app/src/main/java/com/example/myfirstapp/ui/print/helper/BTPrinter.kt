@@ -1,9 +1,9 @@
 package com.example.myfirstapp.ui.print.helper
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.text.TextUtils
 import android.util.Log
-import com.example.myfirstapp.ui.print.helper.BaseBTPrinter
 import com.pax.gl.commhelper.ICommBt
 import com.pax.gl.commhelper.exception.CommException
 import com.pax.gl.commhelper.impl.PaxGLComm
@@ -64,14 +64,13 @@ class BTPrinter : BaseBTPrinter() {
         }
     }
 
-    override fun connect(mac: String): Observable<Boolean> {
+    override fun connect(mac: String, context: Context): Observable<Boolean> {
         return Observable.create { it ->
             if (TextUtils.isEmpty(mac)) {
                 it.onNext(false)
                 it.onComplete()
             } else {
-                _comm = PaxGLComm.getInstance(FinancialApplication.getAppContext()).createBt(mac)
-
+                _comm = PaxGLComm.getInstance(context).createBt(mac)
                 var result = try {
                     _comm?.reset()
                     _comm?.connect()
@@ -87,6 +86,8 @@ class BTPrinter : BaseBTPrinter() {
     }
 
     override fun printBitmap(bitmap: Bitmap): Observable<Int> {
+        Log.wtf("_btListener --->", if (_btListener == null) "es null" else "no es null")
+
         val escPos = GLExtPrinter.createEscPosPrinter(_btListener, 383)
         return Observable.create { emitter ->
             this.printTransaction(

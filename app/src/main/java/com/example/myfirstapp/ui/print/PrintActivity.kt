@@ -13,6 +13,8 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.print.helper.BTPrinter
 import com.example.myfirstapp.ui.print.helper.IBTPrinter
+import com.example.myfirstapp.ui.print.models.PrintResultModel
+import com.example.myfirstapp.utils.Methods
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -21,16 +23,10 @@ import com.google.zxing.oned.Code128Writer
 import com.pax.gl.extprinter.exception.PrintException
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import pe.com.viergegroup.rompefilassdk.util.Common
 import pe.com.viergegroup.rompefilassdk.util.RxUtils
-import com.example.myfirstapp.ui.print.models.OrderTicketLineModel
-import com.example.myfirstapp.ui.print.models.PrintRequestModel
-import com.example.myfirstapp.ui.print.models.PrintResultModel
-import com.example.myfirstapp.utils.Methods
 import java.util.*
-import kotlin.collections.ArrayList
 
-class PrintActivity: AppCompatActivity() {
+class PrintActivity : AppCompatActivity() {
 
     private val _tag = PrintActivity::class.java.simpleName
 
@@ -53,10 +49,10 @@ class PrintActivity: AppCompatActivity() {
 
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-            or  View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            or  View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            or  View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        )
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                )
 
         setContentView(R.layout.loading);
 
@@ -108,7 +104,13 @@ class PrintActivity: AppCompatActivity() {
                         var hints: Map<EncodeHintType?, Any?>? = null
                         hints = EnumMap<EncodeHintType, Any>(EncodeHintType::class.java)
                         hints.put(EncodeHintType.CHARACTER_SET, line.value)
-                        val bitMatrix: BitMatrix = Code128Writer().encode(line.value, BarcodeFormat.CODE_128, _maxWidth, 50, hints)
+                        val bitMatrix: BitMatrix = Code128Writer().encode(
+                            line.value,
+                            BarcodeFormat.CODE_128,
+                            _maxWidth,
+                            50,
+                            hints
+                        )
                         val width: Int = bitMatrix.width
                         val height: Int = bitMatrix.height
                         val pixels = IntArray(width * height)
@@ -116,7 +118,8 @@ class PrintActivity: AppCompatActivity() {
                         for (y in 0 until height) {
                             val offset = y * width
                             for (x in 0 until width) {
-                                pixels[offset + x] = if (bitMatrix.get(x, y)) Color.BLACK else Color.WHITE
+                                pixels[offset + x] =
+                                    if (bitMatrix.get(x, y)) Color.BLACK else Color.WHITE
                             }
                         }
                         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -137,17 +140,16 @@ class PrintActivity: AppCompatActivity() {
                             continue@transaction
                         }
 
-                        var text : String = line.text!!
-                        val align : String = line.align!!
-                        val bold : String = line.bold!!
+                        var text: String = line.text!!
+                        val align: String = line.align!!
+                        val bold: String = line.bold!!
                         var textSize = _textSizeNormal
 
                         if (text.startsWith("NRO UNICO", true)) {
                             textSize = _textSizeSmall
                         }
 
-                        if (text.startsWith("FECHA EMISION"))
-                        {
+                        if (text.startsWith("FECHA EMISION")) {
                             text = text.replace("HORA: ", "").replace("FECHA EMISION", "FECHA")
                         }
 
@@ -174,7 +176,10 @@ class PrintActivity: AppCompatActivity() {
                         val bold = line.bold!!
 
                         var bitmap: Bitmap? = null
-                        if ((!text1.startsWith("Nombre Cliente")) || (text1.startsWith("Nombre Cliente") && !text2.startsWith(" 0 0"))) {
+                        if ((!text1.startsWith("Nombre Cliente")) || (text1.startsWith("Nombre Cliente") && !text2.startsWith(
+                                " 0 0"
+                            ))
+                        ) {
                             bitmap = textLeftRightAsBitmap(text1, text2, bold, _textSizeNormal)
                         }
 
@@ -217,7 +222,8 @@ class PrintActivity: AppCompatActivity() {
                         val textRight = line.textRight!!
                         val bold = line.bold!!
 
-                        val bitmap = textLeftRightAsBitmap(textLeft, textRight, bold, _textSizeNormal)
+                        val bitmap =
+                            textLeftRightAsBitmap(textLeft, textRight, bold, _textSizeNormal)
                         bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
                     }
                     "LINE" -> {
@@ -236,7 +242,7 @@ class PrintActivity: AppCompatActivity() {
                             bitmapTicket = mergeBitmap(bitmapTicket, bitmap)
                         }
                     }
-                    "CODE_TEXT_QR"-> {
+                    "CODE_TEXT_QR" -> {
                         try {
                             val bitmap = Methods.generateQRCode(line.value.toString(), 385, 220)
                             /*val final = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height);*/
@@ -251,11 +257,11 @@ class PrintActivity: AppCompatActivity() {
         return bitmapTicket
     }
 
-
     private fun string64ToBitmap(base64String: String): Bitmap? {
         val base64Image = base64String.split(",".toRegex()).toTypedArray()[1]
 
-        val decodedString: ByteArray = android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT)
+        val decodedString: ByteArray =
+            android.util.Base64.decode(base64Image, android.util.Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
     }
 
@@ -267,7 +273,12 @@ class PrintActivity: AppCompatActivity() {
         _textPaint.textAlign = Paint.Align.LEFT
     }
 
-    private fun textAsBitmap(text: String = " ", textAlign: String = "LEFT", bold: String = "0", textSize: Float = _textSizeNormal): Bitmap {
+    private fun textAsBitmap(
+        text: String = " ",
+        textAlign: String = "LEFT",
+        bold: String = "0",
+        textSize: Float = _textSizeNormal
+    ): Bitmap {
         _textPaint.textSize = textSize
         _textPaint.isFakeBoldText = (bold == "1")
 
@@ -289,7 +300,12 @@ class PrintActivity: AppCompatActivity() {
         return image;
     }
 
-    private fun textLeftRightAsBitmap(textLeft: String, textRight: String, bold: String, textSize: Float): Bitmap {
+    private fun textLeftRightAsBitmap(
+        textLeft: String,
+        textRight: String,
+        bold: String,
+        textSize: Float
+    ): Bitmap {
         _textPaint.textSize = textSize
         _textPaint.isFakeBoldText = (bold == "1")
 
@@ -304,7 +320,11 @@ class PrintActivity: AppCompatActivity() {
         return image
     }
 
-    private fun processText(text: String, bold: String = "0", textSize: Float = _textSizeNormal): List<String> {
+    private fun processText(
+        text: String,
+        bold: String = "0",
+        textSize: Float = _textSizeNormal
+    ): List<String> {
         _textPaint.textSize = textSize
         _textPaint.isFakeBoldText = (bold == "1")
 
@@ -316,7 +336,8 @@ class PrintActivity: AppCompatActivity() {
             if ((_textPaint.measureText(line) + 0.5F) > _maxWidth) {
                 var charLength = 0
                 while (true) {
-                    val width = (_textPaint.measureText(line.substring(0, line.length - charLength)) + 0.5F)
+                    val width =
+                        (_textPaint.measureText(line.substring(0, line.length - charLength)) + 0.5F)
                     if (width > _maxWidth) {
                         charLength++
                         continue
@@ -353,52 +374,40 @@ class PrintActivity: AppCompatActivity() {
 
     private fun getExceptionMessage(message: String?): String {
         if (message != null) {
-            if (message.contains("PRINT#-1("))
-            {
+            if (message.contains("PRINT#-1(")) {
                 return "Error desconocido (1)."
             }
-            if (message.contains("PRINT#-2("))
-            {
+            if (message.contains("PRINT#-2(")) {
                 return "Error de transmisión (3)."
             }
-            if (message.contains("PRINT#-3("))
-            {
+            if (message.contains("PRINT#-3(")) {
                 return "Error de transmisión (2)."
             }
-            if (message.contains("PRINT#-4("))
-            {
+            if (message.contains("PRINT#-4(")) {
                 return "Impresión incompleta."
             }
-            if (message.contains("PRINT#-5("))
-            {
+            if (message.contains("PRINT#-5(")) {
                 return "Impresora sin papel."
             }
-            if (message.contains("PRINT#-6("))
-            {
+            if (message.contains("PRINT#-6(")) {
                 return "Error de transmisión (1)."
             }
-            if (message.contains("PRINT#-7("))
-            {
+            if (message.contains("PRINT#-7(")) {
                 return "Impresora sobrecalentada."
             }
-            if (message.contains("PRINT#-8("))
-            {
+            if (message.contains("PRINT#-8(")) {
                 return "Fallo de impresora."
             }
-            if (message.contains("PRINT#-9("))
-            {
+            if (message.contains("PRINT#-9(")) {
                 return "Impresora con bajo voltaje."
             }
-            if (message.contains("PRINT#-10("))
-            {
+            if (message.contains("PRINT#-10(")) {
                 return "Impresora ocupada."
             }
-            if (message.contains("PRINT#-11("))
-            {
+            if (message.contains("PRINT#-11(")) {
                 return "Error en fuentes de impresora."
             }
-            if (message.contains("PRINT#-12("))
-            {
+            if (message.contains("PRINT#-12(")) {
                 return "Error de conexión."
             }
         }
@@ -407,22 +416,26 @@ class PrintActivity: AppCompatActivity() {
 
     private fun printBitmap(mac: String, bitmap: Bitmap) {
         RxUtils.addDisposable(
-            _btPrinter.connect(mac).flatMap { it ->
-                if (it) _btPrinter.printBitmap(bitmap) else Observable.error(PrintException(-12))
+            _btPrinter.connect(mac,this).flatMap { it ->
+                if (it) {
+                    _btPrinter.printBitmap(bitmap)
+                } else {
+                    Observable.error(PrintException(-12))
+                }
             }.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
-            .subscribe({
-                _printResultModel.Estado = 1
-                _printResultModel.Mensaje = ""
-                Handler(Looper.getMainLooper()).post {
-                    sendResult()
+                .subscribe({
+                    _printResultModel.Estado = 1
+                    _printResultModel.Mensaje = ""
+                    Handler(Looper.getMainLooper()).post {
+                        sendResult()
+                    }
+                }) { e ->
+                    _printResultModel.Estado = 0
+                    _printResultModel.Mensaje = getExceptionMessage(e.message)
+                    Handler(Looper.getMainLooper()).post {
+                        sendResult()
+                    }
                 }
-            }) { e ->
-                _printResultModel.Estado = 0
-                _printResultModel.Mensaje = getExceptionMessage(e.message)
-                Handler(Looper.getMainLooper()).post {
-                    sendResult()
-                }
-            }
         )
     }
 
