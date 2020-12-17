@@ -404,8 +404,15 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
     fun closePrint() {
         _btPrinter.disconect()
         hideLoading()
-        if(printResultModel.Mensaje.isNullOrEmpty()){
-            btn_print.visibility = View.INVISIBLE
+        try {
+            if (printResultModel.Mensaje.isNullOrEmpty()) {
+                btn_print.visibility = View.INVISIBLE
+            } else {
+                toast(printResultModel.Mensaje!!)
+            }
+
+        } catch (e: Exception) {
+            toast(e.toString())
         }
 
     }
