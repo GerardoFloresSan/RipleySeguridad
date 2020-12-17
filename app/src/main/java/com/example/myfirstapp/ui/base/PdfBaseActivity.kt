@@ -1,25 +1,54 @@
 package com.example.myfirstapp.ui.base
 
 import android.graphics.*
+import android.os.Handler
+import android.os.Looper
 import android.text.TextPaint
+import android.util.Log
 import cl.mbaas.baytex.api.utils.PrintUtils
 import com.example.myfirstapp.data.response.CloseCartResponse
+import com.example.myfirstapp.ui.print.PrintActivity
+import com.example.myfirstapp.ui.print.helper.BTPrinter
+import com.example.myfirstapp.ui.print.helper.IBTPrinter
+import com.example.myfirstapp.ui.print.models.PrintResultModel
 import com.example.myfirstapp.utils.Methods
+import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.oned.Code128Writer
+import com.pax.gl.extprinter.exception.PrintException
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import pe.com.viergegroup.rompefilassdk.util.RxUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 abstract class PdfBaseActivity : RipleyBaseActivity() {
 
+    private val _extraName = "PrintResponse"
+
     private val _textPaint = TextPaint()
     private val _maxWidth = 384
     private val _textSizeSmall = 16F
     private val _textSizeNormal = 19F
 
+    private val printResultModel: PrintResultModel = PrintResultModel()
+
+    private val _btPrinter: IBTPrinter = BTPrinter()
+
+    fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>) {
+        try {
+            showLoading()
+            val bitmap = generateBitmap(list)
+            printBitmap(mac, bitmap)
+        } catch (e: Exception) {
+            printResultModel.Estado = 0
+            printResultModel.Mensaje = e.message
+            closePrint()
+        }
+    }
 
     @Suppress("UselessCallOnNotNull")
     fun generateBitmap(ticket: ArrayList<CloseCartResponse.ClientVoucher>?): Bitmap {
@@ -178,7 +207,6 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
         return bitmapTicket
     }
 
-
     private fun string64ToBitmap(base64String: String): Bitmap? {
         val base64Image = base64String.split(",".toRegex()).toTypedArray()[1]
 
@@ -278,4 +306,75 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
         return final
     }
 
+    private fun getExceptionMessage(message: String?): String {
+        if (message != null) {
+            if (message.contains("PRINT#-1(")) {
+                return "Error desconocido (1)."
+            }
+            if (message.contains("PRINT#-2(")) {
+                return "Error de transmisión (3)."
+            }
+            if (message.contains("PRINT#-3(")) {
+                return "Error de transmisión (2)."
+            }
+            if (message.contains("PRINT#-4(")) {
+                return "Impresión incompleta."
+            }
+            if (message.contains("PRINT#-5(")) {
+                return "Impresora sin papel."
+            }
+            if (message.contains("PRINT#-6(")) {
+                return "Error de transmisión (1)."
+            }
+            if (message.contains("PRINT#-7(")) {
+                return "Impresora sobrecalentada."
+            }
+            if (message.contains("PRINT#-8(")) {
+                return "Fallo de impresora."
+            }
+            if (message.contains("PRINT#-9(")) {
+                return "Impresora con bajo voltaje."
+            }
+            if (message.contains("PRINT#-10(")) {
+                return "Impresora ocupada."
+            }
+            if (message.contains("PRINT#-11(")) {
+                return "Error en fuentes de impresora."
+            }
+            if (message.contains("PRINT#-12(")) {
+                return "Error de conexión."
+            }
+        }
+        return "Error desconocido (2)."
+    }
+
+    private fun printBitmap(mac: String, bitmap: Bitmap) {
+        RxUtils.addDisposable(
+            _btPrinter.connect(mac,this).flatMap { it ->
+                if (it) {
+                    _btPrinter.printBitmap(bitmap)
+                } else {
+                    Observable.error(PrintException(-12))
+                }
+            }.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread())
+                .subscribe({
+                    printResultModel.Estado = 1
+                    printResultModel.Mensaje = ""
+                    Handler(Looper.getMainLooper()).post {
+                        closePrint()
+                    }
+                }) { e ->
+                    printResultModel.Estado = 0
+                    printResultModel.Mensaje = getExceptionMessage(e.message)
+                    Handler(Looper.getMainLooper()).post {
+                        closePrint()
+                    }
+                }
+        )
+    }
+    
+    fun closePrint() {
+        _btPrinter.disconect()
+        hideLoading()
+    }
 }

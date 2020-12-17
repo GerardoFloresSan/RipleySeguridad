@@ -1,5 +1,6 @@
 package com.example.myfirstapp.ui.print.helper
 
+import android.content.Context
 import android.graphics.Bitmap
 import io.reactivex.Observable
 import pe.com.viergegroup.rompefilassdk.print.BaseBtPrinter
@@ -10,7 +11,7 @@ open class BaseBTPrinter : IBTPrinter {
         TODO("Not yet implemented")
     }
 
-    override fun connect(mac: String): Observable<Boolean> {
+    override fun connect(mac: String,context: Context): Observable<Boolean> {
         TODO("Not yet implemented")
     }
 

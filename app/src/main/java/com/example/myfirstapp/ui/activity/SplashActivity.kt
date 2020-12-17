@@ -2,6 +2,7 @@ package com.example.myfirstapp.ui.activity
 
 import android.os.Bundle
 import android.os.Handler
+import androidx.multidex.MultiDex
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.LoginResponse
 import com.example.myfirstapp.ui.activity.security.LoginActivity
@@ -16,7 +17,6 @@ class SplashActivity : RipleyBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Handler().postDelayed({
             PapersManager.username = ""
             PapersManager.device = arrayListOf("i9000s", "tr150h")
