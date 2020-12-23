@@ -31,20 +31,23 @@ class EndOrderAppActivity : PdfBaseActivity() {
             startActivityE(WelcomeSecurityActivity::class.java)
         }
 
-
-        btn_print.setOnClickListener {
-            //TODO OPCION 1 DE PREFERENCIA QUE LA MAC DE LA IMPRESORA SEA OTORGADA POR EL LOGIN DEL USUARIO 1 CELULAR 1 IMPRESORA ASIGNADA
-            //TODO OPCION 2 EL USUARIO SETEA LA MAC MANUALMENTE
-            initPrint("68:9E:19:17:8A:85", closeCart.clientVoucher)
+        btn_print_2.setOnClickListener {
+            //TODO
+            /**
+             * Abrir un pop up que tenga la lista de las impresoras (Botones - Guardar - Probar)
+             *
+             *
+             * **/
         }
 
+        btn_print.setOnClickListener {
+            //TODO abrir un popup o una lista -- BL --
+            initPrint("68:9E:19:17:8A:85", closeCart.clientVoucher)
+        }
 
         super.onCreate()
     }
 
+    override fun onBackPressed() { }
 
-
-    override fun onBackPressed() {
-
-    }
 }

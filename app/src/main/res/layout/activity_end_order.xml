@@ -77,13 +77,13 @@
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:visibility="invisible"
         android:id="@+id/btn_print_2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -101,11 +101,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_shape_white"
-            android:text="Guardar voucher"
+            android:text="Configurar impresora"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
