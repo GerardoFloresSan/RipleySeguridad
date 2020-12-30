@@ -46,5 +46,21 @@ object PapersManager {
             return Paper.book(BuildConfig.FLAVOR).read("device", arrayListOf())
         }
 
+    var macPrint: String
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("mac", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("mac", "")
+        }
+
+    var macPrint2: String
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("mac", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("mac", "")
+        }
+
     //i9000s  y el tr150h
 }

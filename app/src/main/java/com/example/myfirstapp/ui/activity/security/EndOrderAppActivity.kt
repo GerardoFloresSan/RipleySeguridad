@@ -8,11 +8,14 @@ import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.PdfBaseActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
+import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.ProcessBitmap
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_end_order.*
+import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
 
-class EndOrderAppActivity : PdfBaseActivity() {
+class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
 
@@ -24,30 +27,50 @@ class EndOrderAppActivity : PdfBaseActivity() {
 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
+
         initTextPaint()
+        initBlueToothScanPrint()
 
         btn_close_all.setOnClickListener {
             RipleyApplication.closeAll()
             startActivityE(WelcomeSecurityActivity::class.java)
         }
 
-        btn_print_2.setOnClickListener {
-            //TODO
-            /**
-             * Abrir un pop up que tenga la lista de las impresoras (Botones - Guardar - Probar)
-             *
-             *
-             * **/
-        }
 
         btn_print.setOnClickListener {
-            //TODO abrir un popup o una lista -- BL --
-            initPrint("68:9E:19:17:8A:85", closeCart.clientVoucher)
+            initPrint(PapersManager.macPrint, closeCart.clientVoucher)
+        }
+
+        btn_print_2.setOnClickListener {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime()
+
+            showBlueToothDevice{ action ->
+                btn_print_2.visibility = if(action)View.GONE else View.INVISIBLE
+
+            }
+
+            /*val bitmap = generateBitmap(closeCart.clientVoucher)
+            ProcessBitmap(object : ProcessBitmap.DoStuff {
+                override fun getContext() = this@EndOrderAppActivity
+
+                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+                override fun done(filePath: String) {
+                    Log.d("IMAGE", "-------------------------$filePath")
+                    toast("Imagen guardada")
+                }
+            }).execute(bitmap)*/
+
         }
 
         super.onCreate()
     }
 
-    override fun onBackPressed() { }
 
+
+    override fun onBackPressed() {
+
+    }
 }

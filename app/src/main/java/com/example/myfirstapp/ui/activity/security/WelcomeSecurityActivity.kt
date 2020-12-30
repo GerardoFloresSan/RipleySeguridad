@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.example.myfirstapp.R
 import com.example.myfirstapp.presenter.ParameterPresenter
 import com.example.myfirstapp.presenter.UserPresenter
 import com.example.myfirstapp.ui.activity.SplashActivity
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.startActivityE
@@ -18,7 +20,7 @@ import java.io.Serializable
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
-class WelcomeSecurityActivity : RipleyBaseActivity(), ParameterPresenter.View {
+class WelcomeSecurityActivity : ScanBlueToothBaseActivity(), ParameterPresenter.View {
 
     @Inject
     lateinit var parameterPresenter: ParameterPresenter
@@ -34,6 +36,14 @@ class WelcomeSecurityActivity : RipleyBaseActivity(), ParameterPresenter.View {
 
         lbl_text_name_user.text = "${PapersManager.loginAccess.name} ${PapersManager.loginAccess.lastName}"
         txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
+
+        initBlueToothScanPrint()
+        get_bluetooth.visibility = View.VISIBLE
+        get_bluetooth.setOnClickListener {
+            showBlueToothDevice{ action ->
+                get_bluetooth.visibility = if(action)View.GONE else View.VISIBLE
+            }
+        }
 
         close_session.setOnClickListener {
             PapersManager.login = false
