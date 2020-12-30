@@ -24,13 +24,15 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="Seleccione una impresora"
-            android:textStyle="bold"
             android:textColor="@color/colorBlackRipley"
-            android:textSize="24sp"/>
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -54,21 +56,22 @@
                     android:id="@+id/lnl_print_empty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    android:orientation="vertical">
+                    android:paddingBottom="16dp">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/img_print"/>
+                        android:src="@drawable/ic_printer_ok" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:text="No se encontraron\nimpresoras"/>
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat"
+                        android:text="No se encontraron\nimpresoras" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -81,7 +84,9 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
 
@@ -89,24 +94,26 @@
                 android:id="@+id/btn_try"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="PROBAR"
+                android:layout_weight="1"
                 android:background="@drawable/round_shape"
+                android:text="Probar"
+                android:textAllCaps="false"
+                android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
+                android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_save"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="GUARDAR"
+                android:layout_weight="1"
                 android:background="@drawable/round_shape"
                 android:backgroundTint="@color/colorBloc"
-                android:fontFamily="@font/montserrat"
                 android:textAllCaps="false"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Guardar"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
+                android:textStyle="bold" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
