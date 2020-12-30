@@ -5,6 +5,7 @@ import android.app.Application
 import com.example.myfirstapp.di.componet.AppComponent
 import com.example.myfirstapp.di.componet.DaggerAppComponent
 import com.example.myfirstapp.di.module.AppModule
+import com.example.myfirstapp.utils.LocationSimpleTracker
 import com.example.myfirstapp.utils.Methods
 import io.paperdb.Paper
 import java.lang.Exception
@@ -18,10 +19,12 @@ open class RipleyApplication : Application() {
         Methods.init(this)
 
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        locationHelper = LocationSimpleTracker(this)
     }
 
     companion object {
         lateinit var appComponent: AppComponent
+        lateinit var locationHelper: LocationSimpleTracker
 
         private val activities = Stack<Activity>()
 

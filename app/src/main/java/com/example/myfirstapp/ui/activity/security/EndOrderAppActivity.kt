@@ -8,11 +8,13 @@ import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.PdfBaseActivity
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
+import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
+import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.ProcessBitmap
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_end_order.*
 
-class EndOrderAppActivity : PdfBaseActivity() {
+class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
 
@@ -24,7 +26,9 @@ class EndOrderAppActivity : PdfBaseActivity() {
 
     override fun onCreate() {
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
+
         initTextPaint()
+        initBlueToothScanPrint()
 
         btn_close_all.setOnClickListener {
             RipleyApplication.closeAll()
@@ -34,9 +38,7 @@ class EndOrderAppActivity : PdfBaseActivity() {
         btn_print.visibility = View.GONE
 
         btn_print.setOnClickListener {
-            //TODO OPCION 1 DE PREFERENCIA QUE LA MAC DE LA IMPRESORA SEA OTORGADA POR EL LOGIN DEL USUARIO 1 CELULAR 1 IMPRESORA ASIGNADA
-            //TODO OPCION 2 EL USUARIO SETEA LA MAC MANUALMENTE
-            initPrint("68:9E:19:17:8A:85", closeCart.clientVoucher)
+            initPrint(PapersManager.macPrint, closeCart.clientVoucher)
         }
 
         btn_print_2.setOnClickListener {
@@ -45,7 +47,9 @@ class EndOrderAppActivity : PdfBaseActivity() {
             }
             mLastClickTime = SystemClock.elapsedRealtime()
 
-            val bitmap = generateBitmap(closeCart.clientVoucher)
+            showBlueToothDevice()
+
+            /*val bitmap = generateBitmap(closeCart.clientVoucher)
             ProcessBitmap(object : ProcessBitmap.DoStuff {
                 override fun getContext() = this@EndOrderAppActivity
 
@@ -54,7 +58,7 @@ class EndOrderAppActivity : PdfBaseActivity() {
                     Log.d("IMAGE", "-------------------------$filePath")
                     toast("Imagen guardada")
                 }
-            }).execute(bitmap)
+            }).execute(bitmap)*/
 
         }
 

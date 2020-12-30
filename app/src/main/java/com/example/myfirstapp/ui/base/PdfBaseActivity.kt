@@ -1,5 +1,8 @@
 package com.example.myfirstapp.ui.base
 
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.IntentFilter
 import android.graphics.*
 import android.os.Handler
 import android.os.Looper
