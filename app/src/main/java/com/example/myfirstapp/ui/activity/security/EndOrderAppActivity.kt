@@ -13,6 +13,7 @@ import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.ProcessBitmap
 import com.example.myfirstapp.utils.startActivityE
 import kotlinx.android.synthetic.main.activity_end_order.*
+import kotlinx.android.synthetic.main.activity_welcome_seguridad.*
 
 class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
@@ -35,7 +36,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             startActivityE(WelcomeSecurityActivity::class.java)
         }
 
-        btn_print.visibility = View.GONE
 
         btn_print.setOnClickListener {
             initPrint(PapersManager.macPrint, closeCart.clientVoucher)
@@ -47,7 +47,10 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             }
             mLastClickTime = SystemClock.elapsedRealtime()
 
-            showBlueToothDevice()
+            showBlueToothDevice{ action ->
+                btn_print_2.visibility = if(action)View.GONE else View.INVISIBLE
+
+            }
 
             /*val bitmap = generateBitmap(closeCart.clientVoucher)
             ProcessBitmap(object : ProcessBitmap.DoStuff {
@@ -64,6 +67,8 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
         super.onCreate()
     }
+
+
 
     override fun onBackPressed() {
 

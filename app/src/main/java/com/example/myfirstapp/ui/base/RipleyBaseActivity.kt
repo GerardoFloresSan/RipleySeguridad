@@ -92,8 +92,8 @@ abstract class RipleyBaseActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun getReadPermission() {
         val permissionArrays = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkPermissionsCamera()) {
-            toast("Permiso otorgado --- PERMISSION_CAMERA")
+        if (checkPermissionsRead()) {
+            toast("Permiso otorgado --- PERMISSION_READ")
         } else {
             requestPermissions(permissionArrays, PERMISSION_READ)
         }

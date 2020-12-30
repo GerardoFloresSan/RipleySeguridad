@@ -41,7 +41,7 @@ class WelcomeSecurityActivity : ScanBlueToothBaseActivity(), ParameterPresenter.
         get_bluetooth.visibility = View.VISIBLE
         get_bluetooth.setOnClickListener {
             showBlueToothDevice{ action ->
-                get_bluetooth.visibility = if(action)View.GONE else View.INVISIBLE
+                get_bluetooth.visibility = if(action)View.GONE else View.VISIBLE
             }
         }
 

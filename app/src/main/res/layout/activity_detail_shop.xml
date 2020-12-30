@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:drawableStart="@drawable/ic_calendar"
+                android:drawableStart="@drawable/ic_calen"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/montserrat"
                 android:textSize="14sp" />
