@@ -43,15 +43,15 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
 
     private val _btPrinter: IBTPrinter = BTPrinter()
 
-    fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>) {
+    fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>, test: Boolean) {
         try {
             showLoading()
             val bitmap = generateBitmap(list)
-            printBitmap(mac, bitmap)
+            printBitmap(mac, bitmap, test)
         } catch (e: Exception) {
             printResultModel.Estado = 0
             printResultModel.Mensaje = e.message
-            closePrint()
+            closePrint(test)
         }
     }
 
@@ -379,7 +379,7 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
         return "Error desconocido (2)."
     }
 
-    private fun printBitmap(mac: String, bitmap: Bitmap) {
+    private fun printBitmap(mac: String, bitmap: Bitmap, test: Boolean) {
         RxUtils.addDisposable(
             _btPrinter.connect(mac, this).flatMap { it ->
                 if (it) {
@@ -392,30 +392,32 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
                     printResultModel.Estado = 1
                     printResultModel.Mensaje = ""
                     Handler(Looper.getMainLooper()).post {
-                        closePrint()
+                        closePrint(test)
                     }
                 }) { e ->
                     printResultModel.Estado = 0
                     printResultModel.Mensaje = getExceptionMessage(e.message)
                     Handler(Looper.getMainLooper()).post {
-                        closePrint()
+                        closePrint(test)
                     }
                 }
         )
     }
 
-    fun closePrint() {
+    fun closePrint(test: Boolean) {
         _btPrinter.disconect()
         hideLoading()
-        try {
-            if (printResultModel.Mensaje.isNullOrEmpty()) {
-                btn_print.visibility = View.INVISIBLE
-            } else {
-                toast(printResultModel.Mensaje!!)
-            }
+        if (!test) {
+            try {
+                if (printResultModel.Mensaje.isNullOrEmpty()) {
+                    btn_print.visibility = View.INVISIBLE
+                } else {
+                    toast(printResultModel.Mensaje!!)
+                }
 
-        } catch (e: Exception) {
-            Log.d("TAG -->",e.toString())
+            } catch (e: Exception) {
+                Log.d("TAG -->",e.toString())
+            }
         }
 
     }

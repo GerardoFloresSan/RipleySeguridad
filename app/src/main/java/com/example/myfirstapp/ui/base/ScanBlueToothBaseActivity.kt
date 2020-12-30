@@ -143,6 +143,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         dialog.setContentView(R.layout.dialog_bluetooth)
         /*val linear: LinearLayoutCompat = dialog.findViewById<View>(R.id.linear_bluetooth) as LinearLayoutCompat*/
         val recyclerView: RecyclerView = dialog.findViewById<View>(R.id.recycler) as RecyclerView
+        val lnlPrint: LinearLayoutCompat = dialog.findViewById<View>(R.id.lnl_print_empty) as LinearLayoutCompat
         var adapter: DeviceAdapter? = null
 
         val btnSave: AppCompatButton = dialog.findViewById<View>(R.id.btn_save) as AppCompatButton
@@ -169,6 +170,8 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         recyclerView.adapter = adapter
         adapter.data = mDeviceList
 
+        lnlPrint.visibility = if(mDeviceList.isNotEmpty()) View.GONE else View.VISIBLE
+
         btnSave.setColorBackground(
             macSelect.isNotEmpty(),
             this,
@@ -186,14 +189,16 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         }
 */
         btnSave.setOnClickListener {
-            PapersManager.macPrint = macSelect
-            dialog.dismiss()
-            returnAction(true)
+            if (macSelect.isNotEmpty()) {
+                PapersManager.macPrint = macSelect
+                dialog.dismiss()
+                returnAction(true)
+            }
         }
 
         btnTry.setOnClickListener {
             if (macSelect.isNotEmpty()) {
-                testPrint(macSelect)
+                testPrint(macSelect, true)
             }
         }
 
@@ -214,7 +219,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
     }
 
 
-    private fun testPrint(mac: String) {
+    private fun testPrint(mac: String, test: Boolean) {
         val jsonAdapter by lazy {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             moshi.adapter<FeaturesJsonEntity>(FeaturesJsonEntity::class.java)
@@ -225,7 +230,8 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         )
         initPrint(
             mac,
-            (featuresJsonEntity?.features as MutableList<CloseCartResponse.ClientVoucher>) as ArrayList
+            (featuresJsonEntity?.features as MutableList<CloseCartResponse.ClientVoucher>) as ArrayList,
+            test
         )
     }
 

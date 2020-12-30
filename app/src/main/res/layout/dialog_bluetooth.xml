@@ -50,6 +50,28 @@
                     app:spanCount="1"
                     tools:listitem="@layout/item_bluetooth" />
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/lnl_print_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/img_print"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="No se encontraron\nimpresoras"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             </LinearLayout>
 
