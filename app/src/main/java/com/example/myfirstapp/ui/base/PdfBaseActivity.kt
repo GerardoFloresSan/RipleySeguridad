@@ -415,7 +415,7 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
             }
 
         } catch (e: Exception) {
-            toast(e.toString())
+            Log.d("TAG -->",e.toString())
         }
 
     }

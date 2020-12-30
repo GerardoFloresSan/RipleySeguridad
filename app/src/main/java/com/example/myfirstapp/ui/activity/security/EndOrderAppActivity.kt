@@ -52,16 +52,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
             }
 
-            /*val bitmap = generateBitmap(closeCart.clientVoucher)
-            ProcessBitmap(object : ProcessBitmap.DoStuff {
-                override fun getContext() = this@EndOrderAppActivity
-
-                @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-                override fun done(filePath: String) {
-                    Log.d("IMAGE", "-------------------------$filePath")
-                    toast("Imagen guardada")
-                }
-            }).execute(bitmap)*/
 
         }
 
