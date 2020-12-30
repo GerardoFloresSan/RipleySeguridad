@@ -36,9 +36,16 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             startActivityE(WelcomeSecurityActivity::class.java)
         }
 
+        if(PapersManager.macPrint.isEmpty()) {
+            btn_print.visibility = View.GONE
+            btn_print_2.visibility = View.VISIBLE
+        } else {
+            btn_print.visibility = View.VISIBLE
+            btn_print_2.visibility = View.GONE
+        }
 
         btn_print.setOnClickListener {
-            initPrint(PapersManager.macPrint, closeCart.clientVoucher)
+            initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
         }
 
         btn_print_2.setOnClickListener {
@@ -48,13 +55,10 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             mLastClickTime = SystemClock.elapsedRealtime()
 
             showBlueToothDevice{ action ->
-                btn_print_2.visibility = if(action)View.GONE else View.INVISIBLE
-
+                btn_print_2.visibility = if(action) View.GONE else View.VISIBLE
+                btn_print.visibility = if(action) View.VISIBLE else View.GONE
             }
-
-
         }
-
         super.onCreate()
     }
 
