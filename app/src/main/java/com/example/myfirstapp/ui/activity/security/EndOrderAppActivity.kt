@@ -54,7 +54,22 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         }
 
         btn_print.setOnClickListener {
-            initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
+            if (PapersManager.macPrint.isEmpty()) {
+
+            }else{
+                initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
+                val validation = (PapersManager.macPrint.isEmpty())
+                btn_close_all.isEnabled = validation
+                btn_close_all.isClickable = validation
+                btn_close_all.isFocusable = validation
+                btn_close_all.setColorBackground(
+                    validation,
+                    this,
+                    R.color.colorPrimary,
+                    R.color.colorPrimaryOpa
+                )
+            }
+
         }
 
         text_config.setOnClickListener {
