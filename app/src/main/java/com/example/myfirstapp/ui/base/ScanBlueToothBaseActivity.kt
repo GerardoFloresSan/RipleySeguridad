@@ -32,6 +32,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.android.synthetic.main.activity_firma.*
 import kotlin.collections.ArrayList
 
 abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
@@ -143,7 +144,8 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         dialog.setContentView(R.layout.dialog_bluetooth)
         /*val linear: LinearLayoutCompat = dialog.findViewById<View>(R.id.linear_bluetooth) as LinearLayoutCompat*/
         val recyclerView: RecyclerView = dialog.findViewById<View>(R.id.recycler) as RecyclerView
-        val lnlPrint: LinearLayoutCompat = dialog.findViewById<View>(R.id.lnl_print_empty) as LinearLayoutCompat
+        val lnlPrint: LinearLayoutCompat =
+            dialog.findViewById<View>(R.id.lnl_print_empty) as LinearLayoutCompat
         var adapter: DeviceAdapter? = null
 
         val btnSave: AppCompatButton = dialog.findViewById<View>(R.id.btn_save) as AppCompatButton
@@ -170,7 +172,31 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         recyclerView.adapter = adapter
         adapter.data = mDeviceList
 
-        lnlPrint.visibility = if(mDeviceList.isNotEmpty()) View.GONE else View.VISIBLE
+        lnlPrint.visibility = if (mDeviceList.isNotEmpty()) View.GONE else View.VISIBLE
+
+        //TODO --> Acá poner la validación
+
+        if (mDeviceList.isEmpty()) {
+            btnTry.isEnabled = false
+            btnTry.isClickable = false
+            btnTry.isFocusable = false
+            btnTry.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.colorBloc
+                )
+            )
+        } else {
+            btnTry.isEnabled = true
+            btnTry.isClickable = true
+            btnTry.isFocusable = true
+            btnTry.setTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.colorPrimary
+                )
+            )
+        }
 
         btnSave.setColorBackground(
             macSelect.isNotEmpty(),
@@ -179,15 +205,6 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             R.color.colorPrimaryOpa
         )
 
-        /*listView(linear, macSelect) {
-            macSelect = it
-            btnSave.setColorBackground(
-                macSelect.isNotEmpty(),
-                this,
-                R.color.colorPrimary,
-                R.color.colorPrimaryOpa)
-        }
-*/
         btnSave.setOnClickListener {
             if (macSelect.isNotEmpty()) {
                 PapersManager.macPrint = macSelect
@@ -261,27 +278,32 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (BluetoothDevice.ACTION_FOUND == action) {
-                val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                if((if(device!!.name == null)  "SIN NOMBRE" else device!!.name).toUpperCase().contains("BP60A")) {
-                    if(mDeviceList.isEmpty()){
+                val device =
+                    intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                if ((if (device!!.name == null) "SIN NOMBRE" else device!!.name).toUpperCase()
+                        .contains("BP60A")
+                ) {
+                    if (mDeviceList.isEmpty()) {
                         mDeviceList.add(
                             BlueToothDeviceData().apply {
-                                this.name = if(device!!.name == null)  "SIN NOMBRE" else device!!.name
+                                this.name =
+                                    if (device!!.name == null) "SIN NOMBRE" else device!!.name
                                 this.addressMac = device.address
                             }
                         )
                     } else {
                         var contains = false
-                        for(e in mDeviceList) {
-                            if(e.name == (if(device!!.name == null)  "SIN NOMBRE" else device!!.name)) {
+                        for (e in mDeviceList) {
+                            if (e.name == (if (device!!.name == null) "SIN NOMBRE" else device!!.name)) {
                                 contains = true
                                 break
                             }
                         }
-                        if(!contains) {
+                        if (!contains) {
                             mDeviceList.add(
                                 BlueToothDeviceData().apply {
-                                    this.name = if(device!!.name == null)  "SIN NOMBRE" else device!!.name
+                                    this.name =
+                                        if (device!!.name == null) "SIN NOMBRE" else device!!.name
                                     this.addressMac = device.address
                                 }
                             )

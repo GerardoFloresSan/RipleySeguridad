@@ -71,7 +71,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:fontFamily="@font/montserrat"
-                        android:text="No se encontraron\nimpresoras" />
+                        android:text="No se encontraron\nimpresoras." />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
