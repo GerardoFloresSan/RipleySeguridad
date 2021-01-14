@@ -30,6 +30,22 @@ object PapersManager {
             return Paper.book(BuildConfig.FLAVOR).read("parameters", arrayListOf())
         }
 
+    var gpsStatus: Boolean
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("gpsStatus", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("gpsStatus", false)
+        }
+
+    var locationUser: LocationUser
+        set(value) {
+            Paper.book(BuildConfig.FLAVOR).write("locationUser", value)
+        }
+        get() {
+            return Paper.book(BuildConfig.FLAVOR).read("locationUser", LocationUser())
+        }
+
     //username
     var login: Boolean
         set(value) {

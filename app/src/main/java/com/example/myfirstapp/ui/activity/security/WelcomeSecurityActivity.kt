@@ -48,6 +48,11 @@ class WelcomeSecurityActivity : ScanBlueToothBaseActivity(), ParameterPresenter.
         close_session.setOnClickListener {
             PapersManager.login = false
             RipleyApplication.closeAll()
+            try {
+                locationTrackingService.stop()
+            } catch (e: Exception) {
+
+            }
             startActivityE(SplashActivity::class.java)
         }
 
