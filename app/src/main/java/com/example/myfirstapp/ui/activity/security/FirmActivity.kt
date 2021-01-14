@@ -117,6 +117,8 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
             this.clientSignature = sign
             this.username = PapersManager.username
             this.token = PapersManager.loginAccess.token
+            this.latitude = PapersManager.locationUser.latitude
+            this.longitude = PapersManager.locationUser.longitude
         })
     }
 

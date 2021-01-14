@@ -33,6 +33,9 @@ abstract class BaseActivity : AppCompatActivity() {
     private var drawerToggle: ActionBarDrawerToggle? = null
     protected var navigationView: NavigationView? = null
     protected var bottomNavigationView: BottomNavigationView? = null
+    protected val locationTrackingService by lazy {
+        RipleyApplication.locationTrackingService
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
