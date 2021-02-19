@@ -93,8 +93,8 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
     }
 
     override fun onResume() {
-        txt_input_user.setText("0020024")
-        txt_input_password.setText("Ripley20024")
+        //txt_input_user.setText("0020024")
+        //txt_input_password.setText("Ripley20024")
         userPresenter.attachView(this)
         super.onResume()
     }

@@ -20,7 +20,7 @@ data class LocationSimpleTracker(val context: Context) {
 
             }
         }
-        fusedLocationProviderClient.requestLocationUpdates(
+        fusedLocationProviderClient.requestLocationUpdates(w
             buildLocationRequest(),
             locationCallback,
             null
@@ -29,8 +29,8 @@ data class LocationSimpleTracker(val context: Context) {
 
     private fun buildLocationRequest(): LocationRequest = LocationRequest.create().apply {
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        interval = 5000 //5 seconds
-        fastestInterval = 5000 //5 seconds
+        interval = 2000 //5 seconds
+        fastestInterval = 3000 //5 seconds
         maxWaitTime = 1000 //1 seconds
     }
 

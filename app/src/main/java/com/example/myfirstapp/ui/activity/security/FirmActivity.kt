@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Build
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.myfirstapp.R
@@ -120,6 +121,8 @@ class FirmActivity : RipleyBaseActivity(), CoroutineScope, SalesPresenter.View {
             this.latitude = PapersManager.locationUser.latitude
             this.longitude = PapersManager.locationUser.longitude
         })
+
+
     }
 
     suspend fun getSign() {
