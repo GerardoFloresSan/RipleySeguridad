@@ -20,7 +20,7 @@ data class LocationSimpleTracker(val context: Context) {
 
             }
         }
-        fusedLocationProviderClient.requestLocationUpdates(w
+        fusedLocationProviderClient.requestLocationUpdates(
             buildLocationRequest(),
             locationCallback,
             null

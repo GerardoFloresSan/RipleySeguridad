@@ -39,10 +39,11 @@ open class RipleyApplication : Application() {
             locationTrackingService.locationDetector { status, latitude, longitude ->
                 when(status) {
                     0 -> {
-                        PapersManager.locationUser = LocationUser().apply {
+/*                        PapersManager.locationUser = LocationUser().apply {
                             this.latitude = latitude
                             this.longitude = longitude
-                        }
+                        }*/
+
                     }
                     1 -> {
                         PapersManager.locationUser = LocationUser()

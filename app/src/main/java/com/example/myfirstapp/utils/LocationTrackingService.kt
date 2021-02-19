@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContextCompat.getSystemService
+import com.example.myfirstapp.data.response.LocationUser
 import com.google.android.gms.location.LocationAvailability
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -82,8 +83,15 @@ data class LocationTrackingService(val context: Context) {
                                 locationGps = location
                                 Log.d("CodeAndroidLocation"," GPS Latitude : " + locationGps!!.latitude)
                                 Log.d("CodeAndroidLocation"," GPS Longitude : " + locationGps!!.longitude)
+
+                                PapersManager.locationUser = LocationUser().apply {
+                                    this.latitude = locationGps!!.latitude
+                                    this.longitude = locationGps!!.longitude
+                                }
+
                                 latitudeUser = location.latitude
                                 longitudeUser = location.longitude
+
                                 onGPSChanged(0, latitudeUser, longitudeUser)
                             }
                         }
