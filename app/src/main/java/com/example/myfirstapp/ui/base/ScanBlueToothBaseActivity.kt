@@ -242,13 +242,9 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             moshi.adapter<FeaturesJsonEntity>(FeaturesJsonEntity::class.java)
         }
 
-        val featuresJsonEntity = jsonAdapter.fromJson(
-            "{\"features\": [{ \"text\": \"Impresora instalada con éxito\"}]}"
+        val featuresJsonEntity = jsonAdapter.fromJson("{\"clientVoucher\": [{ \"text\": \"Impresora instalada con éxito\"}]}" )
 
-        /*
-        "{\"features": [{"text": "Impresora instalada con éxito" }]}
-        * */
-        )
+                                                                /* {"clientVoucher": [{"text": "Impresora instalada con éxito","align": "CENTER","tipo": "TEXT"},{"tipo": "CUT"}]}**/
 
         initPrint(
             mac,
@@ -256,6 +252,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             test
         )
     }
+
 
     private fun itemInflateView(
         mac: String,

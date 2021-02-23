@@ -42,9 +42,22 @@ data class LocationTrackingService(val context: Context) {
         locListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
                 @Suppress("SENSELESS_COMPARISON")
-                if (location != null) {
+                if(location != null) {
+                    /*latitudeUser = location.latitude
+                    longitudeUser = location.longitude
+                    onGPSChanged(0, latitudeUser, longitudeUser)
+                     */
                     latitudeUser = location.latitude
                     longitudeUser = location.longitude
+
+                    PapersManager.locationUser = LocationUser().apply {
+                        this.latitude = latitudeUser
+                        this.longitude = longitudeUser
+                    }
+
+
+                    Log.d("SE GUARDO EN EL PAPER"," DATOS --> : " + PapersManager.locationUser.latitude + " -- " + PapersManager.locationUser.longitude)
+
                     onGPSChanged(0, latitudeUser, longitudeUser)
                 }
             }
@@ -61,11 +74,10 @@ data class LocationTrackingService(val context: Context) {
                 onGPSChanged(3, latitudeUser, longitudeUser)
             }
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,0F,locListener as LocationListener)
-        val localNetworkLocation =
-            locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0F, locListener as LocationListener)
+        val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
         if (localNetworkLocation != null) locationNetwork = localNetworkLocation
-*/
+        */
 
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -75,7 +87,7 @@ data class LocationTrackingService(val context: Context) {
         if (hasGps || hasNetwork) {
             if (hasGps) {
                 Log.d("CodeAndroidLocation", "hasGps")
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,0F, object : LocationListener {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,3000,10F, object : LocationListener {
                         override fun onLocationChanged(location: Location) {
                             Log.d("ENTRO ACÁ SEGURIDAD -->", "onLocationChanged")
                             if (location != null) {
@@ -118,7 +130,7 @@ data class LocationTrackingService(val context: Context) {
 
             if (hasNetwork) {
                 Log.d("CodeAndroidLocation", "hasNetwork")
-                locationManager.requestLocationUpdates( LocationManager.NETWORK_PROVIDER, 50,  0F,  object : LocationListener {
+                locationManager.requestLocationUpdates( LocationManager.NETWORK_PROVIDER, 3000,  10F,  object : LocationListener {
                         override fun onLocationChanged(location: Location) {
                             if (location != null) {
                                 locationNetwork = location
