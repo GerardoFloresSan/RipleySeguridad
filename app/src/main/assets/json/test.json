@@ -1,0 +1,12 @@
+{
+  "clientVoucher": [
+    {
+      "text": "Impresora instalada con éxito",
+      "align": "CENTER",
+      "tipo": "TEXT"
+    },
+    {
+      "tipo": "CUT"
+    }
+  ]
+}

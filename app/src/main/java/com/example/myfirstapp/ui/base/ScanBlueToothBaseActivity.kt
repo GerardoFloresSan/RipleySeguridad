@@ -241,8 +241,19 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
             moshi.adapter<FeaturesJsonEntity>(FeaturesJsonEntity::class.java)
         }
+        val stringBuilder: StringBuilder by lazy {
+            this.assets.open("json/test.json").use {
+                val size = it.available()
+                val buffer = ByteArray(size)
+                it.read(buffer)
+                it.close()
+                val json = String(buffer, Charsets.UTF_8)
 
-        val featuresJsonEntity = jsonAdapter.fromJson("{\"clientVoucher\": [{ \"text\": \"Impresora instalada con éxito\"}]}" )
+                StringBuilder(json)
+            }
+        }
+
+        val featuresJsonEntity = jsonAdapter.fromJson(stringBuilder.toString())
 
                                                                 /* {"clientVoucher": [{"text": "Impresora instalada con éxito","align": "CENTER","tipo": "TEXT"},{"tipo": "CUT"}]}**/
 
