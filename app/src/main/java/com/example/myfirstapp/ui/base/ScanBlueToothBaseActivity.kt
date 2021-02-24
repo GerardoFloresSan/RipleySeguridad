@@ -255,13 +255,17 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
 
         val featuresJsonEntity = jsonAdapter.fromJson(stringBuilder.toString())
 
-                                                                /* {"clientVoucher": [{"text": "Impresora instalada con éxito","align": "CENTER","tipo": "TEXT"},{"tipo": "CUT"}]}**/
+        /* {"clientVoucher": [{"text": "Impresora instalada con éxito","align": "CENTER","tipo": "TEXT"},{"tipo": "CUT"}]}**/
+
+
+        //Log.wtf("Valor -->", featuresJsonEntity.toString())
 
         initPrint(
             mac,
             (featuresJsonEntity?.features as MutableList<CloseCartResponse.ClientVoucher>) as ArrayList,
             test
         )
+
     }
 
 
