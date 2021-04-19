@@ -10,6 +10,7 @@ import com.example.myfirstapp.utils.startActivityE
 import com.example.myfirstapp.utils.toSimpleString
 import com.example.myfirstapp.utils.toSimpleTime
 import kotlinx.android.synthetic.main.activity_detail_shop.*
+import kotlinx.android.synthetic.main.item_detail_cart.view.*
 import java.text.SimpleDateFormat
 
 class DetailShopActivity : RipleyBaseActivity() {
@@ -63,6 +64,16 @@ class DetailShopActivity : RipleyBaseActivity() {
                 btn_check_shopping_cart.visibility = View.VISIBLE
             }
         }
+
+        val clientSos = Methods.getParameter("sgRiskClientText").value
+
+        if (sale.riskClient) {
+            lnl_client_sos.visibility = View.VISIBLE
+            txt_sos_client.text = clientSos
+        } else {
+            lnl_client_sos.visibility = View.GONE
+        }
+
 
         btn_next_shopping_cart.setOnClickListener {
             startActivityE(FirmActivity::class.java, sale)

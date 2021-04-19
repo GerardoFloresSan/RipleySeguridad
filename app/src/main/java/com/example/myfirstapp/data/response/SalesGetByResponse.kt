@@ -17,6 +17,7 @@ data class SalesGetByResponse (
     @SerializedName("clientLast") var clientLast : String = "",
     @SerializedName("clientEmail") var clientEmail : String = "",
     @SerializedName("clientTel") var clientTel : Int = 0,
+    @SerializedName("riskClient") var riskClient : Boolean = false,
     @SerializedName("indRipley") var indRipley : Int = 0,
     @SerializedName("coupons") var coupons : ArrayList<String> = arrayListOf(),
     @SerializedName("cardNumber") var cardNumber : String = "",

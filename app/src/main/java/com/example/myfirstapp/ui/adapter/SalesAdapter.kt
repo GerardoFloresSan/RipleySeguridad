@@ -1,6 +1,7 @@
 package com.example.myfirstapp.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -35,6 +36,7 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) :
         fun bind(sale: SalesGetByResponse, listener: (Int, SalesGetByResponse) -> Unit) =
             with(itemView) {
                 txt_number.text = "Orden de compra: " + sale.orderId.toString()
+                val clientSos = Methods.getParameter("sgRiskClientText").value
 
                 if (sale.trxNumber == null) {
                     txt_number_order.text = "Pendiente"
@@ -63,6 +65,16 @@ class SalesAdapter(private val listener: (Int, SalesGetByResponse) -> Unit) :
                         )
                     )
                 }
+
+                if (sale.riskClient) {
+                    lnl_client_sos.visibility = View.VISIBLE
+                    txt_sos_client.text = clientSos
+                } else {
+                    lnl_client_sos.visibility = View.GONE
+                }
+
+
+                Log.wtf("Cliente Sospechoso", "Valor de -->" + clientSos)
 
 
                 txt_date_detail.text = date.toSimpleString()

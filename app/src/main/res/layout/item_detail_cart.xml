@@ -213,6 +213,41 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/lnl_client_sos"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lnl_hour_shop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Tipo de cliente:"
+                android:textColor="@color/colorErrorDialog"
+                android:textSize="13sp"
+                app:drawableStartCompat="@drawable/ic_sos" />
+
+            <TextView
+                android:id="@+id/txt_sos_client"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorErrorDialog"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
         <View
             android:id="@+id/view3"
             android:layout_width="wrap_content"
@@ -221,7 +256,7 @@
             android:background="@color/colorShapeInput"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnl_hour_shop" />
+            app:layout_constraintTop_toBottomOf="@+id/lnl_client_sos" />
 
         <TextView
             android:id="@+id/btn_detail"
