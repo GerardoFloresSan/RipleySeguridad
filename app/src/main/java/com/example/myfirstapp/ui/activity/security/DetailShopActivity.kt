@@ -22,6 +22,7 @@ class DetailShopActivity : RipleyBaseActivity() {
 
     override fun onCreate() {
         sale = intent.getSerializableExtra("extra0") as SalesGetByResponse
+        //TODO el nuevo campo se llama views la cantidad de cuantas veces hemos preguntado por la misma orden!
 
         txt_number_id.text = "Orden de compra: ${sale.orderId}"
 
