@@ -249,11 +249,11 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                         }
                         500 -> {
                             textError.visibility = View.VISIBLE
-                            textError.text = "No se encuentran compras relacionadas"
+                            textError.text = "No se encuentra compras \nrelacionadas al DNI"
                         }
                         else -> {
                             textError.visibility = View.VISIBLE
-                            textError.text = "No se encuentran compras relacionadas"
+                            textError.text = "No se encuentra compras \nrelacionadas al DNI"
                         }
                     }
                 })
