@@ -23,7 +23,7 @@ data class SalesGetByResponse (
     @SerializedName("cardNumber") var cardNumber : String = "",
     @SerializedName("cardBrand") var cardBrand : String = "",
     @SerializedName("hashQr") var hashQr : String = "",
-    @SerializedName("views") var views : Int = 0,
+    @SerializedName("views") var views : Int?,
     @SerializedName("products") var products :ArrayList<Product> = arrayListOf()
 ) : Serializable {
     data class Product (
