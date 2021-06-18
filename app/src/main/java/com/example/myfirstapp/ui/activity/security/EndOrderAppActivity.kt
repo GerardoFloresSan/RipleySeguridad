@@ -64,8 +64,8 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             if (PapersManager.macPrint.isEmpty()) {
 
             } else {
-                initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
                 needPrint = true
+                initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
                 btn_close_all.isEnabled = true
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
