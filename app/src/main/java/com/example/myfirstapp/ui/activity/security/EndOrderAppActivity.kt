@@ -6,6 +6,7 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
+import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.setColorBackground
 import com.example.myfirstapp.utils.startActivityE
@@ -23,12 +24,18 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         super.onCreate()
 
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
+
+        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
         initTextPaint()
         initBlueToothScanPrint()
 
         btn_close_all.setOnClickListener {
-            RipleyApplication.closeAll()
-            startActivityE(WelcomeSecurityActivity::class.java)
+            if (!needPrint) {
+                RipleyApplication.closeAll()
+                startActivityE(WelcomeSecurityActivity::class.java)
+            } else {
+                toast("Voucher obligatorio")
+            }
         }
 
         //VALIDACIONES
@@ -58,6 +65,7 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
             } else {
                 initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
+                needPrint = true
                 btn_close_all.isEnabled = true
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
@@ -82,8 +90,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
                 btn_print.visibility = if (action) View.VISIBLE else View.GONE
             }
         }
-
-
     }
 
 
