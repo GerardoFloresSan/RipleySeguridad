@@ -29,8 +29,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         initTextPaint()
         initBlueToothScanPrint()
 
-        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
-
         btn_close_all.setOnClickListener {
             if (!needPrint) {
                 RipleyApplication.closeAll()
@@ -68,7 +66,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             } else {
                 needPrint = true
                 initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
-                needPrint = true
                 btn_close_all.isEnabled = true
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
