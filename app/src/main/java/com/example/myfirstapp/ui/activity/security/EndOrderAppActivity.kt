@@ -6,6 +6,7 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
+import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.setColorBackground
 import com.example.myfirstapp.utils.startActivityE
@@ -14,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_end_order_app_activity.*
 class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
-
     private var mLastClickTime: Long = 0
+    var needPrint = false
 
     override fun getView(): Int = R.layout.activity_end_order_app_activity
 
@@ -26,9 +27,15 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         initTextPaint()
         initBlueToothScanPrint()
 
+        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
+
         btn_close_all.setOnClickListener {
-            RipleyApplication.closeAll()
-            startActivityE(WelcomeSecurityActivity::class.java)
+            if (!needPrint) {
+                RipleyApplication.closeAll()
+                startActivityE(WelcomeSecurityActivity::class.java)
+            } else {
+                toast("Voucher obligatorio")
+            }
         }
 
         //VALIDACIONES
@@ -58,6 +65,7 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
             } else {
                 initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
+                needPrint = true
                 btn_close_all.isEnabled = true
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
