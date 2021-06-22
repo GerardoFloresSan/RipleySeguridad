@@ -43,6 +43,8 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
 
     private val _btPrinter: IBTPrinter = BTPrinter()
 
+    var needPrint = false
+
     fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>, test: Boolean) {
         try {
             showLoading()
@@ -407,6 +409,7 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
     fun closePrint(test: Boolean) {
         _btPrinter.disconect()
         hideLoading()
+        needPrint = false
         if (!test) {
             try {
                 if (printResultModel.Mensaje.isNullOrEmpty()) {

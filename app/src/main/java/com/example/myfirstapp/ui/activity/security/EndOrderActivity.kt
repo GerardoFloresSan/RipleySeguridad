@@ -20,7 +20,6 @@ class EndOrderActivity : PdfBaseActivity(), PrinterToTicket.IPrinterListener {
 
     lateinit var closeCart: CloseCartResponse
     lateinit var printer2: PrinterToTicket
-    var needPrint = false
     private var mLastClickTime: Long = 0
 
     override fun getView(): Int = R.layout.activity_end_order

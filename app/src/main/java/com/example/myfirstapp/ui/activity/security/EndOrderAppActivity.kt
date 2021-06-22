@@ -24,6 +24,8 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         super.onCreate()
 
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
+
+        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
         initTextPaint()
         initBlueToothScanPrint()
 
@@ -64,6 +66,7 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             if (PapersManager.macPrint.isEmpty()) {
 
             } else {
+                needPrint = true
                 initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
                 needPrint = true
                 btn_close_all.isEnabled = true
@@ -90,8 +93,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
                 btn_print.visibility = if (action) View.VISIBLE else View.GONE
             }
         }
-
-
     }
 
 
