@@ -16,7 +16,6 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
     private var mLastClickTime: Long = 0
-    var needPrint = false
 
     override fun getView(): Int = R.layout.activity_end_order_app_activity
 
