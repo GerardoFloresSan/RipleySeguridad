@@ -29,6 +29,8 @@ class EndOrderActivity : PdfBaseActivity(), PrinterToTicket.IPrinterListener {
         printer2 = SearchPrinter.searchPrinter(this@EndOrderActivity, this@EndOrderActivity)
         initTextPaint()
 
+        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
+
         btn_close_all.setOnClickListener {
             if (!needPrint) {
                 RipleyApplication.closeAll()
@@ -49,8 +51,6 @@ class EndOrderActivity : PdfBaseActivity(), PrinterToTicket.IPrinterListener {
             printer2.printComprobante(closeCart)
         }
 
-        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
-
         btn_print_2.setOnClickListener {
             if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return@setOnClickListener
@@ -68,6 +68,7 @@ class EndOrderActivity : PdfBaseActivity(), PrinterToTicket.IPrinterListener {
             }).execute(bitmap)
 
         }
+
         validButton()
         super.onCreate()
     }

@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_end_order_app_activity.*
 class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
     lateinit var closeCart: CloseCartResponse
-
     private var mLastClickTime: Long = 0
 
     override fun getView(): Int = R.layout.activity_end_order_app_activity
