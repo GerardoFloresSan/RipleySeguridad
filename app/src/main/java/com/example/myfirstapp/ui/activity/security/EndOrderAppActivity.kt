@@ -24,7 +24,7 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
 
         closeCart = intent.getSerializableExtra("extra0") as CloseCartResponse
 
-        needPrint = Methods.getParameter("sgVoucherInd").value == "1"
+        needPrint = Methods.getParameter("sgVoucherIndPhone").value == "1"
         initTextPaint()
         initBlueToothScanPrint()
 
@@ -37,7 +37,8 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             }
         }
 
-        //VALIDACIONES
+        /*if (needPrint) {*/
+            //VALIDACIONES
         if (PapersManager.macPrint.isEmpty()) {
             btn_print.visibility = View.GONE
             btn_config_blue.visibility = View.VISIBLE
@@ -58,13 +59,23 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
             btn_print.visibility = View.VISIBLE
             btn_config_blue.visibility = View.GONE
         }
+        /*} else {
+            btn_close_all.visibility = View.VISIBLE
+            btn_close_all.isEnabled = true
+            btn_close_all.isClickable = true
+            btn_close_all.isFocusable = true
+        }*/
 
         btn_print.setOnClickListener {
             if (PapersManager.macPrint.isEmpty()) {
 
             } else {
                 needPrint = true
-                initPrint(PapersManager.macPrint, closeCart.clientVoucher, false)
+                validButton()
+                initPrint(PapersManager.macPrint, closeCart.clientVoucher, false) {
+                    needPrint = false
+                    validButton()
+                }
                 btn_close_all.isEnabled = true
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
@@ -89,6 +100,19 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
                 btn_print.visibility = if (action) View.VISIBLE else View.GONE
             }
         }
+        validButton()
+    }
+
+    private fun validButton() {
+        btn_close_all.isEnabled = !needPrint
+        btn_close_all.isClickable = !needPrint
+        btn_close_all.isFocusable = !needPrint
+        btn_close_all.setColorBackground(
+            !needPrint,
+            this,
+            R.color.colorPrimary,
+            R.color.colorPrimaryOpa
+        )
     }
 
 

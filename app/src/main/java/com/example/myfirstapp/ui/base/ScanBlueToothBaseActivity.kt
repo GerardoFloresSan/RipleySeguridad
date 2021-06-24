@@ -261,7 +261,9 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             mac,
             (featuresJsonEntity?.features as MutableList<CloseCartResponse.ClientVoucher>) as ArrayList,
             test
-        )
+        ) {
+
+        }
     }
 
 

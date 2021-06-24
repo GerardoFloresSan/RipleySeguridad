@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import cl.mbaas.baytex.api.utils.PrintUtils
 import com.example.myfirstapp.data.response.CloseCartResponse
+import com.example.myfirstapp.presenter.base.BasePresenter
 import com.example.myfirstapp.ui.print.PrintActivity
 import com.example.myfirstapp.ui.print.helper.BTPrinter
 import com.example.myfirstapp.ui.print.helper.IBTPrinter
@@ -26,6 +27,7 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_end_order.*
 import pe.com.viergegroup.rompefilassdk.util.RxUtils
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,15 +47,19 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
 
     var needPrint = false
 
-    fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>, test: Boolean) {
+    fun initPrint(mac: String, list: ArrayList<CloseCartResponse.ClientVoucher>, test: Boolean, returnAction: (Boolean) -> Unit) {
         try {
             showLoading()
             val bitmap = generateBitmap(list)
-            printBitmap(mac, bitmap, test)
+            printBitmap(mac, bitmap, test) {action->
+                returnAction(action)
+            }
         } catch (e: Exception) {
             printResultModel.Estado = 0
             printResultModel.Mensaje = e.message
-            closePrint(test)
+            closePrint(test) {
+                returnAction(false)
+            }
         }
     }
 
@@ -381,7 +387,7 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
         return "Error desconocido (2)."
     }
 
-    private fun printBitmap(mac: String, bitmap: Bitmap, test: Boolean) {
+    private fun printBitmap(mac: String, bitmap: Bitmap, test: Boolean, returnAction: (Boolean) -> Unit) {
         RxUtils.addDisposable(
             _btPrinter.connect(mac, this).flatMap { it ->
                 if (it) {
@@ -394,21 +400,26 @@ abstract class PdfBaseActivity : RipleyBaseActivity() {
                     printResultModel.Estado = 1
                     printResultModel.Mensaje = ""
                     Handler(Looper.getMainLooper()).post {
-                        closePrint(test)
+                        closePrint(test) { action ->
+                            returnAction(action)
+                        }
                     }
                 }) { e ->
                     printResultModel.Estado = 0
                     printResultModel.Mensaje = getExceptionMessage(e.message)
                     Handler(Looper.getMainLooper()).post {
-                        closePrint(test)
+                        closePrint(test) { action ->
+                            returnAction(action)
+                        }
                     }
                 }
         )
     }
 
-    fun closePrint(test: Boolean) {
+    fun closePrint(test: Boolean, returnAction: (Boolean) -> Unit) {
         _btPrinter.disconect()
         hideLoading()
+        returnAction(true)
         needPrint = false
         if (!test) {
             try {
