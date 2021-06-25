@@ -16,6 +16,7 @@ interface PresenterComponent {
     fun inject(activity: ValidationActivity)
     fun inject(activity: FirmActivity)
     fun inject(activity: ScanQrActivity)
+    fun inject(activity: ListDetailActivity)
 
     //
 }
