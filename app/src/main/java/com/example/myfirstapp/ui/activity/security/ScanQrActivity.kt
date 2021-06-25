@@ -19,7 +19,6 @@ import com.example.myfirstapp.data.response.SalesGetByResponse
 import com.example.myfirstapp.presenter.SalesPresenter
 import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.*
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_scan_qr.*
 import java.io.Serializable
 import javax.inject.Inject
@@ -172,7 +171,7 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
                     when (i) {
                         200 -> {
                             textError.visibility = View.INVISIBLE
-                            startActivityE(ListDetailActivity::class.java, response)
+                            startActivityE(ListDetailActivity::class.java, response, 1)
                             dialog.dismiss()
                         }
                         500 -> {
@@ -219,7 +218,7 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
                 txt_scan_qr.clean()
                 txt_scan_qr.setText("")
                 list.add(t)
-                startActivityE(ListDetailActivity::class.java, list)
+                startActivityE(ListDetailActivity::class.java, list, 0)
             }
             403 -> {
                 toast("Orden de una sucursal diferente a la que está asignado")

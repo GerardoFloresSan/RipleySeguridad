@@ -55,6 +55,45 @@ class SalesPresenter(private var useCase1: GetSalesQr, private var useCase2: Get
         })
     }
 
+    fun getUserByQr2(request: GetStateByQrRequest) {
+        if (!methods.isInternetConnected()) {
+            view?.customWifi()
+            return
+        }
+        view?.showLoading()
+
+        useCase1.request = request
+        useCase1.execute(object : DisposableObserver<SalesGetByResponse>() {
+            override fun onComplete() {
+                view?.hideLoading()
+            }
+
+            override fun onNext(u: SalesGetByResponse) {
+                view?.hideLoading()
+                view?.salesSuccessPresenter(300, u)
+            }
+
+            override fun onError(e: Throwable) {
+                view?.hideLoading()
+                when (e) {
+                    is SocketTimeoutException -> {
+                        view?.hideLoading()
+                        view?.customTimeOut()
+                    }
+                    is HttpException -> {
+                        when {
+                            e.code() == 401 -> view?.tokenExpired()
+                            e.code() == 500 -> view?.salesSuccessPresenter(500, "error")
+                            else -> view?.salesSuccessPresenter(302, "error")
+                        }
+                    }
+                    else -> view?.salesSuccessPresenter(302, "error")
+                }
+            }
+
+        })
+    }
+
     fun getUserByDoc(request: GetStateByDocRequest, listener: (Int, ArrayList<SalesGetByResponse>) -> Unit) {
         if (!methods.isInternetConnected()) {
             view?.customWifi()
