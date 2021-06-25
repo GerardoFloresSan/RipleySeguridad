@@ -116,7 +116,7 @@ class DetailShopActivity : RipleyBaseActivity() {
         if (isBig) {
             params.width = size*4 + 16
             params.height = size
-            (v as AppCompatTextView).text = "${views!!.toString()} Conteo de órdenes"
+            (v as AppCompatTextView).text = "${views!!.toString()} Intento de validación"
             isBig = false
         } else {
             params.width = size

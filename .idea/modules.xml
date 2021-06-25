@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RipleySeguridad.iml" filepath="$PROJECT_DIR$/.idea/modules/RipleySeguridad.iml" group="RipleySeguridad" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RipleySeguridad-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RipleySeguridad-app.iml" group="RipleySeguridad/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" group="RipleySeguridad/UrovoSDK" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Seguridad-rpy-android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Seguridad-rpy-android-app.iml" group="rpy-android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" group="rpy-android/UrovoSDK" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="rpy-android/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rpy-android.iml" filepath="$PROJECT_DIR$/.idea/modules/rpy-android.iml" group="rpy-android" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/rpy-android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/rpy-android-app.iml" group="rpy-android/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/utils.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/utils.iml" group="RipleySeguridad/utils" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils/utils.iml" filepath="$PROJECT_DIR$/.idea/modules/utils/utils.iml" group="rpy-android/utils" />
     </modules>
   </component>
 </project>

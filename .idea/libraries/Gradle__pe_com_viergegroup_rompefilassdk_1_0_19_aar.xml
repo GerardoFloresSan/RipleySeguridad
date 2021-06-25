@@ -1,31 +1,30 @@
 <component name="libraryTable">
   <library name="Gradle: pe.com.viergegroup:rompefilassdk:1.0.19@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/a85832.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/AE_v101.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/COMMON_v101.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/DEVICE_v101.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/DPAS_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/EMV_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/Entry_v102.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/GLComm_V1.03.02_20181030.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/GLExtPrinter_V1.00.00_20181030.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/GLUtils_V1.00.01_20181030.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/JCB_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/MC_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/NeptuneLiteApi_V3.10.00_20200115.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/org.dtools.javaini-v1.1.00.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/PaxGLImgProcessing_V1.00.04_20170502.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/PaxGLPacker_V1.00.07_20170808.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/QPBOC_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/RuPay_v100.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10f367f619b13404f2ee93f1a8b7476f/jetified-rompefilassdk-1.0.19/jars/libs/WAVE_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/a85832.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/AE_v101.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/COMMON_v101.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/DEVICE_v101.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/DPAS_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/EMV_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/Entry_v102.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/GLComm_V1.03.02_20181030.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/GLExtPrinter_V1.00.00_20181030.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/GLUtils_V1.00.01_20181030.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/JCB_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/MC_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/NeptuneLiteApi_V3.10.00_20200115.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/org.dtools.javaini-v1.1.00.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/PaxGLImgProcessing_V1.00.04_20170502.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/PaxGLPacker_V1.00.07_20170808.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/QPBOC_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/RuPay_v100.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f792e181b0647a760619fec7d523adcd/jetified-rompefilassdk-1.0.19/jars/libs/WAVE_v100.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
