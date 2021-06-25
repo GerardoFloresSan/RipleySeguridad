@@ -244,7 +244,7 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                     when (i) {
                         200 -> {
                             textError.visibility = View.INVISIBLE
-                            startActivityE(ListDetailActivity::class.java, response)
+                            startActivityE(ListDetailActivity::class.java, response, 1)
                             dialog.dismiss()
                         }
                         500 -> {
@@ -289,7 +289,7 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                     this.hashQr = hashQrLocal
                 }
                 list.add(t)
-                startActivityE(ListDetailActivity::class.java, list)
+                startActivityE(ListDetailActivity::class.java, list, 0)
             }
             403 -> {
                 toast("Orden de una sucursal diferente a la que está asignado")

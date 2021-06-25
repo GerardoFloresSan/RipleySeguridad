@@ -11,11 +11,8 @@ import android.view.View
 import com.example.myfirstapp.BuildConfig
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.request.LoginRequest
-import com.example.myfirstapp.data.response.CheckPricesResponse
-import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.presenter.UserPresenter
 import com.example.myfirstapp.ui.application.RipleyApplication
-import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.ui.base.ScanBlueToothBaseActivity
 import com.example.myfirstapp.utils.*
 import kotlinx.android.synthetic.main.activity_login.*

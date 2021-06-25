@@ -7,7 +7,6 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.ui.base.PdfBaseActivity
-import com.example.myfirstapp.ui.base.RipleyBaseActivity
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.ProcessBitmap
 import com.example.myfirstapp.utils.printerK.PrinterToTicket
