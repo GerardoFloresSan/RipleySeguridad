@@ -16,9 +16,11 @@ class ListDetailActivity : RipleyBaseActivity(), SalesPresenter.View {
 
     @Inject
     lateinit var salesPresenter: SalesPresenter
-    lateinit var listSales : ArrayList<SalesGetByResponse>
+    lateinit var listSales: ArrayList<SalesGetByResponse>
     private var adapter: SalesAdapter? = null
     private var type: Int = 0
+
+    private var hashQrLocal: String = ""
 
     override fun getView(): Int = R.layout.activity_list_detail
 
@@ -34,9 +36,10 @@ class ListDetailActivity : RipleyBaseActivity(), SalesPresenter.View {
         adapter = SalesAdapter { status, sale ->
             when (status) {
                 0 -> {
-                    if(sale.hashQr.isNullOrEmpty() || type == 0) {
+                    if (sale.hashQr.isNullOrEmpty() || type == 0) {
                         startActivityE(DetailShopActivity::class.java, sale)
                     } else {
+                        hashQrLocal = sale.hashQr
                         salesPresenter.getUserByQr2(GetStateByQrRequest().apply {
                             this.hashQr = sale.hashQr
                             this.username = PapersManager.username
@@ -44,7 +47,8 @@ class ListDetailActivity : RipleyBaseActivity(), SalesPresenter.View {
                         })
                     }
                 }
-                else -> {}
+                else -> {
+                }
             }
         }
         recycler.removeAllViews()
@@ -55,9 +59,12 @@ class ListDetailActivity : RipleyBaseActivity(), SalesPresenter.View {
     }
 
     override fun salesSuccessPresenter(status: Int, vararg args: Serializable) {
-        when(status) {
+        when (status) {
             300 -> {
                 val response = args[0] as SalesGetByResponse
+                response.apply {
+                    this.hashQr = hashQrLocal
+                }
                 startActivityE(DetailShopActivity::class.java, response)
             }
             403 -> {
