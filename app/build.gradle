@@ -6,13 +6,13 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.firebase.crashlytics'
 
-def version = 33
+def version = 34
 
 def keystorePropertiesFile = rootProject.file("key.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-//1.0.0-NumeroDeVersionA:QA - PROD  33
+//1.0.0-NumeroDeVersionA:QA - PROD  34
 
 android {
     flavorDimensions "default"
