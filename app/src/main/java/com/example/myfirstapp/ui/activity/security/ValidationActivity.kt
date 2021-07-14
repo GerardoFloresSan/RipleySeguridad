@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.SparseArray
 import android.view.SurfaceHolder
 import android.view.View
@@ -281,9 +282,9 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
     }
 
     override fun salesSuccessPresenter(status: Int, vararg args: Serializable) {
-        stopScan = false
         when(status) {
             200 -> {
+                stopScan = true
                 val list : ArrayList<SalesGetByResponse> = arrayListOf()
                 val t = (args[0] as SalesGetByResponse).apply {
                     this.hashQr = hashQrLocal
@@ -292,9 +293,13 @@ class ValidationActivity : RipleyBaseActivity(), SalesPresenter.View {
                 startActivityE(ListDetailActivity::class.java, list, 0)
             }
             403 -> {
+                stopScan = false
                 toast("Orden de una sucursal diferente a la que está asignado")
             }
-            else -> toast("No se encuentran compras relacionadas")
+            else -> {
+                stopScan = false
+                toast("No se encuentran compras relacionadas")
+            }
         }
     }
 

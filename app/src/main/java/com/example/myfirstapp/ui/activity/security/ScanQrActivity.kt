@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Build
+import android.os.Handler
 import android.text.Editable
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
         txt_scan_qr.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 if(!stopScan && txt_scan_qr.getString().isNotEmpty()) {
+                    stopScan = true
                     hashQrLocal = txt_scan_qr.getString()
                     salesPresenter.getUserByQr(GetStateByQrRequest().apply {
                         this.hashQr = txt_scan_qr.getString()
@@ -208,9 +210,9 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
     }
 
     override fun salesSuccessPresenter(status: Int, vararg args: Serializable) {
-        stopScan = false
         when(status) {
             200 -> {
+                stopScan = true
                 val list : ArrayList<SalesGetByResponse> = arrayListOf()
                 val t = (args[0] as SalesGetByResponse).apply {
                     this.hashQr = hashQrLocal
@@ -221,9 +223,13 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
                 startActivityE(ListDetailActivity::class.java, list, 0)
             }
             403 -> {
+                stopScan = false
                 toast("Orden de una sucursal diferente a la que está asignado")
             }
-            else -> toast("No se encuentran compras relacionadas")
+            else -> {
+                stopScan = false
+                toast("No se encuentran compras relacionadas")
+            }
         }
     }
 
