@@ -1,7 +1,6 @@
 package com.example.myfirstapp.ui.activity.security
 
 import android.app.Activity
-import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -31,6 +30,9 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
         super.onCreate()
         component.inject(this)
         userPresenter.attachView(this)
+
+        txt_version_seg.text = "v1.0.0-33"
+
         txt_input_user.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 cleanError(txt_input_user)
@@ -45,7 +47,7 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
 
         btnStartShop.setOnClickListener {
             enabledBluetooth()
-            if(checkAll()) {
+            if (checkAll()) {
                 enabledDetectGps()
             } //
             else {
@@ -121,11 +123,15 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
         )
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode) {
-            PERMISSION_READ ->{
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMISSION_READ -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(checkAll()) {
+                    if (checkAll()) {
                         enabledDetectGps()
                     } else {
                         getPermission()
@@ -134,9 +140,9 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
                     toast("Que es obligatorio el permiso de la escritura para poder continuar")
                 }
             }
-            PERMISSION_CAMERA ->{
+            PERMISSION_CAMERA -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(checkAll()) {
+                    if (checkAll()) {
                         enabledDetectGps()
                     } else {
                         getPermission()
@@ -145,9 +151,9 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
                     toast("Que es obligatorio el permiso de la escritura para poder continuar")
                 }
             }
-            PERMISSION_LOCATION ->{
+            PERMISSION_LOCATION -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(checkAll()) {
+                    if (checkAll()) {
                         enabledDetectGps()
                     } else {
                         getPermission()
@@ -213,9 +219,6 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
 
 
 }
-
-
-
 
 
 /*fun gg() {
