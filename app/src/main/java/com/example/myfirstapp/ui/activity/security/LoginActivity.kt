@@ -31,7 +31,7 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
         component.inject(this)
         userPresenter.attachView(this)
 
-        txt_version_seg.text = "v1.0.0-33"
+        txt_version_seg.text = "v1.0.0-34"
 
         txt_input_user.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
