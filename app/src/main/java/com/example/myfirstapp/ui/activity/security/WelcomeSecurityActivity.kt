@@ -31,7 +31,7 @@ class WelcomeSecurityActivity : ScanBlueToothBaseActivity(), ParameterPresenter.
         parameterPresenter.attachView(this)
         parameterPresenter.getParameters()
 
-        txt_version_welcome.text = "v1.0.0-34"
+        txt_version_welcome.text = "v1.0.0-35"
         lbl_text_name_user.text =
             "${PapersManager.loginAccess.name} ${PapersManager.loginAccess.lastName}"
         txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
