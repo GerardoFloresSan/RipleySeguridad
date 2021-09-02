@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.google.android.gms.location.*
 
+/*
 data class LocationSimpleTracker(val context: Context) {
     private val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     private var locationCallback: LocationCallback? = null
@@ -37,4 +38,4 @@ data class LocationSimpleTracker(val context: Context) {
     fun stop() {
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
-}
+}*/

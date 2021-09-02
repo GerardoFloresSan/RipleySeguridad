@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,8 @@ import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.inflate
 import com.example.myfirstapp.utils.setColorBackground
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.PendingResult
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -42,10 +45,9 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
     val pairedDevices: Set<BluetoothDevice>? = null
     val PERMISSION_LOCATION = 5678
     val REQUEST_CHECK_CODE = 8949
-    val locationHelper by lazy {
-        RipleyApplication.locationHelper
-    }
     var builder: LocationSettingsRequest.Builder? = null
+
+    private var googleApiClient: GoogleApiClient? = null
 
     fun initBlueToothScanPrint() {
         blueAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -64,16 +66,59 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         return checkPermissionsLocation() && checkPermissionsRead() && checkPermissionsCamera()
     }
 
-    fun removeGPS() {
-        try {
-            locationHelper.stop()
-        } catch (e: Exception) {
-            Log.d("Error locationHelper", e.message.toString())
-        }
-    }
-
-    fun gpsEnabled() {
+    fun gpsEnabled(returnAction: (Boolean) -> Unit) {
         val request: LocationRequest = LocationRequest()
+            .setFastestInterval(5000)
+            .setInterval(3000)
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+        builder = LocationSettingsRequest.Builder().addLocationRequest(request)
+        //val result = LocationServices.getSettingsClient(this).checkLocationSettings(builder!!.build())
+
+
+        Log.e("LocationStoreActivity", "5 gpsEnabled - inicio")
+        if (googleApiClient == null) {
+            Log.e("LocationStoreActivity", "5 gpsEnabled  - googleApiClient")
+            googleApiClient = GoogleApiClient.Builder(this@ScanBlueToothBaseActivity)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(object : GoogleApiClient.ConnectionCallbacks {
+                    override fun onConnected(bundle: Bundle?) {}
+                    override fun onConnectionSuspended(i: Int) {
+                        googleApiClient!!.connect()
+                    }
+                })
+                .addOnConnectionFailedListener { connectionResult ->
+                    Log.d(
+                        "Location error",
+                        "Location error " + connectionResult.errorCode
+                    )
+                }.build()
+            googleApiClient!!.connect()
+        }
+        val result: PendingResult<LocationSettingsResult> = LocationServices.SettingsApi.checkLocationSettings(
+            googleApiClient,
+            builder!!.build()
+        )
+
+        result.setResultCallback { result ->
+            val status = result.status
+
+            Log.e("LocationStoreActivity", "5 gpsEnabled result - ${status.statusCode}")
+            when (status.statusCode) {
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+                    // Show the dialog by calling startResolutionForResult(),
+                    // and check the result in onActivityResult().
+                    Log.e("LocationStoreActivity", "5.1 iniciar gps solicitud - ${status.statusCode}")
+                    status.startResolutionForResult(this@ScanBlueToothBaseActivity, REQUEST_CHECK_CODE)
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e("LocationStoreActivity", "5.1 iniciar gps error - ${e.toString()}")
+                    // Ignore the error.
+                }
+                LocationSettingsStatusCodes.SUCCESS -> {
+                    returnAction(true)
+                }
+            }
+        }
+        /*val request: LocationRequest = LocationRequest()
             .setFastestInterval(5000)
             .setInterval(3000)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -82,7 +127,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             LocationServices.getSettingsClient(this).checkLocationSettings(builder!!.build())
 
         result.addOnCompleteListener { task: Task<LocationSettingsResponse> ->
-            try {
+            *//*try {
                 task.getResult(ApiException::class.java)
             } catch (e: ApiException) {
                 when (e.statusCode) {
@@ -101,12 +146,15 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
                     }
                     LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
                     }
+                    LocationSettingsStatusCodes.SUCCESS -> {
+                        returnAction(true)
+                    }
                     else -> {
                         e
                     }
                 }
-            }
-        }
+            }*//*
+        }*/
     }
 
     @RequiresApi(Build.VERSION_CODES.M)

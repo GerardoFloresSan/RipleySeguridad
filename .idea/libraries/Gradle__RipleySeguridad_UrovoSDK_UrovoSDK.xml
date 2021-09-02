@@ -1,9 +1,5 @@
 <component name="libraryTable">
-<<<<<<< HEAD:.idea/libraries/Gradle__RipleySeguridad_UrovoSDK_UrovoSDK.xml
   <library name="Gradle: RipleySeguridad.UrovoSDK.UrovoSDK">
-=======
-  <library name="Gradle: rpy-android.UrovoSDK.UrovoSDK">
->>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f:.idea/libraries/Gradle__rpy_android_UrovoSDK_UrovoSDK.xml
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/UrovoSDK/UrovoSDK.jar!/" />
     </CLASSES>

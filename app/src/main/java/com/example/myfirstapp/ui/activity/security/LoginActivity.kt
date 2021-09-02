@@ -44,6 +44,10 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
                 cleanError(txt_input_password)
             }
         })
+        if(BuildConfig.IS_SHOW_LOG) {
+            txt_input_user.setText("0020026")
+            txt_input_password.setText("Ripley123")
+        }
 
         btnStartShop.setOnClickListener {
             enabledBluetooth()
@@ -57,19 +61,13 @@ class LoginActivity : ScanBlueToothBaseActivity(), UserPresenter.View {
     }
 
     private fun enabledDetectGps() {
-        removeGPS()
-        locationHelper.detectGPS { gps ->
-            if (gps) {
-                loginP()
-            } else {
-                gpsEnabled()
-            }
+        gpsEnabled {
+            loginP()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        removeGPS()
     }
 
     private fun loginP() {

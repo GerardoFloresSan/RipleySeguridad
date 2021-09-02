@@ -1,18 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: me.zhanghai.android.materialprogressbar:library:1.4.2@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/69928559957a03aa2f7fac875e6aefb9/jetified-library-1.4.2/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/775464919e5ac5e5679a74f01a5ca389/jetified-library-1.4.2/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/839ab473f003af612d2d0a8a2200632e/jetified-library-1.4.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/839ab473f003af612d2d0a8a2200632e/jetified-library-1.4.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/839ab473f003af612d2d0a8a2200632e/jetified-library-1.4.2/AndroidManifest.xml" />
-=======
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/69928559957a03aa2f7fac875e6aefb9/jetified-library-1.4.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/69928559957a03aa2f7fac875e6aefb9/jetified-library-1.4.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/69928559957a03aa2f7fac875e6aefb9/jetified-library-1.4.2/AndroidManifest.xml" />
->>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/775464919e5ac5e5679a74f01a5ca389/jetified-library-1.4.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/775464919e5ac5e5679a74f01a5ca389/jetified-library-1.4.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/775464919e5ac5e5679a74f01a5ca389/jetified-library-1.4.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.zhanghai.android.materialprogressbar/library/1.4.2/8176c096217fe07a56cfcec8c9e3b7869b5e8276/library-1.4.2-javadoc.jar!/" />

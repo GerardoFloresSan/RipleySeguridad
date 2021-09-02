@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":UrovoSDK" external.linked.project.path="$MODULE_DIR$/../../../UrovoSDK" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="rpy-android" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":UrovoSDK" external.linked.project.path="$MODULE_DIR$/../../../UrovoSDK" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="RipleySeguridad" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -23,10 +23,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-<<<<<<< HEAD:.idea/modules/UrovoSDK/RipleySeguridad.UrovoSDK.iml
     <orderEntry type="library" exported="" name="Gradle: RipleySeguridad.UrovoSDK.UrovoSDK" level="project" />
-=======
-    <orderEntry type="library" exported="" name="Gradle: rpy-android.UrovoSDK.UrovoSDK" level="project" />
->>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f:.idea/modules/UrovoSDK/rpy-android.UrovoSDK.iml
   </component>
 </module>

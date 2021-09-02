@@ -1,13 +1,12 @@
 package com.example.myfirstapp.ui.application
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.util.Log
-import com.example.myfirstapp.data.response.LocationUser
 import com.example.myfirstapp.di.componet.AppComponent
 import com.example.myfirstapp.di.componet.DaggerAppComponent
 import com.example.myfirstapp.di.module.AppModule
-import com.example.myfirstapp.utils.LocationSimpleTracker
 import com.example.myfirstapp.utils.LocationTrackingService
 import com.example.myfirstapp.utils.Methods
 import com.example.myfirstapp.utils.PapersManager
@@ -23,13 +22,16 @@ open class RipleyApplication : Application() {
         Methods.init(this)
 
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
-        locationHelper = LocationSimpleTracker(this)
+        /*locationHelper = LocationSimpleTracker(this)*/
         locationTrackingService = LocationTrackingService(this)
     }
 
+    @SuppressLint("StaticFieldLeak")
     companion object {
         lateinit var appComponent: AppComponent
-        lateinit var locationHelper: LocationSimpleTracker
+        /*lateinit var locationHelper: LocationSimpleTracker*/
+
+        @SuppressLint("StaticFieldLeak")
         lateinit var locationTrackingService: LocationTrackingService
 
         private val activities = Stack<Activity>()
