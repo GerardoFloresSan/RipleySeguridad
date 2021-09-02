@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e2f8df826307f1b315563cb0407f3e0b/jetified-realm-android-library-5.12.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e2f8df826307f1b315563cb0407f3e0b/jetified-realm-android-library-5.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e2f8df826307f1b315563cb0407f3e0b/jetified-realm-android-library-5.12.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.realm/realm-android-library/5.12.0/12b202dea55772e84775db266fb8c3d1d2659bed/realm-android-library-5.12.0-javadoc.jar!/" />

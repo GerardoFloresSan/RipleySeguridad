@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: rpy-android.UrovoSDK.UrovoSDK">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/UrovoSDK/UrovoSDK.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
