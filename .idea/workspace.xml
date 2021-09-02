@@ -5,10 +5,49 @@
       <config />
     </shared>
   </component>
+<<<<<<< HEAD
   <component name="ChangeListManager">
     <list default="true" id="89f54ac5-9ae3-4c39-a9cd-345928835d1e" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__RipleySeguridad_UrovoSDK_UrovoSDK.xml" afterDir="false" />
+=======
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="050451e9-f517-42ee-9a44-91b2b762b945" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_annotation_annotation_1_1_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_arch_core_core_common_2_1_0.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_collection_collection_1_1_0.xml" afterDir="false" />
@@ -57,9 +96,16 @@
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_objenesis_objenesis_2_5_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_reactivestreams_reactive_streams_1_0_2.xml" afterDir="false" />
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/modules/UrovoSDK/RipleySeguridad.UrovoSDK.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules/app/RipleySeguridad.app.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules/utils/RipleySeguridad.utils.iml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__rpy_android_UrovoSDK_UrovoSDK.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/UrovoSDK/rpy-android.UrovoSDK.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/app/rpy-android.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/utils/rpy-android.utils.iml" afterDir="false" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -228,24 +274,41 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__pe_com_viergegroup_rompefilassdk_1_0_19_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__pe_com_viergegroup_rompefilassdk_1_0_19_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/modules/RipleySeguridad.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/RipleySeguridad.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/RipleySeguridad-app.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/Seguridad-rpy-android-app.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/rpy-android-app.iml" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/modules/UrovoSDK/UrovoSDK.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Seguridad-rpy-android-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/TiSmart-Seguridad-rpy-android-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/rpy-android-app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/rpy-android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/rpy-android.iml" afterDir="false" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
       <change beforePath="$PROJECT_DIR$/.idea/modules/utils/utils.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android-template.iml" beforeDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/myfirstapp/ui/activity/security/ScanQrActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/myfirstapp/ui/activity/security/ScanQrActivity.kt" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[5a6e90820406]" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[631ce4fc]" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -254,18 +317,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="1weFGDvit8RzL8DckHUtX98ZqRB" />
   <component name="ProjectViewState">
+=======
+  <component name="ProjectId" id="1wxnghGN5NJyc9l3fEFa1B1DBri" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+<<<<<<< HEAD
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+=======
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -276,7 +350,11 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+<<<<<<< HEAD
       <module name="RipleySeguridad.app" />
+=======
+      <module name="rpy-android.app" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -338,15 +416,36 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="89f54ac5-9ae3-4c39-a9cd-345928835d1e" name="Default Changelist" comment="" />
       <created>1628811049368</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1628811049368</updated>
+=======
+      <changelist id="050451e9-f517-42ee-9a44-91b2b762b945" name="Default Changelist" comment="" />
+      <created>1629409219386</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629409219386</updated>
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="477" y="266" key="#PSD" timestamp="1628820152466">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -355,5 +454,32 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="675" y="253" width="585" height="534" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1629612187115" />
+=======
+    <state width="1876" height="627" key="GridCell.Tab.0.bottom" timestamp="1630551984044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="627" key="GridCell.Tab.0.bottom/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1630551984044" />
+    <state width="1876" height="627" key="GridCell.Tab.0.center" timestamp="1630551984044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="627" key="GridCell.Tab.0.center/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1630551984044" />
+    <state width="1876" height="627" key="GridCell.Tab.0.left" timestamp="1630551984044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="627" key="GridCell.Tab.0.left/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1630551984044" />
+    <state width="1876" height="627" key="GridCell.Tab.0.right" timestamp="1630551984044">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1876" height="627" key="GridCell.Tab.0.right/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1630551984044" />
+    <state x="707" y="273" width="567" height="534" key="find.popup" timestamp="1629485829488">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2587" y="273" width="585" height="534" key="find.popup/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1629484886416" />
+    <state x="707" y="273" width="567" height="534" key="find.popup/62.0.1858.1080/1920.0.1920.1080@62.0.1858.1080" timestamp="1629485829488" />
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1629409616850">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2543" y="235" width="672" height="678" key="search.everywhere.popup/62.0.1858.1080/1920.0.1920.1080@1920.0.1920.1080" timestamp="1629409616850" />
+>>>>>>> d86db6987b0f35b280d237d7fbb9ff8934368b8f
   </component>
 </project>
