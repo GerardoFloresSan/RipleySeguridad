@@ -23,20 +23,15 @@ import com.example.myfirstapp.R
 import com.example.myfirstapp.data.response.BlueToothDeviceData
 import com.example.myfirstapp.data.response.CloseCartResponse
 import com.example.myfirstapp.ui.adapter.DeviceAdapter
-import com.example.myfirstapp.ui.application.RipleyApplication
 import com.example.myfirstapp.utils.PapersManager
 import com.example.myfirstapp.utils.inflate
 import com.example.myfirstapp.utils.setColorBackground
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.PendingResult
-import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.common.api.*
+import com.google.android.gms.common.api.internal.GoogleApiManager
 import com.google.android.gms.location.*
-import com.google.android.gms.tasks.Task
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.activity_firma.*
-import kotlin.collections.ArrayList
 
 abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
 
@@ -48,6 +43,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
     var builder: LocationSettingsRequest.Builder? = null
 
     private var googleApiClient: GoogleApiClient? = null
+    private val mSignInClient: GoogleApiManager? = null
 
     fun initBlueToothScanPrint() {
         blueAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -99,16 +95,22 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
             builder!!.build()
         )
 
-        result.setResultCallback { result ->
-            val status = result.status
+        result.setResultCallback { t ->
+            val status = t.status
 
             Log.e("LocationStoreActivity", "5 gpsEnabled result - ${status.statusCode}")
             when (status.statusCode) {
                 LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    Log.e("LocationStoreActivity", "5.1 iniciar gps solicitud - ${status.statusCode}")
-                    status.startResolutionForResult(this@ScanBlueToothBaseActivity, REQUEST_CHECK_CODE)
+                    Log.e(
+                        "LocationStoreActivity",
+                        "5.1 iniciar gps solicitud - ${status.statusCode}"
+                    )
+                    status.startResolutionForResult(
+                        this@ScanBlueToothBaseActivity,
+                        REQUEST_CHECK_CODE
+                    )
                 } catch (e: IntentSender.SendIntentException) {
                     Log.e("LocationStoreActivity", "5.1 iniciar gps error - ${e.toString()}")
                     // Ignore the error.
@@ -118,16 +120,17 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
                 }
             }
         }
-        /*val request: LocationRequest = LocationRequest()
+        /*val request2: LocationRequest = LocationRequest()
             .setFastestInterval(5000)
             .setInterval(3000)
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
         builder = LocationSettingsRequest.Builder().addLocationRequest(request)
-        val result =
+        val result2 =
             LocationServices.getSettingsClient(this).checkLocationSettings(builder!!.build())
 
-        result.addOnCompleteListener { task: Task<LocationSettingsResponse> ->
-            *//*try {
+        result2.addOnCompleteListener { task: Task<LocationSettingsResponse> ->
+            task.result
+            try {
                 task.getResult(ApiException::class.java)
             } catch (e: ApiException) {
                 when (e.statusCode) {
@@ -153,7 +156,7 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
                         e
                     }
                 }
-            }*//*
+            }
         }*/
     }
 

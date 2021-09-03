@@ -2,10 +2,18 @@ package com.example.myfirstapp.ui.activity.security
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.ColorStateList
+import android.device.ScanManager
+import android.device.ScanManager.*
+import android.graphics.BitmapFactory
 import android.os.Build
-import android.os.Handler
+import android.os.Message
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -13,6 +21,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.myfirstapp.R
 import com.example.myfirstapp.data.request.GetStateByDocRequest
 import com.example.myfirstapp.data.request.GetStateByQrRequest
@@ -24,6 +33,7 @@ import kotlinx.android.synthetic.main.activity_scan_qr.*
 import java.io.Serializable
 import javax.inject.Inject
 
+
 class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
 
     @Inject
@@ -32,6 +42,71 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
     private var stopScan = false
 
     private var hashQrLocal: String = ""
+    private val ACTION_CAPTURE_IMAGE = "scanner_capture_image_result";
+
+    private val DECODE_CAPTURE_IMAGE_KEY = "bitmapBytes"
+    private val MSG_SHOW_SCAN_RESULT = 1;
+    private val MSG_SHOW_SCAN_IMAGE = 2;
+
+    var mScanManager = ScanManager()
+
+
+    /*private val mReceiver2: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            // Get Scan Image . Make sure to make a request before getting a scanned image
+            if (ACTION_CAPTURE_IMAGE.equals(action)) {
+                val imagedata = intent.getByteArrayExtra(DECODE_CAPTURE_IMAGE_KEY)
+                if (imagedata != null && imagedata.size > 0) {
+                    val bitmap = BitmapFactory.decodeByteArray(imagedata, 0, imagedata.size)
+                    val msg: Message = mHandler.obtainMessage(MSG_SHOW_SCAN_IMAGE)
+                    msg.obj = bitmap
+                    mHandler.sendMessage(msg)
+                } else {
+                    Log.d("onReceive", "ignore imagedata:$imagedata")
+                }
+            } else {
+                // Get scan results, including string and byte data etc.
+                val barcode = intent.getByteArrayExtra(DECODE_DATA_TAG)
+                val barcodeLen = intent.getIntExtra(BARCODE_LENGTH_TAG, 0)
+                val temp = intent.getByteExtra(BARCODE_TYPE_TAG, 0.toByte())
+                val barcodeStr = intent.getStringExtra(BARCODE_STRING_TAG)
+                if (mScanCaptureImageShow) {
+                    // Request images of this scan
+                    context.sendBroadcast(Intent(ACTION_DECODE_IMAGE_REQUEST))
+                }
+                LogI("barcode type:$temp")
+                var scanResult = String(barcode!!, 0, barcodeLen)
+                // print scan results.
+                scanResult = """ length：$barcodeLen
+barcode：$scanResult
+bytesToHexString：${bytesToHexString(barcode)}
+barcodeStr:$barcodeStr"""
+                val msg: Message = mHandler.obtainMessage(MSG_SHOW_SCAN_RESULT)
+                msg.obj = scanResult
+                mHandler.sendMessage(msg)
+            }
+        }
+    }*/
+
+    /*private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+            val action = intent.action
+            if ("scanner_capture_image_result" == action) {
+                val imageData = intent.getByteArrayExtra("bitmapBytes")
+                if (imageData != null && imageData.size > 0) {
+                    val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
+                    if (bitmap != null) {
+                        Log.d("ScanQrActivity", "imageData:$bitmap")
+                    } else {
+                        Log.d("ScanQrActivity", "null")
+                    }
+                } else {
+                    Log.d("ScanQrActivity", "imageData:$imageData")
+                }
+            }
+        }
+    }*/
 
     override fun getView(): Int = R.layout.activity_scan_qr
     
@@ -40,9 +115,11 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
         component.inject(this)
         salesPresenter.attachView(this)
 
+
+
         txt_scan_qr.addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
-                if(!stopScan && txt_scan_qr.getString().isNotEmpty()) {
+                if (!stopScan && txt_scan_qr.getString().isNotEmpty()) {
                     stopScan = true
                     hashQrLocal = txt_scan_qr.getString()
                     salesPresenter.getUserByQr(GetStateByQrRequest().apply {
@@ -67,13 +144,22 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
     override fun onResume() {
         salesPresenter.attachView(this)
         stopScan = false
+        /*LocalBroadcastManager.getInstance(this).registerReceiver(
+            mReceiver,
+            IntentFilter("scanner_capture_image_result")
+        )*/
+        mScanManager.switchOutputMode(1)
+        /*mScanManager.openScanner()*/
         super.onResume()
     }
 
     override fun onPause() {
         stopScan = true
         hideLoading()
+        /*LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver)*/
         salesPresenter.detachView()
+        /*mScanManager.closeScanner()*/
+        mScanManager.switchOutputMode(0)
         super.onPause()
     }
 
@@ -145,17 +231,29 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
         }
         btnDelete.setOnClickListener {
             textError.visibility = View.INVISIBLE
-            if (textCode.length() > 0) textCode.text = textCode.text.substring(0, textCode.length() - 1)
+            if (textCode.length() > 0) textCode.text = textCode.text.substring(
+                0,
+                textCode.length() - 1
+            )
             val validation = textCode.text.length > 7
             btnOk.isEnabled = validation
             btnOk.isClickable = validation
             btnOk.isFocusable = validation
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                btnOk.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
+                btnOk.backgroundTintList = ColorStateList.valueOf(
+                    if (validation) getColor(R.color.colorPrimary) else getColor(
+                        R.color.colorPrimaryOpa
+                    )
+                )
             }//
             else {
-                btnOk.background.setTint(ContextCompat.getColor(this, if(validation) R.color.colorPrimary else R.color.colorPrimaryOpa))
+                btnOk.background.setTint(
+                    ContextCompat.getColor(
+                        this,
+                        if (validation) R.color.colorPrimary else R.color.colorPrimaryOpa
+                    )
+                )
             }
         }
         btnCancel.setOnClickListener {
@@ -202,10 +300,19 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            btnOk.backgroundTintList = ColorStateList.valueOf(if(validation) getColor(R.color.colorPrimary) else getColor(R.color.colorPrimaryOpa))
+            btnOk.backgroundTintList = ColorStateList.valueOf(
+                if (validation) getColor(R.color.colorPrimary) else getColor(
+                    R.color.colorPrimaryOpa
+                )
+            )
         }//
         else {
-            btnOk.background.setTint(ContextCompat.getColor(this, if(validation) R.color.colorPrimary else R.color.colorPrimaryOpa))
+            btnOk.background.setTint(
+                ContextCompat.getColor(
+                    this,
+                    if (validation) R.color.colorPrimary else R.color.colorPrimaryOpa
+                )
+            )
         }
     }
 
@@ -213,7 +320,7 @@ class ScanQrActivity : RipleyBaseActivity(), SalesPresenter.View {
         when(status) {
             200 -> {
                 stopScan = true
-                val list : ArrayList<SalesGetByResponse> = arrayListOf()
+                val list: ArrayList<SalesGetByResponse> = arrayListOf()
                 val t = (args[0] as SalesGetByResponse).apply {
                     this.hashQr = hashQrLocal
                 }
