@@ -29,6 +29,8 @@ class DeviceAdapter(private val listener: (BlueToothDeviceData) -> Unit) : Recyc
         fun bind(data: BlueToothDeviceData, listener: (BlueToothDeviceData) -> Unit) = with(itemView) {
             if(PapersManager.macPrint2 == data.addressMac) {
                 this.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryOpa))
+            } else {
+                this.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
             }
 
             name_bluetooth.text = data.name

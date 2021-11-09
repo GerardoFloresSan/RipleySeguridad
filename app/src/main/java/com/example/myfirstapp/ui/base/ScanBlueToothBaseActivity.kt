@@ -344,11 +344,9 @@ abstract class ScanBlueToothBaseActivity : PdfBaseActivity() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (BluetoothDevice.ACTION_FOUND == action) {
-                val device =
-                    intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
-                if ((if (device!!.name == null) "SIN NOMBRE" else device!!.name).toUpperCase()
-                        .contains("BP60A")
-                ) {
+                val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+                val valid =(if (device!!.name == null) "SIN NOMBRE" else device!!.name).toUpperCase().startsWith("BP60A") || (if (device!!.name == null) "SIN NOMBRE" else device!!.name).toUpperCase().startsWith("SW_")
+                if (valid) {
                     if (mDeviceList.isEmpty()) {
                         mDeviceList.add(
                             BlueToothDeviceData().apply {

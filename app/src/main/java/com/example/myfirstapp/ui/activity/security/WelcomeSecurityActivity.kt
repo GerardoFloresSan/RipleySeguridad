@@ -37,10 +37,10 @@ class WelcomeSecurityActivity : ScanBlueToothBaseActivity(), ParameterPresenter.
         txt_subsidiary.text = "Ripley " + PapersManager.loginAccess.subsidiaryName
 
         initBlueToothScanPrint()
-        //get_bluetooth.visibility = View.VISIBLE
+        get_bluetooth.visibility = View.VISIBLE
         get_bluetooth.setOnClickListener {
-            showBlueToothDevice { action ->
-                get_bluetooth.visibility = if (action) View.GONE else View.VISIBLE
+            showBlueToothDevice { _ ->
+                /*get_bluetooth.visibility = if (action) View.GONE else View.VISIBLE*/
             }
         }
 

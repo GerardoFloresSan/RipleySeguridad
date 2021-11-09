@@ -67,9 +67,7 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
         }*/
 
         btn_print.setOnClickListener {
-            if (PapersManager.macPrint.isEmpty()) {
-
-            } else {
+            if (PapersManager.macPrint.isNotEmpty()) {
                 needPrint = true
                 validButton()
                 initPrint(PapersManager.macPrint, closeCart.clientVoucher, false) {
@@ -80,23 +78,23 @@ class EndOrderAppActivity : ScanBlueToothBaseActivity() {
                 btn_close_all.isClickable = true
                 btn_close_all.isFocusable = true
                 btn_close_all.setColorBackground(
-                    true,
-                    this,
-                    R.color.colorPrimary,
-                    R.color.colorPrimaryOpa
+                        true,
+                        this,
+                        R.color.colorPrimary,
+                        R.color.colorPrimaryOpa
                 )
             }
 
         }
 
-        text_config.setOnClickListener {
+        btn_config_blue.setOnClickListener {
             if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return@setOnClickListener
             }
             mLastClickTime = SystemClock.elapsedRealtime()
 
             showBlueToothDevice { action ->
-                btn_config_blue.visibility = if (action) View.GONE else View.VISIBLE
+                //btn_config_blue.visibility = if (action) View.GONE else View.VISIBLE
                 btn_print.visibility = if (action) View.VISIBLE else View.GONE
             }
         }
